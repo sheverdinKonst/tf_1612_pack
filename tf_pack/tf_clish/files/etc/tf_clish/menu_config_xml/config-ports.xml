@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CLISH_MODULE xmlns="http://clish.sourceforge.net/XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://clish.sourceforge.net/XMLSchema
+                     http://clish.sourceforge.net/XMLSchema/clish.xsd">
+    <!--  =======================================================-->
+    <VIEW name="main">
+        <COMMAND name="network port"
+                 help="port settings and status">
+            <PARAM name="config"
+                   test='"${access_level}" = "admin"'
+                   help="port settings - speed, flow_control, poe"
+                   optional="true"
+                   mode="subcommand"
+                   ptype="SUBCOMMAND">
+                <PARAM name="ports"
+                       help="choose port range"
+                       optional="false"
+                       order="true"
+                       mode="subcommand"
+                       ptype="SUBCOMMAND">
+                    <PARAM name="portValue"
+                           test = '-n "${ports}"'
+                           optional="false"
+                           order="true"
+                           help=" - for port settings"
+                           ptype="PORT_NUM_LIST_1_10"/>
+                </PARAM>
+
+                <PARAM name="state"
+                       test='-n "${ports}""'
+                       help="set port state"
+                       optional="true"
+                       mode="subcommand"
+                       ptype="SUBCOMMAND">
+                    <PARAM name="stateValue"
+                           help=" - port state"
+                           ptype="STATE_DE"/>
+                </PARAM>
+
+                <PARAM name="speed"
+                       test='-n "${ports}"'
+                       help="set port speed"
+                       optional="true"
+                       mode="subcommand"
+                       ptype="SUBCOMMAND">
+                    <PARAM name="speedValue"
+                           help=" - port speed value"
+                           ptype="PORT_SPEED"/>
+                </PARAM>
+
+                <PARAM name="flow_control"
+                       test='-n "${ports}"'
+                       help="set flow control"
+                       optional="true"
+                       mode="subcommand"
+                       ptype="SUBCOMMAND">
+                    <PARAM name="flow_controlValue"
+                           help=" - port flow control"
+                           ptype="STATE_DE"/>
+                </PARAM>
+
+                <PARAM name="poe"
+                       test='-n "${ports}"'
+                       help="set PoE type"
+                       optional="true"
+                       mode="subcommand"
+                       ptype="SUBCOMMAND">
+                    <PARAM name="poeValue"
+                           help=" - PoE type"
+                           ptype="POE_VALUE"/>
+                </PARAM>
+            </PARAM>
+
+            <PARAM name="show"
+                   help="show port status and settings"
+                   test='-z "${config}"'
+                   optional="true"
+                   order="true"
+                   mode="subcommand"
+                   ptype="SUBCOMMAND">
+                <PARAM name="status"
+                       help="show port status"
+                       test='-z "${config}"'
+                       optional="true"
+                       order="true"
+                       mode="subcommand"
+                       ptype="SUBCOMMAND">
+                    <PARAM name="ports"
+                           help="choose port range"
+                           optional="true"
+                           order="true"
+                           mode="subcommand"
+                           ptype="SUBCOMMAND"/>
+                    <PARAM name="portValue"
+                           test = '-n "${ports}"'
+                           optional="false"
+                           order="true"
+                           help=" - for port status"
+                           ptype="PORT_NUM_LIST_1_10"/>
+                </PARAM>
+
+                <PARAM name="configuration"
+                       help="c"
+                       test='-z "${status}" -a "${show_access_level}" = "admin"'
+                       optional="true"
+                       order="true"
+                       mode="subcommand"
+                       ptype="SUBCOMMAND">
+                    <PARAM name="ports"
+                           help="choose port range"
+                           optional="true"
+                           order="true"
+                           mode="subcommand"
+                           ptype="SUBCOMMAND"/>
+                    <PARAM name="portValue"
+                           test = '-n "${ports}"'
+                           optional="false"
+                           order="true"
+                           help=" - for port settings"
+                           ptype="PORT_NUM_LIST_1_10"/>
+                </PARAM>
+            </PARAM>
+
+            <ACTION>
+                 if [[ -n "${config}" ]]; then
+                    if [[  -n "${stateValue}" ]]; then
+                        /etc/tf_clish/scripts/port/config_ports_poe.lua "state" ${portValue} ${stateValue}
+                    fi
+
+                    if [[  -n "${speedValue}" ]]; then
+                        /etc/tf_clish/scripts/port/config_ports_poe.lua "speed" ${portValue} ${speedValue}
+                    fi
+
+                    if [[  -n "${flow_controlValue}" ]]; then
+                        /etc/tf_clish/scripts/port/config_ports_poe.lua "flow" ${portValue} ${flow_controlValue}
+                    fi
+
+                    if [[  -n "${poeValue}" ]]; then
+                        /etc/tf_clish/scripts/port/config_ports_poe.lua "poe" ${portValue} ${poeValue}
+                    fi
+                fi
+
+                if [[ -n "${show}" ]]; then
+                    if [[ -n "${configuration}" ]]; then
+                        if [[ -n "${ports}" ]]; then
+                            /etc/tf_clish/scripts/port/show_port.lua  "config" ${portValue}
+                        else
+                            /etc/tf_clish/scripts/port/show_port.lua  "config" "1-10"
+                        fi
+                    fi
+
+                    if [[ -n "${status}" ]]; then
+                        if [[ -n "${ports}" ]]; then
+                            /etc/tf_clish/scripts/port/show_port.lua  "status" ${portValue}
+                        else
+                            /etc/tf_clish/scripts/port/show_port.lua  "status" "1-10"
+                        fi
+                    fi
+                fi
+            </ACTION>
+        </COMMAND>
+    </VIEW>
+</CLISH_MODULE>
+

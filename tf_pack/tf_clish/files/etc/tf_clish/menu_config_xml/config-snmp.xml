@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CLISH_MODULE xmlns="http://clish.sourceforge.net/XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://clish.sourceforge.net/XMLSchema
+                     http://clish.sourceforge.net/XMLSchema/clish.xsd">
+    <!--=======================================================-->
+    <VIEW name="main">
+        <COMMAND name="services snmp"
+                 help="Configure or show SNMP settings"
+                 lock="false"
+                 interrupt="true">
+            <PARAM name="config"
+                   test='"${access_level}" = "admin"'
+                   help="configure SNMP "
+                   optional="true"
+                   order="true"
+                   mode="subcommand"
+                   ptype="SUBCOMMAND">
+                <PARAM name="state"
+                       help="set snmp state"
+                       optional="false"
+                       order="true"
+                       mode="subcommand"
+                       ptype="SUBCOMMAND">
+                    <PARAM name="stateValue"
+                           help="state value"
+                           ptype="STATE"/>
+                </PARAM>
+                <PARAM name="port"
+                       test='"${stateValue}" != 0 -a -z "${version}"'
+                       help="set SNMP port"
+                       optional="true"
+                       order="false"
+                       mode="subcommand"
+                       ptype="SUBCOMMAND">
+                    <PARAM name="portValue"
+                           help="SNMP port value"
+                           ptype="UINT"/>
+                </PARAM>
+                <PARAM name="version"
+                       test='"${stateValue}" != 0'
+                       help="SNMP version protocol"
+                       optional="false"
+                       order="false"
+                       mode="subcommand"
+                       ptype="SUBCOMMAND">
+                    <PARAM name="versionValue"
+                           help="SNMP protocol version:"
+                           ptype="SNMP_VERSION_1"/>
+                    <PARAM name="enabled"
+                           help="  specified version"
+                           ptype="STATE"/>
+                </PARAM>
+
+                <PARAM name="username"
+                       test='"${stateValue}" != 0 -a "${versionValue}" = "v3" -a "${enabled}" = "1"'
+                       help="snmp v3 username "
+                       optional="true"
+                       order="false"
+                       mode="subcommand"
+                       ptype="SUBCOMMAND">
+                    <PARAM name="username_value"
+                           help="user name value"
+                           ptype="STRING"/>
+                </PARAM>
+
+                <PARAM name="allow_write"
+                       test='"${stateValue}" != 0 -a "${versionValue}" = "v3" -a "${enabled}" = "1"'
+                       help=" allow_write"
+                       optional="true"
+                       order="false"
+                       mode="subcommand"
+                       ptype="SUBCOMMAND">
+                    <PARAM name="allow_write_value"
+                           help="allow write value"
+                           ptype="STATE"/>
+                </PARAM>
+
+                <PARAM name="auth_type"
+                       test='"${stateValue}" != 0 -a "${versionValue}" = "v3" -a "${enabled}" = "1"'
+                       help=" snmp v3 auth type"
+                       optional="true"
+                       order="false"
+                       mode="subcommand"
+                       ptype="SUBCOMMAND">
+                    <PARAM name="auth_type_value"
+                           help="auth type MD5 / SHA"
+                           ptype="AUTH_TYPE"/>
+                </PARAM>
+
+                <PARAM name="auth_pass"
+                       test='"${stateValue}" != 0 -a "${versionValue}" = "v3" -a "${enabled}" = "1" -a -n "${auth_type_value}" -a "${auth_type_value}" != "none"'
+                       help=" snmp v3 auth pass"
+                       optional="false"
+                       order="false"
+                       mode="subcommand"
+                       ptype="SUBCOMMAND">
+                    <PARAM name="auth_pass_value"
+                           help="auth password"
+                           ptype="STRING"/>
+                </PARAM>
+
+                <PARAM name="privacy_type"
+                       test='"${stateValue}" != 0 -a "${versionValue}" = "v3" -a "${enabled}" = "1"'
+                       help="snmp v3 privacy type"
+                       optional="true"
+                       order="false"
+                       mode="subcommand"
+                       ptype="SUBCOMMAND">
+                    <PARAM name="privacy_type_value"
+                           help="privacy type AES / DES"
+                           ptype="PRIVACY_TYPE"/>
+                </PARAM>
+
+                <PARAM name="privacy_pass"
+                       test='"${stateValue}" != 0 -a "${versionValue}" = "v3" -a "${enabled}" = "1" -a -n "${privacy_type_value}" -a "${privacy_type_value}" != "none"'
+                       help="snmp v3 privacy password"
+                       optional="false"
+                       order="false"
+                       mode="subcommand"
+                       ptype="SUBCOMMAND">
+                    <PARAM name="privacy_pass_value"
+                           help="privacy password"
+                           ptype="STRING"/>
+                </PARAM>
+
+                <PARAM name="read_community"
+                       test='"${stateValue}" != 0 -a "${versionValue}" != "v3" -a "${enabled}" = "1" -a -z "${write_community}"'
+                       help="read community name"
+                       optional="true"
+                       order="false"
+                       mode="subcommand"
+                       ptype="SUBCOMMAND">
+                    <PARAM name="rcValue"
+                           help="read community value"
+                           ptype="STRING"/>
+                </PARAM>
+
+                <PARAM name="write_community"
+                   test='"${stateValue}" != 0 -a "${versionValue}" != "v3" -a "${enabled}" = "1" -a -z "${read_community}"'
+                   help="write community name"
+                   optional="true"
+                   order="false"
+                   mode="subcommand"
+                   ptype="SUBCOMMAND">
+                <PARAM name="wcValue"
+                       help="write community"
+                       ptype="STRING"/>
+                </PARAM>
+
+                <PARAM name="source"
+                       test='-n "${write_community}" -o -n "${read_community}"'
+                       help="set host for SNMP community"
+                       optional="true"
+                       order="false"
+                       mode="subcommand"
+                       ptype="SUBCOMMAND">
+                    <PARAM name="hostbool"
+                           help=" "
+                           ptype="SNMP_HOST"/>
+                    <PARAM name="ip_addr"
+                           test='"${hostbool}" = "custom"'
+                           help="ip address"
+                           optional="false"
+                           order="true"
+                           mode="subcommand"
+                           ptype="SUBCOMMAND">
+                        <PARAM name="hostValue"
+                               help="ip address"
+                               ptype="IP_ADDR"/>
+                    </PARAM>
+                    <PARAM name="mask"
+                           test='"${hostbool}" = "custom"'
+                           help="set net mask"
+                           optional="true"
+                           order="true"
+                           mode="subcommand"
+                           ptype="SUBCOMMAND">
+                        <PARAM name="maskValue"
+                               help="net mask "
+                               ptype="IP_ADDR_MASK"/>
+                    </PARAM>
+                </PARAM>
+            </PARAM>
+
+            <PARAM name="show"
+                   help="config"
+                   test='-z "${config}"'
+                   optional="true"
+                   order="true"
+                   mode="subcommand"
+                   ptype="SUBCOMMAND">
+                <PARAM name="configuration"
+                       help="config"
+                       optional="true"
+                       order="true"
+                       mode="subcommand"
+                       ptype="SUBCOMMAND"/>
+            </PARAM>
+
+            <ACTION>
+                if [[  -n "${config}" ]]; then
+                    cmd="state ${stateValue}"
+                    if [[ "${stateValue}" = 1 ]]; then
+                        if [[ -n "${port}"  ]]; then
+                            cmd="$cmd port ${portValue}"
+                        fi
+                        if [[ -n "${version}"  ]]; then
+                            cmd="$cmd version ${versionValue} ${enabled}"
+                        fi
+
+                        if [[ "${versionValue}" = "v1" || "${versionValue}" = "v2c" ]]; then
+                             if [[ -n "${read_community}"  ]]; then
+                                cmd="$cmd com read_community ${rcValue}"
+                             fi
+                             if [[ -n "${write_community}"  ]]; then
+                                cmd="$cmd com write_community ${wcValue}"
+                             fi
+                             if [[ -n "${source}"  ]]; then
+                                cmd="$cmd source ${hostbool} ${hostValue} ${maskValue}"
+                             fi
+                        fi
+                        if [[ "${versionValue}" = "v3" ]]; then
+                            if [[ -n "${username}" ]]; then
+                                cmd="$cmd username ${username_value}"
+                            fi
+                            if [[ -n "${allow_write}" ]]; then
+                                cmd="$cmd allow_write ${allow_write_value}"
+                            fi
+                            if [[ -n "${auth_type}" ]]; then
+                                cmd="$cmd auth_type ${auth_type_value}"
+                            fi
+                            if [[ -n "${auth_pass}" ]]; then
+                                cmd="$cmd auth_pass ${auth_pass_value}"
+                            fi
+                            if [[ -n "${privacy_type}" ]]; then
+                                cmd="$cmd privacy_type ${privacy_type_value}"
+                            fi
+                            if [[ -n "${privacy_pass}" ]]; then
+                                cmd="$cmd privacy_pass ${privacy_pass_value}"
+                            fi
+
+                            echo "cmd = " "$cmd"
+                        fi
+                    fi
+                    /etc/tf_clish/scripts/snmp/config_snmp.lua $cmd
+                fi
+
+                if [[  -n "${show}" ]]; then
+                    if [[  -n "${configuration}" ]]; then
+                         /etc/tf_clish/scripts/snmp/show_snmp.lua
+                    fi
+                fi
+            </ACTION>
+        </COMMAND>
+    </VIEW>
+    <!--=======================================================-->
+</CLISH_MODULE>

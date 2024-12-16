@@ -1,0 +1,61 @@
+
+config lan 'lan1'
+	option state 'enable'
+	option speed 'auto'
+	option flow 'enable'
+	option poe 'enable'
+
+config lan 'lan2'
+	option state 'enable'
+	option speed 'auto'
+	option flow 'enable'
+	option poe 'enable'
+
+config lan 'lan3'
+	option state 'enable'
+	option speed 'auto'
+	option flow 'enable'
+	option poe 'enable'
+
+config lan 'lan4'
+	option state 'enable'
+	option speed 'auto'
+	option flow 'enable'
+	option poe 'enable'
+
+config lan 'lan5'
+	option state 'enable'
+	option speed 'auto'
+	option flow 'enable'
+	option poe 'enable'
+
+config lan 'lan6'
+	option state 'enable'
+	option speed 'auto'
+	option flow 'enable'
+	option poe 'enable'
+
+config lan 'lan7'
+	option state 'enable'
+	option speed 'auto'
+	option flow 'enable'
+	option poe 'enable'
+
+config lan 'lan8'
+	option state 'enable'
+	option speed 'auto'
+	option flow 'enable'
+	option poe 'enable'
+
+config lan 'lan9'
+	option state 'enable'
+	option speed 'auto'
+	option flow 'enable'
+
+
+config lan 'lan10'
+	option state 'enable'
+	option speed 'auto'
+	option flow 'enable'
+
+

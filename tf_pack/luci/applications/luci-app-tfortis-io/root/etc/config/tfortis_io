@@ -1,0 +1,17 @@
+config input 'tamper'
+	option state 'open'
+	option alarm_state 'open'
+	option type 'build-in'
+
+config input 'sensor1'
+	option state 'open'
+	option alarm_state 'short'
+	option type 'build-in'
+
+config input 'sensor2'
+	option state 'open'
+	option alarm_state 'short'
+	option type 'build-in'
+
+config output 'relay'
+	option state 'open'

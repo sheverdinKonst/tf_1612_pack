@@ -1,0 +1,150 @@
+{
+	"admin/system/system": {
+		"title": "System",
+		"order": 1,
+		"action": {
+			"type": "view",
+			"path": "system/system"
+		},
+		"depends": {
+			"acl": [ "luci-mod-system-config" ]
+		}
+	},
+
+	"admin/system/admin": {
+		"title": "SSH/HTTPS",
+		"order": 2,
+		"action": {
+			"type": "firstchild"
+		},
+		"depends": {
+			"acl": [ "luci-mod-system-config", "luci-mod-system-ssh", "luci-app-acl" ]
+		}
+	},
+
+	"admin/dev/password": {
+		"title": "Router Password",
+		"order": 1,
+		"action": {
+			"type": "view",
+			"path": "system/password"
+		},
+		"depends": {
+			"acl": [ "luci-mod-system-config", "luci-app-acl"]
+		}
+	},
+
+	"admin/system/admin/dropbear": {
+		"title": "SSH Access",
+		"order": 2,
+		"action": {
+			"type": "view",
+			"path": "system/dropbear"
+		},
+		"depends": {
+			"acl": [ "luci-mod-system-ssh" ],
+			"fs": {	"/usr/sbin/dropbear": "executable" }
+		}
+	},
+
+	"admin/system/admin/sshkeys": {
+		"title": "SSH-Keys",
+		"order": 3,
+		"action": {
+			"type": "view",
+			"path": "system/sshkeys"
+		},
+		"depends": {
+			"acl": [ "luci-mod-system-ssh" ],
+			"fs": {	"/usr/sbin/dropbear": "executable" }
+		}
+	},
+
+	"admin/system/admin/https": {
+		"title": "HTTP(S) Access",
+		"order": 4,
+		"action": {
+			"type": "view",
+			"path": "system/https"
+		},
+		"depends": {
+			"acl": [ "luci-mod-system-https" ],
+			"fs": {	"/usr/sbin/uhttpd": "executable" }
+		}
+	},
+
+
+	"admin/dev/startup": {
+		"title": "Startup",
+		"order": 45,
+		"action": {
+			"type": "view",
+			"path": "system/startup"
+		},
+		"depends": {
+			"acl": [ "luci-mod-system-init", "luci-app-acl" ]
+		}
+	},
+
+	"admin/dev/crontab": {
+		"title": "Scheduled Tasks",
+		"order": 46,
+		"action": {
+			"type": "view",
+			"path": "system/crontab"
+		},
+		"depends": {
+			"acl": [ "luci-mod-system-cron", "luci-app-acl" ]
+		}
+	},
+
+	"admin/dev/mounts": {
+		"title": "Mount Points",
+		"order": 50,
+		"action": {
+			"type": "view",
+			"path": "system/mounts"
+		},
+		"depends": {
+			"acl": [ "luci-mod-system-mounts" ],
+			"fs": { "/sbin/block": "executable" }
+		}
+	},
+
+	"admin/dev/leds": {
+		"title": "LED Configuration",
+		"order": 60,
+		"action": {
+			"type": "view",
+			"path": "system/leds"
+		},
+		"depends": {
+			"acl": [ "luci-mod-system-config","luci-app-acl"],
+			"fs": { "/sys/class/leds": "directory" }
+		}
+	},
+
+	"admin/system/flash": {
+		"title": "Update Firmware",
+		"order": 70,
+		"action": {
+			"type": "view",
+			"path": "system/flash"
+		},
+		"depends": {
+			"acl": [ "luci-mod-system-flash" ]
+		}
+	},
+
+	"admin/system/reboot": {
+		"title": "Reboot",
+		"order": 90,
+		"action": {
+			"type": "view",
+			"path": "system/reboot"
+		},
+		"depends": {
+			"acl": [ "luci-mod-system-reboot" ]
+		}
+	}
+}

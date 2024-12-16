@@ -1,0 +1,6 @@
+#!/bin/sh
+
+touch /etc/config/tfortis_ups
+
+
+return 0

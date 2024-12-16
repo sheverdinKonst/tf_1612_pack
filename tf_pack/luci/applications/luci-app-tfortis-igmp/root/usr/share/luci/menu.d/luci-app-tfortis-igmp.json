@@ -1,0 +1,32 @@
+{
+  "admin/services/igmp": {
+    "title": "IGMP",
+    "order": 3,
+    "action": {
+      "type": "firstchild"
+    },
+    "depends": {
+      "acl": [ "luci-app-tfortis-igmp" ]
+    }
+  },
+
+  "admin/services/igmp/settings": {
+    "title": "IGMP Settings",
+    "order": 1,
+    "action": {
+      "type": "view",
+      "path": "igmp/settings"
+    }
+  },
+
+  "admin/services/igmp/status": {
+    "title": "IGMP Status",
+    "order": 2,
+    "action": {
+      "type": "view",
+      "path": "igmp/status"
+    }
+  }
+
+  
+}

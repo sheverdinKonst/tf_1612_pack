@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CLISH_MODULE xmlns="http://clish.sourceforge.net/XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://clish.sourceforge.net/XMLSchema
+                     http://clish.sourceforge.net/XMLSchema/clish.xsd">
+    <!--=======================================================-->
+    <VIEW name="main">
+
+        <COMMAND name="tools"
+                 help="Send messages to network hosts">
+            <PARAM name="ping"
+                   test='"${access_level}" = "admin"'
+                   help="config"
+                   optional="true"
+                   order="true"
+                   mode="subcommand"
+                   ptype="SUBCOMMAND">
+                <PARAM name="proto"
+                       help="Protocol to use for the ping"
+                       optional="true"
+                       mode="switch"
+                       ptype="SUBCOMMAND">
+                    <PARAM name="ip"
+                           help="Send ICMP IPv4 messages to network hosts (default)"
+                           mode="subcommand"
+                           ptype="SUBCOMMAND"/>
+                    <PARAM name="ipv6"
+                           help="Send ICMP IPv6 messages to network hosts"
+                           mode="subcommand"
+                           ptype="SUBCOMMAND"/>
+                    <PARAM name="arp"
+                           help="Send ARP requests to a neighbour host"
+                           mode="subcommand"
+                           ptype="SUBCOMMAND"/>
+                </PARAM>
+                <PARAM name="dst"
+                       help="Hostname or IP-address to ping"
+                       ptype="STRING"/>
+                <PARAM name="source"
+                       help="Source IP-address (ip) or interface (ip and arp)"
+                       optional="true"
+                       mode="subcommand"
+                       ptype="SUBCOMMAND">
+                    <PARAM name="src"
+                           help="Source IP-address (ip) or interface name (ip and arp)"
+                           ptype="STRING"/>
+                </PARAM>
+                <PARAM name="repeat"
+                       help="Requests to send count, default is 5"
+                       optional="true"
+                       mode="subcommand"
+                       ptype="SUBCOMMAND">
+                    <PARAM name="count"
+                           help="Requests count"
+                           ptype="UINT"/>
+                </PARAM>
+                <PARAM name="resolve"
+                       test='"${proto}"!="arp"'
+                       help="Resolve names"
+                       optional="true"
+                       mode="subcommand"
+                       ptype="SUBCOMMAND"/>
+                <PARAM name="broadcat"
+                       test='"${proto}"!="arp"'
+                       help="Ping broadcast address"
+                       optional="true"
+                       mode="subcommand"
+                       ptype="SUBCOMMAND"/>
+                <PARAM name="size"
+                       test='"${proto}"!="arp"'
+                       help="Packet size"
+                       optional="true"
+                       mode="subcommand"
+                       ptype="SUBCOMMAND">
+                    <PARAM name="psize"
+                           help="Number of data bytes to send"
+                           ptype="UINT"/>
+                </PARAM>
+                <PARAM name="interval"
+                       test='"${proto}"!="arp"'
+                       help="The time interval between packets, default is 1"
+                       optional="true"
+                       mode="subcommand"
+                       ptype="SUBCOMMAND">
+                    <PARAM name="iod"
+                           help="Interval between packets"
+                           ptype="STRING"/>
+                </PARAM>
+                <PARAM name="flood"
+                       test='"${proto}"!="arp"'
+                       help="Flood ping"
+                       optional="true"
+                       mode="subcommand"
+                       ptype="SUBCOMMAND"/>
+                <PARAM name="duplicate-detect"
+                       test='"${proto}"="arp"'
+                       help="Duplicate address detection mode"
+                       optional="true"
+                       mode="subcommand"
+                       ptype="SUBCOMMAND"/>
+            </PARAM>
+            <ACTION>
+               
+                 if test -n "${ipv6}"; then
+                    cmd="traceroute6"
+                 else
+                    cmd="ping"
+                 fi
+
+                #Resolve names
+                if test -z "${resolve}"; then
+                    cmd=$cmd" -n"
+                fi
+                # Source address
+                cmd=$cmd"${ -s :src}"
+                # Source interface
+                cmd=$cmd"${ -i :if}"
+                cmd=$cmd" ${dst}"
+
+                if  [[ -n "${repeat}" ]]; then
+                    cmd=$cmd" -c ${count}"
+                else
+                    cmd=$cmd" -c 5"
+                fi
+
+                $cmd
+            </ACTION>
+        </COMMAND>
+    </VIEW>
+</CLISH_MODULE>

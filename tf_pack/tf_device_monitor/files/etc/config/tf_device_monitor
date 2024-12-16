@@ -1,0 +1,8 @@
+config tf_device_monitor
+    option enabled        '0'
+    option interface      'switch.1'
+
+config tf_device_monitor
+    option enabled        '0'
+    option interface      'switch.2'
+

@@ -1,0 +1,148 @@
+{
+  "values": {
+    "global": {
+      ".anonymous": false,
+      ".type": "mstpd",
+      ".name": "global",
+      ".index": 0,
+      "enabled": "1",
+      "loglevel": "2",
+      "bridge": [
+        "switch"
+      ]
+    },
+    "switch": {
+      ".anonymous": false,
+      ".type": "bridge",
+      ".name": "switch",
+      ".index": 1,
+      "forcevers": "rstp",
+      "treeprio": "8",
+      "hello": "2",
+      "fdelay": "15",
+      "maxage": "20",
+      "ageing": "300",
+      "txholdcount": "6"
+    },
+    "lan1": {
+      ".anonymous": false,
+      ".type": "bridge_port",
+      ".name": "lan1",
+      ".index": 2,
+      "treeprio": "8",
+      "pathcost": "0",
+      "adminedge": "no",
+      "autoedge": "yes",
+      "bpdufilter": "no",
+      "bpduguard": "no"
+    },
+    "lan2": {
+      ".anonymous": false,
+      ".type": "bridge_port",
+      ".name": "lan2",
+      ".index": 3,
+      "treeprio": "8",
+      "pathcost": "0",
+      "adminedge": "no",
+      "autoedge": "yes",
+      "bpdufilter": "no",
+      "bpduguard": "no"
+    },
+    "lan3": {
+      ".anonymous": false,
+      ".type": "bridge_port",
+      ".name": "lan3",
+      ".index": 4,
+      "treeprio": "8",
+      "pathcost": "0",
+      "adminedge": "no",
+      "autoedge": "yes",
+      "bpdufilter": "no",
+      "bpduguard": "no"
+    },
+    "lan4": {
+      ".anonymous": false,
+      ".type": "bridge_port",
+      ".name": "lan4",
+      ".index": 5,
+      "treeprio": "8",
+      "pathcost": "0",
+      "adminedge": "no",
+      "autoedge": "yes",
+      "bpdufilter": "no",
+      "bpduguard": "no"
+    },
+    "lan5": {
+      ".anonymous": false,
+      ".type": "bridge_port",
+      ".name": "lan5",
+      ".index": 6,
+      "treeprio": "8",
+      "pathcost": "0",
+      "adminedge": "no",
+      "autoedge": "yes",
+      "bpdufilter": "no",
+      "bpduguard": "no"
+    },
+    "lan6": {
+      ".anonymous": false,
+      ".type": "bridge_port",
+      ".name": "lan6",
+      ".index": 7,
+      "treeprio": "8",
+      "pathcost": "0",
+      "adminedge": "no",
+      "autoedge": "yes",
+      "bpdufilter": "no",
+      "bpduguard": "no"
+    },
+    "lan7": {
+      ".anonymous": false,
+      ".type": "bridge_port",
+      ".name": "lan7",
+      ".index": 8,
+      "treeprio": "8",
+      "pathcost": "0",
+      "adminedge": "no",
+      "autoedge": "yes",
+      "bpdufilter": "no",
+      "bpduguard": "no"
+    },
+    "lan8": {
+      ".anonymous": false,
+      ".type": "bridge_port",
+      ".name": "lan8",
+      ".index": 9,
+      "treeprio": "8",
+      "pathcost": "0",
+      "adminedge": "no",
+      "autoedge": "yes",
+      "bpdufilter": "no",
+      "bpduguard": "no"
+    },
+    "lan9": {
+      ".anonymous": false,
+      ".type": "bridge_port",
+      ".name": "lan9",
+      ".index": 10,
+      "treeprio": "8",
+      "pathcost": "0",
+      "adminedge": "no",
+      "autoedge": "yes",
+      "bpdufilter": "no",
+      "bpduguard": "no"
+    },
+    "lan10": {
+      ".anonymous": false,
+      ".type": "bridge_port",
+      ".name": "lan10",
+      ".index": 11,
+      "treeprio": "8",
+      "pathcost": "0",
+      "adminedge": "no",
+      "autoedge": "yes",
+      "bpdufilter": "no",
+      "bpduguard": "no"
+    }
+  }
+}

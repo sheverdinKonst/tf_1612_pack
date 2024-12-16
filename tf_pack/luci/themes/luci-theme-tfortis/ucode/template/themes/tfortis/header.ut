@@ -1,0 +1,139 @@
+{%
+	import { getuid, getspnam } from 'luci.core';
+
+	const boardinfo = ubus.call('system', 'board');
+	const description = uci.get('system','tfortis','description');
+	const hostname = striptags(boardinfo?.hostname ?? '?');
+	const model = striptags(boardinfo?.model ?? '?');
+	http.prepare_content('text/html; charset=UTF-8');
+-%}
+
+<!DOCTYPE html>
+<html lang="{{ dispatcher.lang }}">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"/>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#09c">
+<meta name="msapplication-tap-highlight" content="no">
+<meta name="msapplication-TileColor" content="#09c">
+<meta name="application-name" content="{{ hostname }} {{ description }}">
+<meta name="apple-mobile-web-app-title" content="{{ hostname }} {{ description }}">
+<link rel="stylesheet" href="{{ media }}/cascade.css?v=git-24.089.46139-9c89ef9">
+<link rel="shortcut icon" href="{{ media }}/favicon.ico">
+{% if (node?.css): %}
+<link rel="stylesheet" href="{{ resource }}/{{ node.css }}">
+{% endif %}
+<script src="{{ dispatcher.build_url('admin/translations', dispatcher.lang) }}"></script>
+<script src="{{ resource }}/cbi.js"></script>
+<script src="{{ resource }}/tf_common.js"></script>
+<title>{{ hostname }} {{ description }}</title>
+{% if (css): %}
+<style title="text/css">{{ css }}</style>
+{% endif %}
+</head>
+<body class="lang_{{ dispatcher.lang }} {{ ctx.authsession ? 'logged-in' : '' }} {{ length(ctx.path) ? `node-${join('-', ctx.path)}` : 'node-main-login' }}" data-page="{{ entityencode(join('-', ctx.path), true) }}">
+
+
+
+<header>
+
+	<div class="tfortismenu">
+
+		<div class="tfortismenu__container">
+			<div class="tfortismenu__logo">
+				<img src="{{ media }}/logo.png" data-visible="desktop">
+				<img src="{{ media }}/logo-mobile.svg" data-visible="mobile">
+			</div>
+			<a href="#" class="tfortismenu__brand">
+				{{ model }}
+				{#<span>{{ description }}</span>#}
+			</a>
+		</div>
+
+		{% if (ctx.authsession !== null && ctx.authsession !== ''): %}
+
+			<div class="ports-status-tfortis">
+				<div class="spinning">{{ _('Loading view…') }}</div>				
+			</div>	
+
+
+			<div class="tfortismenu__buttons">
+				<div class="tfortismenu__user">
+					<div class="tfortismenu__bange">
+						<img src="/luci-static/tfortis/icons/user.svg">
+					</div>
+					<p>
+						{{ ctx.authuser }}
+					</p>
+				</div>
+				<a class="btn btn-outline" onclick="open_help_info()">
+					<img src="/luci-static/tfortis/icons/help.svg" class="btn-ico-left">
+					Помощь
+				</a>
+				<a class="btn btn-outline tfortismenu__button--exit" href="/cgi-bin/luci/admin/logout">
+					<img src="/luci-static/tfortis/icons/exit.svg" class="btn-ico-left">
+					Выйти
+				</a>
+			</div>
+
+
+		{% endif %}
+		
+		<span class="showSide tfortismenu__hum"></span>
+
+	</div>
+</header>
+
+
+<div class="main">
+	<div style="" class="loading"><span><div class="loading-img"></div>{{ _('Collecting data...') }}</span></div>
+
+	
+	<div class="main-left" id="mainmenu" style="display:none"> </div>
+	<div class="main-right">
+		<div class="modemenu-buttons" style="display:none">
+			<ul id="modemenu"></ul>
+		</div>
+		<div class="darkMask"></div>
+		<div id="maincontent">
+
+			<div class="container">
+   				
+				{% if (ctx.authsession !== null && ctx.authsession !== ''): %}
+					<div class="tfortis-indicator">
+	   					<span class="status" id="indicators"></span>
+	   				</div>
+				{% endif %}
+
+
+				{% if (getuid() == 0 && getspnam('root') && boardinfo?.rootfs_type !== "initramfs" ?.pwdp === '' ): %}
+					<div class="alert-message warning">
+						<h4>{{ _('No password set!') }}</h4>
+						<p>{{ _('There is no password set on this router. Please configure a root password to protect the web interface.') }}</p>
+						{% if (dispatcher.lookup("admin/system/admin")): %}
+						  <div class="right"><a class="btn" href="{{ dispatcher.build_url("admin/system/admin") }}">{{ _('Go to password configuration...') }}</a></div>
+						{% endif %}
+					</div>
+				{% endif %}
+
+				{% if (boardinfo?.rootfs_type == "initramfs"): %}
+					<div class="alert-message warning">
+						<h4>{{ _('System running in recovery (initramfs) mode.') }}</h4>
+						<p>{{ _('No changes to settings will be stored and are lost after rebooting. This mode should only be used to install a firmware upgrade') }}</p>
+						<p>{{ _('To logout use <b>root</b> username with empty password') }}</p>
+						{% if (dispatcher.lookup("admin/system/flash")): %}
+						  <div class="right"><a class="btn" href="{{ dispatcher.build_url("admin/system/flash") }}">{{ _('Go to firmware upgrade...') }}</a></div>
+						{% endif %}
+					</div>
+				{% endif %}
+
+				<noscript>
+					<div class="alert-message warning">
+						<h4>{{ _('JavaScript required!') }}</h4>
+						<p>{{ _('You must enable JavaScript in your browser or LuCI will not work properly.') }}</p>
+					</div>
+				</noscript>
+
+				<div id="tabmenu" style="display:none"></div>

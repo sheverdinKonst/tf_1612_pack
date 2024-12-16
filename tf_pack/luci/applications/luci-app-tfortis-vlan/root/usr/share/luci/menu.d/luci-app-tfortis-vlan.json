@@ -1,0 +1,25 @@
+{
+  "admin/vlan/": {
+    "title": "VLAN",
+    "order": 4,
+    "action": {
+      "type": "firstchild"
+    },
+    "depends": {
+      "acl": [ "luci-app-tfortis-vlan" ]
+    }
+  },
+
+  "admin/vlan/8021q": {
+    "title": "802.1Q",
+    "order": 1,
+    "action": {
+      "type": "view",
+      "path": "vlan/8021q"
+    }
+  }
+
+
+
+  
+}

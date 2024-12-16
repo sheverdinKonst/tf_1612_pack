@@ -1,0 +1,145 @@
+{
+	"admin/status/": {
+		"title": "Dashboard",
+		"order": 1,
+		"action": {
+			"type": "firstchild"
+		},
+		"depends": {
+			"acl": [ "luci-mod-status-index" ]
+		}
+	},
+
+	"admin/status/": {
+		"title": "Dashboard",
+		"order": 1,
+		"action": {
+			"type": "template",
+			"path": "admin_status/index"
+		}
+	},
+
+	"admin/statistics/routes": {
+		"title": "Routing",
+		"order": 2,
+		"action": {
+			"type": "view",
+			"path": "status/routes"
+		},
+		"depends": {
+			"acl": [ "luci-mod-status-routes" ]
+		}
+	},
+
+	"admin/statistics/iptables": {
+		"title": "Firewall",
+		"order": 3,
+		"action": {
+			"type": "view",
+			"path": "status/iptables"
+		},
+		"depends": {
+			"acl": [ "luci-mod-status-firewall" ],
+			"fs": [
+				{ "/usr/sbin/nft": "absent", "/usr/sbin/iptables": "executable" },
+				{ "/usr/sbin/nft": "absent", "/usr/sbin/ip6tables": "executable" }
+			]
+		}
+	},
+
+	"admin/statistics/nftables": {
+		"title": "Firewall",
+		"order": 3,
+		"action": {
+			"type": "view",
+			"path": "status/nftables"
+		},
+		"depends": {
+			"acl": [ "luci-mod-status-firewall" ],
+			"fs": { "/usr/sbin/nft": "executable" }
+		}
+	},
+
+	"admin/statistics/nftables/iptables": {
+		"action": {
+			"type": "view",
+			"path": "status/iptables"
+		}
+	},
+
+	"admin/statistics/processes": {
+		"title": "Processes",
+		"order": 6,
+		"action": {
+			"type": "view",
+			"path": "status/processes"
+		},
+		"depends": {
+			"acl": [ "luci-mod-status-processes" ]
+		}
+	},
+
+	"admin/statistics/channel_analysis": {
+		"title": "Channel Analysis",
+		"order": 7,
+		"action": {
+			"type": "view",
+			"path": "status/channel_analysis"
+		},
+		"depends": {
+			"acl": [ "luci-mod-status-channel_analysis" ],
+			"uci": { "wireless": { "@wifi-device": true } }
+		}
+	},
+
+	"admin/statistics/realtime": {
+		"title": "Port statistics",
+		"order": 1,
+		"action": {
+			"type": "firstchild"
+		},
+		"depends": {
+			"acl": [ "luci-mod-status-index" ]
+		}
+	},
+
+	"admin/statistics/realtime/bandwidth": {
+		"title": "Traffic",
+		"order": 1,
+		"action": {
+			"type": "view",
+			"path": "status/bandwidth"
+		}
+	},
+
+	"admin/statistics/realtime/load": {
+		"title": "Load",
+		"order": 2,
+		"action": {
+			"type": "view",
+			"path": "status/load"
+		}
+	},
+
+
+	"admin/statistics/realtime/wireless": {
+		"title": "Wireless",
+		"order": 3,
+		"action": {
+			"type": "view",
+			"path": "status/wireless"
+		},
+		"depends": {
+			"uci": { "wireless": { "@wifi-device": true } }
+		}
+	},
+
+	"admin/statistics/realtime/connections": {
+		"title": "Connections",
+		"order": 4,
+		"action": {
+			"type": "view",
+			"path": "status/connections"
+		}
+	}
+}

@@ -1,0 +1,96 @@
+#!/bin/sh /etc/rc.common
+# Copyright (C) 2013-2014 OpenWrt.org
+
+START=95
+STOP=90
+
+
+
+start() {
+	echo "sysfixtime start"
+
+
+	if [[ "$(/etc/init.d/tf_hwsysd status)" == "running" ]]
+	then
+		local rtc_time="$(get_rtc_time)"
+		date -s "$rtc_time"
+		echo "tf_hwsysd not started, wait..."
+		echo "$(/etc/init.d/tf_hwsysd status)"
+	else
+		sleep 10
+
+		echo "Status: $(/etc/init.d/tf_hwsysd status)"
+
+		if [[ "$(/etc/init.d/tf_hwsysd status)" == "running" ]]
+		then
+			local rtc_time="$(get_rtc_time)"
+			date -s "$rtc_time"
+			echo "tf_hwsysd started"
+		else
+			local curtime="$(date +%s)"
+			local maxtime="$(find /etc -type f -exec date -r {} +%s \; | sort -nr | head -n1)"
+			[ $curtime -lt $maxtime ] && date -s @$maxtime
+			echo "tf_hwsysd not started, time from /etc"
+		fi
+	fi
+
+	logger -t sysfixtime "clock_load '$(date)'"
+	echo "clock_load $rtc_time"
+}
+
+stop() {
+	echo "sysfixtime stop"
+  set_rtc_time
+  hwclock_save
+}
+
+hwclock_load() {
+    logger -t sysfixtime "hwclock_load '$(date)'"
+}
+
+hwclock_save(){
+    logger -t sysfixtime "hwclock_save '$(date)'"
+}
+
+get_rtc_time(){
+    local status=$(tf_hwsys_ctrl RTC_STATUS get)
+    local year="$(tf_hwsys_ctrl RTC_YEAR get)"
+    local month="$(tf_hwsys_ctrl RTC_MONTH get)"
+    local day="$(tf_hwsys_ctrl RTC_DAY get)"
+    local hour="$(tf_hwsys_ctrl RTC_HOUR get)"
+    local minute="$(tf_hwsys_ctrl RTC_MINUTE get)"
+    local second="$(tf_hwsys_ctrl RTC_SECOND get)"
+
+    if [ $status="1" ]
+    then
+        echo "20$year-$month-$day $hour:$minute:$second"
+    else
+        find_max_time
+    fi
+}
+
+set_rtc_time(){
+    if [ $(date +%Y) -ge "2000" ]
+    then
+        tf_hwsys_ctrl RTC_YEAR set $(($(date +%Y) - 2000))
+    fi
+	sleep 1
+    tf_hwsys_ctrl RTC_MONTH set $(date +%m)\
+	sleep 1
+    tf_hwsys_ctrl RTC_DAY set $(date +%d)
+	sleep 1
+    tf_hwsys_ctrl RTC_HOUR set $(date +%H)
+	sleep 1
+    tf_hwsys_ctrl RTC_MINUTE set $(date +%M)
+	sleep 1
+    tf_hwsys_ctrl RTC_SECOND set $(date +%S)
+}
+
+find_max_time() {
+    local file newest
+
+    for file in $( find /etc -type f ) ; do
+        [ -z "$newest" -o "$newest" -ot "$file" ] && newest=$file
+    done
+    [ "$newest" ] && date -r "$newest"
+}

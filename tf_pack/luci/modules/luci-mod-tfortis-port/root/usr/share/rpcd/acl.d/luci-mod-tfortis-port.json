@@ -1,0 +1,19 @@
+{
+	"luci-mod-battstatus": {
+		"description": "Grant access to port header table",
+		"read": {
+			"ubus": {
+				"poe":[
+					"info"
+				],
+				"luci": [
+					"getBuiltinEthernetPorts"
+				],
+				"luci-rpc": [
+					"getBoardJSON",
+					"getNetworkDevices"	
+				]
+			}
+		}
+	}
+}

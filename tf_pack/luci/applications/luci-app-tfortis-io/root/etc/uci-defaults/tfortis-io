@@ -1,0 +1,3 @@
+config tfortis-io
+	option	tamper_state 1
+	option out1_state 'enable'

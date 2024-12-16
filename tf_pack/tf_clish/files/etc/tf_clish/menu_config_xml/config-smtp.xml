@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CLISH_MODULE xmlns="http://clish.sourceforge.net/XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://clish.sourceforge.net/XMLSchema
+                     http://clish.sourceforge.net/XMLSchema/clish.xsd">
+    <!--  =======================================================-->
+    <VIEW name="main">
+        <COMMAND name="services smtp"
+                 help="Apply new configuration"
+                 lock="false"
+                 interrupt="false">
+            <PARAM name="config"
+                   test='-z "${show}" -a -z "${test}" -a "${access_level}" = "admin"'
+                   help="config"
+                   optional="true"
+                   order="true"
+                   mode="subcommand"
+                   ptype="SUBCOMMAND">
+                <PARAM name="state"
+                       help="set host name or IP address for smtp server"
+                       optional="true"
+                       oder = "true"
+                       mode="subcommand"
+                       ptype="SUBCOMMAND">
+                    <PARAM name="stateValue"
+                           optional="false"
+                           help="filter name"
+                           ptype="STATE"/>
+                </PARAM>
+
+                <PARAM name="port"
+                       test='-z "${state}"'
+                       help="set host name  or IP address for sntp server"
+                       optional="true"
+                       oder = "true"
+                       mode="subcommand"
+                       ptype="SUBCOMMAND">
+                    <PARAM name="portValue"
+                           optional="false"
+                           help="filter name"
+                           ptype="UINT"/>
+                </PARAM>
+
+                <PARAM name="host"
+                       help="set host name  or IP address for sntp server"
+                       optional="true"
+                       oder = "true"
+                       mode="subcommand"
+                       ptype="SUBCOMMAND">
+                    <PARAM name="hostValue"
+                           optional="false"
+                           help="filter name"
+                           ptype="IP_ADDR"/>
+                </PARAM>
+
+                <PARAM name="usr"
+                       help="set host name  or IP address for sntp server"
+                       optional="true"
+                       oder = "true"
+                       mode="subcommand"
+                       ptype="SUBCOMMAND">
+                    <PARAM name="userValue"
+                           optional="false"
+                           help="filter name"
+                           ptype="STRING"/>
+                    <PARAM name="password"
+                           help="set password"
+                           optional="true"
+                           oder = "true"
+                           mode="subcommand"
+                           ptype="SUBCOMMAND">
+                        <PARAM name="passwordValue"
+                               optional="false"
+                               help="filter name"
+                               ptype="STRING"/>
+                    </PARAM>
+                </PARAM>
+
+                <PARAM name="subject"
+                       help="set host name  or IP address for sntp server"
+                       optional="true"
+                       oder = "true"
+                       mode="subcommand"
+                       ptype="SUBCOMMAND">
+                    <PARAM name="subjectValue"
+                           optional="false"
+                           help="filter name"
+                           ptype="STRING"/>
+                </PARAM>
+
+                <PARAM name="to"
+                       help="set host name  or IP address for sntp server"
+                       optional="true"
+                       oder = "true"
+                       mode="subcommand"
+                       ptype="SUBCOMMAND">
+                    <PARAM name="toValue"
+                           optional="false"
+                           help="filter name"
+                           ptype="EMAIL"/>
+                </PARAM>
+
+                <PARAM name="tls"
+                       help="set host name  or IP address for sntp server"
+                       optional="true"
+                       oder = "true"
+                       mode="subcommand"
+                       ptype="SUBCOMMAND">
+                    <PARAM name="tlsValue"
+                           optional="false"
+                           help="filter name"
+                           ptype="STATE"/>
+                </PARAM>
+            </PARAM>
+
+            <PARAM name="show"
+                   help="config"
+                   test='-z "${config}" -a -z "${test}"'
+                   optional="true"
+                   order="true"
+                   mode="subcommand"
+                   ptype="SUBCOMMAND">
+                <PARAM name="configuration"
+                       help="config"
+                       test='-z "${password}" -a "${show_access_level}" = "admin"'
+                       optional="true"
+                       order="true"
+                       mode="subcommand"
+                       ptype="SUBCOMMAND">
+                    <PARAM name="password"
+                       help="set host name  or IP address for sntp server"
+                       optional="true"
+                       oder = "true"
+                       mode="subcommand"
+                       ptype="SUBCOMMAND">
+                </PARAM>
+                </PARAM>
+
+            </PARAM>
+
+            <PARAM name="test"
+                   help="config"
+                   test='-z "${config}" -a -z "${show}"'
+                   optional="true"
+                   order="true"
+                   mode="subcommand"
+                   ptype="SUBCOMMAND">
+            </PARAM>
+            <ACTION>
+                if [[ -n "${config}" ]]; then
+                    if [[ -n "${state}" ]]; then
+                        /etc/tf_clish/scripts/smpt/smtp_config.lua "state" "${stateValue}"
+                    fi
+
+                    if [[ -n "${portValue}" ]]; then
+                        /etc/tf_clish/scripts/smpt/smtp_config.lua "port" "${portValue}"
+                    fi
+
+                    if [[ -n "${hostValue}" ]]; then
+                        /etc/tf_clish/scripts/smpt/smtp_config.lua "host" "${hostValue}"
+                    fi
+
+                    if [[ -n "${userValue}" ]]; then
+                        if [[ -n "${passwordValue}" ]]; then
+                            /etc/tf_clish/scripts/smpt/smtp_config.lua "usr" "${usrValue}" "password" "${passwordValue}"
+                        else
+                            /etc/tf_clish/scripts/smpt/getPass_smtp.sh ${userValue}
+                    fi
+
+
+                    if [[ -n "${passwordValue}" ]]; then
+                        /etc/tf_clish/scripts/smpt/smtp_config.lua "password" "${passwordValue}"
+                    fi
+
+                    if [[ -n "${subjectValue}" ]]; then
+                        /etc/tf_clish/scripts/smpt/smtp_config.lua "subject" "${subjectValue}"
+                    fi
+
+                    if [[ -n "${to}" ]]; then
+                        /etc/tf_clish/scripts/smpt/smtp_config.lua "to" "${toValue}"
+                    fi
+
+                    if [[ -n "${tls}" ]]; then
+                        /etc/tf_clish/scripts/smpt/smtp_config.lua "tls" "${tlsValue}"
+                    fi
+                fi
+
+                if [[ -n "${show}" ]]; then
+                    if [[ -n "${configuration}" -a -z "${password}"]]; then
+                        /etc/tf_clish/scripts/smpt/smtp_show.lua "show_config"
+                    fi
+                    if [[ -n "${configuration}" -a -n "${password}"]]; then
+                        /etc/tf_clish/scripts/smpt/smtp_show.lua "show_config" "password"
+                    fi
+                fi
+
+                if [[ -n "${test}" ]]; then
+                    if [[ -n "${show}" ]]; then
+                        /etc/tf_clish/scripts/smpt/smtp_show.lua "test"
+                    fi
+                fi
+            </ACTION>
+        </COMMAND>
+    </VIEW>
+    <!--=======================================================-->
+</CLISH_MODULE>

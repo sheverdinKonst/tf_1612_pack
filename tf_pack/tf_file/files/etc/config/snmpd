@@ -1,0 +1,49 @@
+
+config general
+	option agentaddress 'UDP:161,UDP6:161'
+	option agentxsocket '/var/run/agentx.sock'
+	option enabled '1'
+	option port '161'
+
+config snmp_v1
+	option version_state '1'
+	option version 'v1'
+	option read_community 'p1'
+	option write_community 'private_1'
+	option read_access 'default'
+	option write_access 'default'
+
+config snmp_v2c
+	option version_state '1'
+	option version 'v2c'
+	option read_community 'public_2'
+	option write_community 'private_2'
+	option read_access 'default'
+	option write_access 'default'
+
+config snmp_v3
+	option version_state '1'
+	option version 'v3'
+	option username 'sdfvs'
+	option allow_write '0'
+	option auth_type 'MD5'
+	option auth_pass '123456789'
+	option privacy_type 'none'
+	option privacy_pass 'passphrase'
+
+config snmptrap 'trap'
+	option trap_enabled '0'
+	option trap_snmp_version 'v2c'
+	option trap_host 'localhost'
+	option trap_port '162'
+	option trap_community 'private'
+
+config logging 'log'
+	option log_syslog '1'
+	option log_syslog_facility 'd'
+	option log_syslog_priority 'd'
+
+config pass
+	option prog '/etc/tf_statistics/scripts/snmp_main.lua'
+	option miboid '.1.3.6.1.4.1.42019'
+

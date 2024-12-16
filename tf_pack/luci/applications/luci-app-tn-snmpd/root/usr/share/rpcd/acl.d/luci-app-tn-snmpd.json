@@ -1,0 +1,21 @@
+{
+	"luci-app-tn-snmpd-config": {
+		"description": "Grant access to SNMP configuration",
+		"read": {
+			"uci": [ "snmpd", "luci", "luci_snmpd" ],
+			"file": { "/usr/share/snmp/mibs/*": [ "read", "stat" ] },
+			"ubus": {
+				"luci": [ "getInitList" ],
+				"file": [ "read", "stat" ]
+			}
+		},
+		"write": {
+			"uci": [ "snmpd" ],
+			"ubus": {
+				"luci": [
+					"setInitAction"
+				]
+			}
+		}
+	}
+}

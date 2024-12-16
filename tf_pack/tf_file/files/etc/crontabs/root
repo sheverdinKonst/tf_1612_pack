@@ -1,0 +1,1 @@
+58 * * * * logrotate /etc/logrotate.conf

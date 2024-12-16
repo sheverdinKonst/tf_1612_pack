@@ -1,0 +1,10 @@
+{
+  "luci-app-tfortis-ups": {
+    "description": "Grant UCI access to LuCI app tfortis-ups",
+    "read": {
+      "ubus": {
+        "hw_sensor": [ "getStatus" ]
+      }
+    }
+  }
+}

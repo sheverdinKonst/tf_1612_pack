@@ -1,0 +1,98 @@
+config interface 'loopback'
+	option device 'lo'
+	option proto 'static'
+	option ipaddr '127.0.0.1'
+	option netmask '255.0.0.0'
+
+config interface 'lan'
+	option device 'switch.1'
+	option proto 'static'
+	option ipaddr '192.168.1.1'
+	option netmask '255.255.255.0'
+	option ip6assign '60'
+
+	
+config device 'switch'
+	option name 'switch'
+	option type 'bridge'
+	list ports 'lan1'
+	list ports 'lan2'
+	list ports 'lan3'
+	list ports 'lan4'
+	list ports 'lan5'
+	list ports 'lan6'
+	list ports 'lan7'
+	list ports 'lan8'
+	list ports 'lan9'
+	list ports 'lan10'
+	option stp '1'
+	option igmp_snooping '1'
+	option macaddr 'C0:11:A6:00:00:00'
+	
+config bridge-vlan 'vlan1'
+	option device 'switch'
+	option vlan '1'
+	option state 'enable'
+	option descr 'name'
+	list ports 'lan1'
+	list ports 'lan2'
+	list ports 'lan3'
+	list ports 'lan4'
+	list ports 'lan5'
+	list ports 'lan6'
+	list ports 'lan7'
+	list ports 'lan8'
+	list ports 'lan9'
+	list ports 'lan10'
+
+config device
+	option name 'switch.1'
+	option type '8021q'
+	option ifname 'switch'
+	option vid '1'
+	option macaddr 'C0:11:A6:00:00:00'
+
+config device
+	option name 'eth0'
+	option macaddr 'C0:11:A6:00:00:00'
+
+config device
+	option name 'lan8'
+	option macaddr 'C0:11:A6:00:00:00'
+
+config device
+	option name 'lan1'
+	option macaddr 'C0:11:A6:00:00:00'
+
+config device
+	option name 'lan2'
+	option macaddr 'C0:11:A6:00:00:00'
+
+config device
+	option name 'lan3'
+	option macaddr 'C0:11:A6:00:00:00'
+
+config device
+	option name 'lan4'
+	option macaddr 'C0:11:A6:00:00:00'
+
+config device
+	option name 'lan5'
+	option macaddr 'C0:11:A6:00:00:00'
+
+config device
+	option name 'lan6'
+	option macaddr 'C0:11:A6:00:00:00'
+
+config device
+	option name 'lan7'
+	option macaddr 'C0:11:A6:00:00:00'
+
+config device
+	option name 'lan9'
+	option macaddr 'C0:11:A6:00:00:00'
+
+config device
+	option name 'lan10'
+	option macaddr 'C0:11:A6:00:00:00' 
+

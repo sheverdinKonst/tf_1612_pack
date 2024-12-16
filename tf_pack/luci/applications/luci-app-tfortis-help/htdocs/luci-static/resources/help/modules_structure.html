@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+	<meta charset="utf-8">
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"/>
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="mobile-web-app-capable" content="yes">
+	<meta name="theme-color" content="#09c">
+	<meta name="msapplication-tap-highlight" content="no">
+	<meta name="msapplication-TileColor" content="#09c">
+	<meta name="application-name" content="LuCI">
+	<meta name="apple-mobile-web-app-title" content="LuCI">
+	<link rel="stylesheet" href="/luci-static/tfortis/help.css">
+	<link rel="shortcut icon" href="/luci-static/tfortis/favicon.ico">
+	<script src="/luci-static/resources/help/main.js"></script>
+	<script src="https://code.jquery.com/jquery-3.7.1.slim.min.js" integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
+	<title> Поддержка </title>
+</head>
+
+<body>
+	<div class="page">
+		
+		<div class="header">
+			<a class="header__container" href="/">
+				<div class="header__logo">
+					<img src="/luci-static/tfortis/logo.svg" data-visible="desktop">
+					<img src="/luci-static/tfortis/logo-mobile.svg" data-visible="mobile">
+				</div>
+				<div class="header__name">
+					Справочная информация
+				</div>
+			</a>
+			<div id="js-ham" class="header__hum"></div>
+		</div>
+
+		<div class="page__container">
+			<div class="page__menu">
+				<!--
+					
+					При добавлении нового пункта в меню, необходимо:
+
+					1. Добавить div.menu__item.
+					2. На странице данного пукта добавить сласс div.menu__item.active
+					3. Разместить внутри ссылку с атрибутом href если вложенных списков нет, без атрибута если есть. 
+					4. Если есть вложенное меню, добавить div.menu-sub по аналогии
+					5. На странице подпункта меню добавить класс div.menu-sub__item.active, также для div.menu__item.active
+
+				-->
+				<div class="menu">
+					<div class="menu__item">
+						<a href="/luci-static/resources/help"> Быстрый старт </a>	
+					</div>
+					<div class="menu__item active">
+						<a> Модули </a>
+						<div class="menu-sub">
+							<a href="/luci-static/resources/help/modules_desc.html" class="menu-sub__item"> Описание модулей </a>
+							<a href="/luci-static/resources/help/modules_structure.html" class="menu-sub__item active"> Структура модулей </a>
+						</div>
+					</div>
+					<div class="menu__item">
+						<a> Меню </a>
+						<div class="menu-sub">
+							<a class="menu-sub__item">Меню 1</a>
+							<a class="menu-sub__item">Меню 2</a>
+							<a class="menu-sub__item">Меню 3</a>
+						</div>
+					</div>
+					<div class="menu__item">
+						<a href="/luci-static/resources/help/test.html"> Тестовые возможности </a>
+					</div>
+				</div>
+			</div>
+			<div class="page__content">
+				<h1> Быстрый старт </h1>
+				<p>
+					<b>Lorem ipsum dolor</b> sit amet, consectetur adipisicing elit, sed do eiusmod
+					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+					consequat.
+				</p>
+				<h2> Быстрый старт </h2>
+				<p>
+					<a> Lorem ipsum dolor </a> sit amet, consectetur adipisicing elit, sed do eiusmod
+					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+					consequat.
+				</p>
+				<h3> Быстрый старт </h3>
+				<p>
+					<em> Lorem ipsum dolor </em> sit amet, consectetur adipisicing elit, sed do eiusmod
+					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+					consequat.
+				</p>
+				<p>
+					<del>Lorem ipsum dolor </del> sit amet, consectetur adipisicing elit, sed do eiusmod
+					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+					consequat.
+				</p>
+				<p>
+					<ins>Lorem ipsum dolor </ins> sit amet, consectetur adipisicing elit, sed do eiusmod
+					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+					consequat.
+				</p>
+				<p>
+					<mark>Lorem ipsum dolor </mark> sit amet, consectetur adipisicing elit, sed do eiusmod
+					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+					consequat.
+				</p>
+				<p>
+					<small>Lorem ipsum dolor </small> sit amet, consectetur adipisicing elit, sed do eiusmod
+					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+					consequat.
+				</p>
+				<p>
+					<small>Lorem ipsum dolor </small> sit amet, consectetur adipisicing elit, sed do eiusmod
+					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+					consequat.
+				</p>
+				
+				<h3> Быстрый старт </h3>
+				<ul>
+					<li> Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum </li>
+					<li> Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum </li>
+					<li> Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum </li>
+				</ul>
+				
+				<h3> Быстрый старт </h3>
+				<ol>
+					<li> Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum </li>
+					<li> Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum </li>
+					<li> Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum </li>
+				</ol>
+
+				<h3> Быстрый старт </h3>
+				<code>
+					Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+				</code>
+
+				<h3> Быстрый старт </h3>
+
+				<div class="table-responsive">
+					<table>
+						<tr>
+							<th>Заголовок 1</th>
+							<th>Заголовок 2</th>
+							<th>Заголовок 3</th>
+							<th>Заголовок 4</th>
+						</tr>
+						<tr>
+							<td>Контент</td>
+							<td>Контент</td>
+							<td>Контент</td>
+							<td>Контент</td>
+						</tr>
+						<tr>
+							<td>Контент</td>
+							<td>Контент</td>
+							<td>Контент</td>
+							<td>Контент</td>
+						</tr>
+						<tr>
+							<td>Контент</td>
+							<td>Контент</td>
+							<td>Контент</td>
+							<td>Контент</td>
+						</tr>
+						<tr>
+							<td>Контент</td>
+							<td>Контент</td>
+							<td>Контент</td>
+							<td>Контент</td>
+						</tr>
+					</table>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</body>

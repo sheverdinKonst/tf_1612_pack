@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CLISH_MODULE xmlns="http://clish.sourceforge.net/XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://clish.sourceforge.net/XMLSchema
+              http://clish.sourceforge.net/XMLSchema/clish.xsd">
+    <!--=======================================================-->
+    <VIEW name="main">
+        <COMMAND name="services lldp"
+                 help="lldp settings and status">
+            <PARAM name="config"
+                   test='"${access_level}" = "admin"'
+                   help="lldp settings"
+                   optional="true"
+                   order="true"
+                   mode="subcommand"
+                   ptype="SUBCOMMAND">
+                <PARAM name="state"
+                       help="set lldp state"
+                       optional="true"
+                       mode="subcommand"
+                       ptype="SUBCOMMAND">
+                    <PARAM name="stateValue"
+                           help=" - LLDP state"
+                           ptype="STATE"/>
+                </PARAM>
+                <PARAM name="transmit_interval"
+                       help="The delay between two LDP PDU transmissions. The default value is 30 seconds."
+                       optional="true"
+                       mode="subcommand"
+                       ptype="SUBCOMMAND">
+                    <PARAM name="tx_interval"
+                           help=" - LLDP tx interval"
+                           ptype="LLDP_TX_INTERVAL"/>
+                </PARAM>
+                <PARAM name="hold_multiplier"
+                       help="This value is used to calculate the TTL of transmitted packets, which is the product of this value and the transmission delay. The default value is 4."
+                       optional="true"
+                       mode="subcommand"
+                       ptype="SUBCOMMAND">
+                    <PARAM name="lldp_tx_hold"
+                           help=" - LLDP tx hold"
+                           ptype="LLDP_HOLD_MULTI"/>
+                </PARAM>
+                <PARAM name="interfaces"
+                       help="Specify which interfaces should listen to and send LLD PDU. If no interfaces are specified, LLDPd will use all available physical interfaces."
+                       optional="true"
+                       order="true"
+                       mode="subcommand"
+                       ptype="SUBCOMMAND">
+                    <PARAM name="if_state"
+                           test='-n ${"interfaces"}'
+                           help="set ports state *add* or *remove* from lldp interfaces list"
+                           optional="false"
+                           mode="subcommand"
+                           ptype="SUBCOMMAND">
+                        <PARAM name="if_stateValue"
+                               optional="false"
+                               help=" - ports state for lldp interfaces list"
+                               ptype="LLDP_PORT_STATE"/>
+                    </PARAM>
+                    <PARAM name="ports"
+                           test='-n ${"if_state"}'
+                           help="set which ports to add or remove from lldp interfaces list"
+                           optional="false"
+                           order="true"
+                           mode="subcommand"
+                           ptype="SUBCOMMAND">
+                        <PARAM name="portValue"
+                           test = '-n "${ports}"'
+                           optional="false"
+                           help=" - ports to add  or remove from lldp  interfaces list"
+                           ptype="PORT_NUM_LIST_1_10"/>
+                    </PARAM>
+                </PARAM>
+            </PARAM>
+
+            <PARAM name="show"
+                   help="show status lldp"
+                   test='-z "${config}"'
+                   optional="true"
+                   order="true"
+                   mode="subcommand"
+                   ptype="SUBCOMMAND">
+                <PARAM name="status"
+                       help="show lldp status"
+                       test='-z "${config}"'
+                       optional="true"
+                       order="true"
+                       mode="subcommand"
+                       ptype="SUBCOMMAND">
+                    <PARAM name="local"
+                           test='-z "${remote}" -a -z "${statistic}" -a -z "${interfaces}"'
+                           help="show lldp local "
+                           optional="true"
+                           mode="subcommand"
+                           ptype="SUBCOMMAND">
+                    </PARAM>
+                    <PARAM name="remote"
+                           test='-z "${local}" -a -z "${statistic}" -a -z "${interfaces}"'
+                           help="show lldp remote"
+                           optional="true"
+                           mode="subcommand"
+                           ptype="SUBCOMMAND">
+                    <PARAM name="ports"
+                           help="choose port range"
+                           optional="true"
+                           order="true"
+                           mode="subcommand"
+                           ptype="SUBCOMMAND"/>
+                    <PARAM name="portValue"
+                           test = '-n "${ports}"'
+                           optional="false"
+                           order="true"
+                           help=" - for lldp remote"
+                           ptype="PORT_NUM_LIST_1_10"/>
+                    </PARAM>
+                    <PARAM name="statistic"
+                           test='-z "${local}" -a -z "${remote}" -a -z "${interfaces}"'
+                           help="show lldp statistic"
+                           optional="true"
+                           mode="subcommand"
+                           ptype="SUBCOMMAND">
+                    <PARAM name="ports"
+                           help="choose port range"
+                           optional="true"
+                           order="true"
+                           mode="subcommand"
+                           ptype="SUBCOMMAND"/>
+                    <PARAM name="portValue"
+                           test = '-n "${ports}"'
+                           optional="false"
+                           order="true"
+                           help=" - for lldp statistic"
+                           ptype="PORT_NUM_LIST_1_10"/>
+                    </PARAM>
+                    <PARAM name="interfaces"
+                           test='-z "${local}" -a -z "${statistic}" -a -z "${remote}"'
+                           help="show lldp interfaces"
+                           optional="true"
+                           mode="subcommand"
+                           ptype="SUBCOMMAND">
+                        <PARAM name="ports"
+                               help="choose port range"
+                               optional="true"
+                               order="true"
+                               mode="subcommand"
+                               ptype="SUBCOMMAND">
+                            <PARAM name="portValue"
+                                   test = '-n "${ports}"'
+                                   optional="false"
+                                   order="true"
+                                   help=" - for lldp interfaces"
+                                   ptype="PORT_NUM_LIST_1_10"/>
+                        </PARAM>
+                    </PARAM>
+                </PARAM>
+                <PARAM name="configuration"
+                       help="show config lldp"
+                       test='-z "${status}"'
+                       optional="true"
+                       order="true"
+                       mode="subcommand"
+                       ptype="SUBCOMMAND">
+                </PARAM>
+
+            </PARAM>
+            <ACTION>
+
+                if [[ -n "${config}" ]]; then
+                    if [[ -n "${state}" ]]; then
+                        /etc/tf_clish/scripts/lldpd/config_lldp.lua "enable_lldp" "all" ${stateValue}
+                    fi
+
+                    if [[ -n "${transmit_interval}" ]]; then
+                        /etc/tf_clish/scripts/lldpd/config_lldp.lua "lldp_tx_interval" "all" ${tx_interval}
+                    fi
+
+                    if [[ -n "${hold_multiplier}" ]]; then
+                        /etc/tf_clish/scripts/lldpd/config_lldp.lua "lldp_tx_hold" "all" ${lldp_tx_hold}
+                    fi
+                    if [[ -n "${interfaces}" ]]; then
+                        /etc/tf_clish/scripts/lldpd/config_lldp.lua "ports" ${portValue} ${if_stateValue}
+                    fi
+                fi
+
+                if [[ -n "${show}" ]]; then
+                    if [[ -n "${status}" ]]; then
+                        if [[ -n "${local}" ]]; then
+                             /etc/tf_clish/scripts/lldpd/show_lldpd.lua "all" "local"
+                        fi
+
+                        if [[ -n "${remote}" ]]; then
+                            if [[  -z "${portValue}" ]]; then
+                                /etc/tf_clish/scripts/lldpd/show_lldpd.lua "all" "remote"
+                            fi
+
+                            if [[  -n "${portValue}" ]]; then
+                                /etc/tf_clish/scripts/lldpd/show_lldpd.lua ${portValue} "remote"
+                            fi
+                        fi
+
+                        if [[ -n "${statistic}" ]]; then
+                            if [[  -z "${portValue}" ]]; then
+                                /etc/tf_clish/scripts/lldpd/show_lldpd.lua "all" "statistics"
+                            fi
+
+                            if [[  -n "${portValue}" ]]; then
+                                /etc/tf_clish/scripts/lldpd/show_lldpd.lua ${portValue} "statistics"
+                            fi
+                        fi
+
+                        if [[ -n "${interfaces}" ]]; then
+                            if [[  -z "${portValue}" ]]; then
+                                /etc/tf_clish/scripts/lldpd/show_lldpd.lua "all" "interfaces"
+                            fi
+
+                            if [[  -n "${portValue}" ]]; then
+                                /etc/tf_clish/scripts/lldpd/show_lldpd.lua ${portValue} "interfaces"
+                            fi
+                        fi
+                    fi
+
+                    if [[ -n "${configuration}" ]]; then
+                        /etc/tf_clish/scripts/lldpd/show_lldpd.lua "all" "configuration"
+                    fi
+                fi
+            </ACTION>
+        </COMMAND>
+    </VIEW>
+</CLISH_MODULE>

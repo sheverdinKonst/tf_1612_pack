@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CLISH_MODULE xmlns="http://clish.sourceforge.net/XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://clish.sourceforge.net/XMLSchema
+                     http://clish.sourceforge.net/XMLSchema/clish.xsd">
+    <!--=======================================================-->
+    <VIEW name="main">
+        <!--===================================================-->
+        <COMMAND name="services sntp"
+                 help="Configure SNTP">
+            <PARAM name="config"
+                   test='"${access_level}" = "admin"'
+                   help="config"
+                   optional="true"
+                   order="true"
+                   mode="subcommand"
+                   ptype="SUBCOMMAND">
+
+                <PARAM name="state"
+                       help="alarm state (open/short/any)"
+                       optional="true"
+                       mode="subcommand"
+                       ptype="SUBCOMMAND">
+                    <PARAM name="stateValue"
+                           help="alarm_state value"
+                           ptype="STATE"/>
+                </PARAM>
+
+                <PARAM name="add"
+                       test='-z "${delete}"'
+                       help="config"
+                       optional="true"
+                       mode="subcommand"
+                       ptype="SUBCOMMAND">
+                    <PARAM name="host_name"
+                           help="set host name  or IP address for sntp server"
+                           optional="false"
+                           mode="subcommand"
+                           ptype="SUBCOMMAND">
+                           <PARAM name="host_nameValue"
+                               optional="false"
+                               help="host name"
+                               ptype="STRING"/>
+                    </PARAM>
+                </PARAM>
+
+                <PARAM name="timezone"
+                       help="set host name  or IP address for sntp server"
+                       optional="true"
+                       mode="subcommand"
+                       ptype="SUBCOMMAND">
+                    <PARAM name="timezoneValue"
+                           optional="false"
+                           help="host name"
+                           ptype="TIMEZONE"/>
+                </PARAM>
+
+                <PARAM name="delete"
+                       test='-z "${add}" -a -z "${state}" -a -z "${timezone}"'
+                       help="config"
+                       optional="true"
+                       mode="subcommand"
+                       ptype="SUBCOMMAND">
+                    <PARAM name="host_name"
+                           help="set host name  or IP address for sntp server"
+                           optional="false"
+                           mode="subcommand"
+                           ptype="SUBCOMMAND">
+                        <PARAM name="host_nameValue"
+                               optional="false"
+                               help="host name"
+                               ptype="STRING"/>
+                    </PARAM>
+                </PARAM>
+            </PARAM>
+
+            <PARAM name="show"
+                   help="config"
+                   test='-z "${config}"'
+                   optional="true"
+                   order="true"
+                   mode="subcommand"
+                   ptype="SUBCOMMAND">
+                <PARAM name="configuration"
+                       help="config"
+                       test='"${show_access_level}" = "admin"'
+                       optional="true"
+                       order="true"
+                       mode="subcommand"
+                       ptype="SUBCOMMAND"/>
+            </PARAM>
+
+            <ACTION>
+                if [[  -n "${config}" ]]; then
+                    if [[  -n "${state}" ]]; then
+                        /etc/tf_clish/scripts/sntp/config_sntp.lua "state" ${stateValue}
+                    fi
+
+                    if [[  -n "${timezone}" ]]; then
+                          /etc/tf_clish/scripts/sntp/config_sntp.lua "timezone" ${timezoneValue}
+                    fi
+
+                    if [[  -n "${add}" ]]; then
+                         /etc/tf_clish/scripts/sntp/config_sntp.lua "add" ${host_nameValue}
+                    fi
+
+                    if [[  -n "${delete}" ]]; then
+                         /etc/tf_clish/scripts/sntp/config_sntp.lua "delete" ${hostname}
+                    fi
+                fi
+
+                if [[  -n "${show}" ]]; then
+                    if [[  -n "${configuration}" ]]; then
+                        /etc/tf_clish/scripts/sntp/show_sntp.lua
+                    fi
+                fi
+            </ACTION>
+        </COMMAND>
+    </VIEW>
+</CLISH_MODULE>
+

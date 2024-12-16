@@ -1,0 +1,30 @@
+#system  config for tfortis PSW ver 2.0
+#network config for tfortis PSW ver 2.0
+#instaling from ipk
+
+config system 'tfortis'
+	option hostname 'TFortis'
+	option bootloader '01.00'
+	option timezone '<+05>-5'
+	option ttylogin '0'
+	option log_size '64'
+	option urandom_seed '0'
+	option zonename 'Etc/GMT-5'
+	option log_proto 'udp'
+	option conloglevel '8'
+	option cronloglevel '5'
+	option description ''
+	option notes ''
+	option contacts '8(800)100-112-8 support@tfortis.ru'
+
+config timeserver 'ntp'
+	list server '0.ru.pool.ntp.org'
+	list server '1.ru.pool.ntp.org'
+	list server '2.ru.pool.ntp.org'
+	list server '3.ru.pool.ntp.org'
+config led
+    option name 'cpu'
+    option sysfs 'green:sys'
+    option trigger 'timer'
+    option delayon '1000'
+    option delayoff '1000'

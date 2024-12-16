@@ -1,0 +1,65 @@
+stages:
+  # - init
+  - build
+  #- test
+  #- deploy
+
+image:
+  name: ftdocker02.ft.local:5000/tfortis_os:1.0
+
+build-job:
+  tags:
+    - tfortisBuild
+  stage: build
+  script:
+    - echo "CI/CD Running Build Stage... $GITLAB_USER_LOGIN"
+    - mkdir fw_tfortis
+    #- echo "fw_user=$fw_user --- fw_pass=$fw_pass --- fw_ip=$fw_ip"
+    - mount -t cifs -o rw,file_mode=0777,dir_mode=0777,username=$fw_user,password=$fw_pass //$fw_ip/fw_tfortis ./fw_tfortis
+    - cd fw_tfortis
+    - ls
+    - rm -rf openwrt_tfortis_packages/
+    - ls
+    - git clone http://sheverdin:7319837kon@gitlab.forttel.ru/TFortis/FirmWare/tfortis-realtek/openwrt_tfortis_packages.git
+    - ls
+    - cp mstpd.config /tfortis_OS/.config
+    - cp -r openwrt_tfortis_packages/tf_file/files /tfortis_OS/files
+    - cp feeds.conf.default  /tfortis_OS
+    - cat /tfortis_OS/feeds.conf.default
+    - cp  openwrt_tfortis_packages/tf_dts/rtl8380_tfortis_psw-2g8f.dts /tfortis_OS/target/linux/realtek/dts-5.15/
+    - cp  openwrt_tfortis_packages/tf_dts/rtl838x.mk /tfortis_OS/target/linux/realtek/image/rtl838x.mk
+    #- cp -r bin /tfortis_OS/
+    #- cp -r dl /tfortis_OS/
+    #- ls
+    - cd /tfortis_OS
+    - ls
+    - ./scripts/feeds update -a
+    - ./scripts/feeds install -a
+    - cat /tfortis_OS/feeds/tfortis_packages/tf_autorestart/Makefile
+    - export FORCE_UNSAFE_CONFIGURE=1
+    - export FORCE=1
+    - make V=-1 -j"$nproc"
+    - ls /tfortis_OS/bin/targets/realtek/rtl838x
+    - ls /tfortis_OS/bin/packages/mips_4kec/tfortis_packages/
+    - cd ..
+    - mount -t cifs -o rw,file_mode=0777,dir_mode=0777,username=$fw_user,password=$fw_pass //$fw_ip/fw_tfortis /fw_tfortis
+    - cp -r /tfortis_OS/bin /fw_tfortis/
+    - ls
+    - ls /fw_tfortis/bin/packages/mips_4kec/tfortis_packages/
+    - ls /fw_tfortis/bin/targets/realtek/rtl838x
+    - umount fw_tfortis
+
+
+  #unit-test-job:   # This job runs in the test stage.
+  #  stage: test    # It only starts when the job in the build stage completes successfully.
+  #  script:
+  #    - echo "Running unit tests... This will take about 60 seconds."
+  #    - sleep 1
+  #    - echo "Code coverage is 90%"
+
+  #deploy-job:      # This job runs in the deploy stage.
+  #  stage: deploy  # It only runs when *both* jobs in the test stage complete successfully.
+  #  script:
+  #  - echo "Deploying application..."
+  #  - ls bin/targets/realtek/rtl838x/
+  

@@ -1,0 +1,5 @@
+config syslog 'syslog'
+	option log_proto 'udp'
+	option enabled '1'
+	option log_port '514'
+

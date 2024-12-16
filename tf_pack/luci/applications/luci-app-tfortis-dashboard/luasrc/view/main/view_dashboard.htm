@@ -1,0 +1,57 @@
+<%
+	local util = require "luci.util"
+	local fs = require "nixio.fs"
+	local sys = require "luci.sys"
+	local http = require "luci.http"
+	local dispatcher = require "luci.dispatcher"
+	local uci = require "luci.model.uci".cursor()
+	
+	local rps_connected = tostring(luci.util.exec("/usr/bin/request_ctrl RPS_CONNECTED get"))
+	local battery_voltage = tostring(luci.util.exec("/usr/bin/request_ctrl RPS_BAT_VOLTAGE get"))
+	local battery_current = luci.util.exec("/usr/bin/request_ctrl RPS_BAT_CURRENT get")
+	local temper = luci.util.exec("/usr/bin/request_ctrl RPS_TEMPER get")
+    local remain_time = luci.util.exec("/usr/bin/request_ctrl RPS_REMAIN_TIME get")	
+	
+-%>
+
+<%+header%>
+
+<style>
+
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  border-bottom: 1px solid var(--border-color-medium);
+  font-size: 12px;
+  padding: 10px;
+  text-align: justify;
+  display: table-cell;
+  vertical-align: top;
+}
+
+td input[type="checkbox"] {
+    float: left;
+    margin: 0 auto;
+    width: 40%;
+}
+
+tr:nth-child(odd) {background-color: var(--background-color-medium)}
+
+</style>
+
+
+<h2><%:UPS%></h2>
+	<div class="cbi-map-descr"><%:Statistics of build in UPS%> .</div>
+	<p></p>
+	<div class="table" width="100%">
+	<div class="tr"><div class="td left" width="33%"><%:RPS connected%>:</div><div class="td left"><%=rps_connected%></div></div>
+	<div class="tr"><div class="td left" width="33%"><%:Battery voltage%>:</div><div class="td left"><%=battery_voltage%></div></div>
+	<div class="tr"><div class="td left" width="33%"><%:Battery current%>:</div><div class="td left"><%=battery_current%></div></div>
+	<div class="tr"><div class="td left" width="33%"><%:Temperature%>:</div><div class="td left"><%=temper%></div></div>
+	<div class="tr"><div class="td left" width="33%"><%:UPS remain time%>:</div><div class="td left"><%=remain_time%></div></div>	
+	</div>
+<%+footer%>

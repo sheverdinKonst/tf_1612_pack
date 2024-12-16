@@ -1,0 +1,14 @@
+:root {
+	--main-color: #9F9FC1/*#00B5E2*/;
+	--header-bg: #34b0ec/*#00B5E2*/;
+	--header-color: #fff;
+	--bar-bg: #369/*#00B5E2*/;
+	--menu-bg-color: #fff;
+	--menu-color: #5f6368;
+	--menu-color-hover: #202124;
+	--main-menu-color: #202124;
+	--submenu-bg-hover: #d4d4d4;
+	--submenu-bg-hover-active: #369/*#00B5E2*/;
+	/*--font-body: "Microsoft Yahei", "WenQuanYi Micro Hei", "sans-serif", "Helvetica Neue", "Helvetica", "Hiragino Sans GB";*/
+	--font-body: "Inter";
+}

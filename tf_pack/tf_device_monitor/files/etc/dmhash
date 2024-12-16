@@ -1,0 +1,31 @@
+#!/usr/bin/lua
+
+local hash_cmd = "ubus call uci get '{\"config\":\"rpcd\"}'"
+
+local tf = require "tf_module"
+
+local res = "error"
+local function run_hash_test()
+	local userdata = tf.collectJsonTable(hash_cmd)
+	userdata = userdata["values"]
+    if arg[1] ~= nil and arg[1] ~= "" then
+        for _, user in pairs(userdata) do
+            if user[".type"] == "login" then
+                if user["hash"] ~= nil then
+                    print("user name = " .. user["username"]  .. " hash = " ..  user["hash"])
+                    if user["hash"] == arg[1] then
+                        res = "OK"
+                    end
+                else
+                    print("user name = " .. user["username"] .. " NOT HAVE HASH")
+                end
+            end
+        end
+        print (res)
+    else
+	print("hash not valid")
+    end
+end
+
+print("start ")
+run_hash_test()

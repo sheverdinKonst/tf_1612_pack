@@ -1,0 +1,13 @@
+{
+  "admin/port/sfp": {
+    "title": "SFP",
+    "order": 3,
+    "action": {
+      "type": "view",
+      "path": "port/sfp"
+    },
+    "depends": {
+      "acl": [ "luci-app-tfortis-sfp" ]
+    }
+  }  
+}

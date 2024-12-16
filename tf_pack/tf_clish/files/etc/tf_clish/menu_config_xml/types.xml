@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CLISH_MODULE xmlns="http://clish.sourceforge.net/XMLSchema"
+			  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			  xsi:schemaLocation="http://clish.sourceforge.net/XMLSchema
+                     http://clish.sourceforge.net/XMLSchema/clish.xsd">
+    <!--=======================================================-->
+	<PTYPE name="SUBCOMMAND"
+		   pattern="[^\]+"
+		   help="String"/>
+
+    <PTYPE name="ACTION_TYPE"
+		   method="select"
+		   pattern="add(add) edit(edit) delete(delete)"
+		   help="Action type"/>
+	<!--=======================================================-->
+    <PTYPE name="STRING"
+		   pattern=".+"
+		   help="string"/>
+    <!--=======================================================-->
+    <PTYPE name="UINT"
+	    pattern="[0-9]+"
+	       help="number "/>
+    <!--=======================================================-->
+    <PTYPE name="UINT_1_3"
+		   pattern="[1-3]"
+		   help="digits from 1 to 3"/>
+	<!--=======================================================-->
+	<PTYPE name="UINT_8"
+		   pattern="(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9][0-9]|[1-9])"
+		   help="number in the range 1-255"/>
+	<!--=======================================================-->
+	<PTYPE name="NUM_1_10"
+		   pattern="(10|[1-9])"
+		   help="Number in the range 1-10"/>
+	<!--=======================================================-->
+	<PTYPE name="NUM_4_30"
+		   pattern="([4-9]|[1-2][0-9]|30)"
+		   help="number in the range 4-30"/>
+	<!--=======================================================-->
+	<PTYPE name="NUM_6-40"
+		   pattern="([6-9]|[1-3][0-9]|40)"
+		   help="number in the range 4-30"/>
+	<!--=======================================================-->
+	<PTYPE name="NUM_10_1M"
+		   pattern="([1-9][0-9]{1,5}|1000000)"
+		   help="number in the range 10-1M"/>
+	<!--=======================================================-->
+	<PTYPE name="NUM_10-20M"
+		   pattern="([1-9][0-9]{1,6}|20000000)"
+		   help="number in the range 10-1M"/>
+	<!--=======================================================-->
+	<PTYPE name="PORT_NUM_LIST_1_10"
+		   pattern="(((([1-9]|10?)\-)([2-9]|10))|([1-9]|10))"
+		   help="number in range 1-10 or one port"/>
+    <!--=======================================================-->
+    <PTYPE name="PORT_NUM_LIST_1_8"
+		   pattern="(((([1-8]?)\-)([2-8]))|([1-8]))"
+		   help="range or number in the range 1-8 - "/>
+	<!--=======================================================-->
+    <PTYPE name="VLAN_ID"
+		   pattern="(409[0-4]|40[0-8][0-9]|[1-3][0-9]{3}|[1-9][0-9]{2}|[1-9][0-9]|[1-9])"
+		   help="number in the range 1-4094"/>
+	<!--=======================================================-->
+	<PTYPE name="VLAN_ID_LIST"
+		   pattern="((((409[0-4]|40[0-8][0-9]|[1-3][0-9]{3}|[1-9][0-9]{2}|[1-9][0-9]|[1-9])\-)(409[0-4]|40[0-8][0-9]|[1-3][0-9]{3}|[1-9][0-9]{2}|[1-9][0-9]|[2-9]))|(409[0-5]|40[0-8][0-9]|[1-3][0-9]{3}|[1-9][0-9]{2}|[1-9][0-9]|[1-9]))"
+		   help="number in the range 1-4094"/>
+	<!--=======================================================-->
+	<PTYPE name="LLDP_TX_INTERVAL"
+		   pattern="([5-9]|[1-9][0-9]|1[01][0-9]|120)"
+		   help="number in the range 5-120"/>
+	<!--=======================================================-->
+	<PTYPE name="LLDP_HOLD_MULTI"
+		   pattern="([2-9])"
+		   help="number in the range 2-9"/>
+    <!--=======================================================-->
+    <PTYPE name="LLDP_PORT_STATE"
+		   method="select"
+		   pattern="add(enable) remove(disable)"
+		   help="add, remove"/>
+    <!--=======================================================-->
+	<PTYPE name="TIMEZONE"
+		   pattern="(\-1[0-2]|-[1-9]|1[0-2]|[0-9])"
+		   help="Timezone -12..+12"/>
+	<!--=======================================================-->
+    <PTYPE name="TIME24H"
+		   pattern="((([0-1][0-9]|2[0-4])\:)([0-5][0-9]))"
+		   help="time in format HH:MM"/>
+	<!--=======================================================-->
+	<PTYPE name="IP_ADDR"
+		   pattern="(((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))"
+		   help="ip address"/>
+    <!--=======================================================-->
+    <PTYPE name="IP_ADDR_MASK"
+		   pattern="(((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))|(/(1[0-9]|2[0-9]|3[0-2]|[0-9]))"
+		   help="A.B.C.D[/mask]"/>
+	<!--=======================================================-->
+	<PTYPE name="IP_ADDR_ANY"
+		   pattern="(((((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))(/(1[0-9]|2[0-9]|3[0-2]|[0-9]))?)|any)"
+		   help="A.B.C.D[/mask] or any"/>
+	<!--=======================================================-->
+    <PTYPE name="PORT_MASK_ANY"
+		   pattern="^(([0-9]+(/0x[0-9a-f]+)?)|(any))$"
+		   help="Port[/mask]" />
+	<!--=======================================================-->
+	<PTYPE name="PROTO"
+		   method="select"
+		   pattern="ip(ip) ipencap(ipencap) icmp(icmp) igmp(igmp) tcp(tcp) udp(udp)"
+		   help="Protocol choice"/>
+    	<!--=======================================================-->
+    <PTYPE name="PROTO_2"
+		   method="select"
+		   pattern="TCP(tcp) UDP(udp)"
+		   help="Protocol choice"/>
+	<!--=======================================================-->
+    <PTYPE name="INPUT_TYPE"
+		   method="select"
+		   pattern="tamper(tamper) sensor1(sensor1) sensor2(sensor2)"
+		   help="tamper, sensor1, sensor2"/>
+    <!--=======================================================-->
+    <PTYPE name="INPUT_STATE"
+		   method="select"
+		   pattern="open(open) short(short)"
+		   help="open, short"/>
+	<!--=======================================================-->
+    <PTYPE name="OUTPUT_TYPE"
+		   method="select"
+		   pattern="relay(relay)"
+		   help="relay"/>
+    <!--=======================================================-->
+     <PTYPE name="INPUT_ALARM_STATE"
+		   method="select"
+		   pattern="open(open) short(open) any(any)"
+		   help="open, short, any"/>
+	<!--=======================================================-->
+	<PTYPE name="PORT"
+		   method="select"
+		   pattern="lan1(lan1) lan2(lan2) lan3(lan3) lan4(lan4) lan5(lan5) lan6(lan6) lan7(lan7) lan8(lan8) lan9(lan9) lan10(lan10)"
+		   help="Port choice"/>
+	<!--=======================================================-->
+	<PTYPE name="STATE"
+		   method="select"
+		   pattern="enable(1) disable(0)"
+		   help="enable / disable"/>
+	<!--=======================================================-->
+	<PTYPE name="STATE_DE"
+		   method="select"
+		   pattern="enable(enable) disable(disable)"
+		   help="enable, disable"/>
+	<!--=======================================================-->
+	<PTYPE name="PORT_SPEED"
+            method="select"
+            pattern="auto(1) 1000_full(2)  100_full(3) 100_half(4) 10_full(5) 10_half(6)"
+            help="auto, 1000_full, 100_full, 100_half, 10_full, 10_half"/>
+	<!--=======================================================-->
+	<PTYPE name="POE_VALUE"
+		   method="select"
+		   pattern="disable(disable) auto(auto) passive(passive) ultrapoe(ultrapoe) onlya(onlya) onlyb(onlyb) forced(forced)"
+		   help="disable, auto, passive, ultra poe, only a, only b, forced"/>
+	<!--=======================================================-->
+	<PTYPE name="PORT_TYPE"
+		   method="select"
+		   pattern="normal(normal) rx(rx) tx(tx) both(both)"
+		   help="chose port type"/>
+	<!--=======================================================-->
+	<PTYPE name="AUTORESTART_MODE"
+		   method="select"
+		   pattern="disable(disable) link(link), ping(ping), speed(speed)"
+		   help="select: disable, link, ping, speed"/>
+	<!--=======================================================-->
+	<PTYPE name="TELEPORT_INPUT"
+		   method="select"
+		   pattern="Sensor_1(1) Sensor_2(2)"
+		   help="chose input number"/>
+	<!--=======================================================-->
+	<PTYPE name="TELEPORT_EVENT"
+		   method="select"
+		   pattern="switch_to_UPS(1) TOBEDO(2)"
+		   help="chose event number"/>
+	<!--=======================================================-->
+	<PTYPE name="SNMP_VERSION"
+		   method="select"
+		   pattern="v1/v2c(v1/v2c) v1/v2c/v3(v1/v2c/v3) v3(v3)"
+		   help="v1 / v2c / v3"/>
+	<!--=======================================================-->
+    <PTYPE name="SNMP_VERSION_1"
+		   method="select"
+		   pattern="v1(v1) v2c(v2c) v3(v3)"
+		   help="v1 / v2c / v3"/>
+	<!--=======================================================-->
+	<PTYPE name="SNMP_V3_LEVEL"
+		   method="select"
+		   pattern="0(0) 1(1) 2(2)"
+		   help="0, 1 or 2"/>
+	<!--=======================================================-->
+	<PTYPE name="SNMP_HOST"
+		   method="select"
+		   pattern="localhost(localhost) default(default) custom(custom)"
+		   help="localhost/ default / custom"/>
+	<!--=======================================================-->
+	<PTYPE name="ADMIN_RULE"
+		   method="select"
+		   pattern="full(full) user(user)"
+		   help="Access level: FULL, READ ONLY"/>
+	<!--=======================================================-->
+	<PTYPE name="VLAN_TAGGED_TYPE_EDIT"
+		   method="select"
+		   pattern="tagged(tagged) untagged(untagged) not_member(not_memb)"
+		   help="chose port type"/>
+	<!--=======================================================-->
+	<PTYPE name="VLAN_TAGGED_TYPE_ADD"
+		   method="select"
+		   pattern="tagged(tagged) untagged(untagged)"
+		   help="chose port type"/>
+	<!--=======================================================-->
+	<PTYPE name="STP_PROTOCOL"
+		   method="select"
+	       pattern="STP(stp) RSTP(rstp)"
+	       help="chose STP protocol STP, RSTP"/>
+    <!--=======================================================-->
+	<PTYPE name="STP_PRIORITY"
+		   method="select"
+		   pattern="0(0) 4096(1) 8192(2) 12288(3) 16384(4) 20480(5) 24576(6) 28672(7) 32768(8) 36864(9) 40960(10) 45056(11) 49152(12) 53248(13) 57344(14) 614401(15)"
+		   help="0–61440"/>
+	<!--=======================================================-->
+	<PTYPE name="STP_LOG_LEVEL"
+		   method="select"
+		   pattern="disable(0), error(1), info(2), debug(3), state_machine_transition(4)"
+		   help="disable / error / info / debug / state machine transition"/>
+	<!--=======================================================-->
+	<PTYPE name="STP_BOOL"
+		   method="select"
+		   pattern="enable(yes), disable(no)"
+		   help="enable/disable"/>
+	<!--=======================================================-->
+    <PTYPE name="LOG_FACILITY"
+		   method="select"
+		   pattern=" *(*), kernel(kern), user(user), mail(mail), daemon(daemon), auth(auth), syslog(syslog), lpr(lpr), news(news), uucp(uucp), cron(cron), authpriv(authpriv), ftp(ftp), ntp(ntp), security(security), console(console), local0(local0), local1(local1), local2(local2), local3(local3), local4(local4), local5(local5), local6(local6), local7(local7)"
+		   help="choose FACILITY param"/>
+    <!--=======================================================-->
+    <PTYPE name="LOG_SEVERITY"
+		   method="select"
+		   pattern="*(*), emergency(emerg), alert(alert), critical(crit), error(err), warning(warning), notice(notice), info(info), debug(debug)"
+		   help="choose SEVERITY param"/>
+    <!--=======================================================-->
+    <PTYPE name="LOG_EDIT_DELETE"
+		   method="select"
+		   pattern="add/edit(add)  delete(delete)"
+		   help="choose SEVERITY param"/>
+    <!--=======================================================-->
+    <PTYPE name="LOG_ACTION"
+		   method="select"
+		   pattern="memory(memory), flash(flash), syslog(syslog), email(email)"
+		   help="choose FACILITY param"/>
+    <!--=======================================================-->
+    <PTYPE name="EMAIL"
+           pattern=".+"
+           help="choose FACILITY param"/>
+    <!--=======================================================-->
+    <PTYPE name="SFP_TYPE"
+           method="select"
+           pattern="1(1) 2(2)"
+           help="1, 2"/>
+    <!--=======================================================-->
+    <PTYPE name="SERVICE"
+		   pattern="((ftp)|(telnet)|(sntp)|(smtp)|(http)|([0-9]+))"
+		   help="Port"/>
+	<!--=======================================================-->
+	<PTYPE name="SEQ"
+		   pattern="^[0-9]*[1-9][0-9]*"
+		   help="Entry number"/>
+	<!--=======================================================-->
+    <PTYPE name="TriggerMode"
+		   method="select"
+		   pattern="LinkON(link) Transmit(Transmit) Receive(Receive)"
+		   help="Trigger Mode"/>
+	<!--=======================================================-->
+    <PTYPE name="IFNAME"
+		   method="select"
+		   pattern="lan(lan) switch1(switch.1)"
+		   help="chose interface"/>
+	<!--=======================================================-->
+    <PTYPE name="LOG_LEVEL"
+		   method="select"
+		   pattern="Emergency(1) Alert(2) Critical(3) Error(4) Warning(5) Notice(6) Info(7) Debug(8)"
+		   help="Output Log level: Emergency Alert Critical Error Warning Notice Info Debug"/>
+	<!--=======================================================-->
+    <PTYPE name="CRON_LOG_LEVEL"
+		   method="select"
+		   pattern="Warning(9) Normal(8) Debug(5)"
+		   help="Cron Log level: Warning Normal Debug"/>
+	<!--=======================================================-->
+    <PTYPE name="SHOW_TYPE"
+           method="select"
+           pattern="status(status) config(configuration)"
+           help="choose sfp"/>
+    <!--=======================================================-->
+    <PTYPE name="LOG_TYPE"
+           method="select"
+           pattern="filter(filter) action(action) rule(rule) all(all)"
+           help="choose sfp"/>
+    <!--=======================================================-->
+    <PTYPE name="AUTH_TYPE"
+           method="select"
+           pattern="MD5(MD5) SHA(SHA) none(none)"
+           help="choose - "/>
+    <!--=======================================================-->
+    <PTYPE name="PRIVACY_TYPE"
+           method="select"
+           pattern="AES(AES) DES(DES) none(none)"
+           help="choose - "/>
+    <!--=======================================================-->
+    <PTYPE name="BOOL"
+		   method="select"
+		   pattern="true(1) false(0)"
+		   help="Boolean choice"/>
+    <!--=======================================================-->
+</CLISH_MODULE>
+
+

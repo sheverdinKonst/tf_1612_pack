@@ -1,0 +1,1836 @@
+{
+  "statistics": {
+    "lldp": [
+      {
+        "interface": [
+          {
+            "name": "eth0",
+            "tx": [
+              {
+                "tx": "72"
+              }
+            ],
+            "rx": [
+              {
+                "rx": "141"
+              }
+            ],
+            "rx_discarded_cnt": [
+              {
+                "rx_discarded_cnt": "0"
+              }
+            ],
+            "rx_unrecognized_cnt": [
+              {
+                "rx_unrecognized_cnt": "0"
+              }
+            ],
+            "ageout_cnt": [
+              {
+                "ageout_cnt": "0"
+              }
+            ],
+            "insert_cnt": [
+              {
+                "insert_cnt": "3"
+              }
+            ],
+            "delete_cnt": [
+              {
+                "delete_cnt": "1"
+              }
+            ]
+          },
+          {
+            "name": "lan1",
+            "tx": [
+              {
+                "tx": "0"
+              }
+            ],
+            "rx": [
+              {
+                "rx": "0"
+              }
+            ],
+            "rx_discarded_cnt": [
+              {
+                "rx_discarded_cnt": "0"
+              }
+            ],
+            "rx_unrecognized_cnt": [
+              {
+                "rx_unrecognized_cnt": "0"
+              }
+            ],
+            "ageout_cnt": [
+              {
+                "ageout_cnt": "0"
+              }
+            ],
+            "insert_cnt": [
+              {
+                "insert_cnt": "0"
+              }
+            ],
+            "delete_cnt": [
+              {
+                "delete_cnt": "0"
+              }
+            ]
+          },
+          {
+            "name": "lan2",
+            "tx": [
+              {
+                "tx": "72"
+              }
+            ],
+            "rx": [
+              {
+                "rx": "0"
+              }
+            ],
+            "rx_discarded_cnt": [
+              {
+                "rx_discarded_cnt": "0"
+              }
+            ],
+            "rx_unrecognized_cnt": [
+              {
+                "rx_unrecognized_cnt": "0"
+              }
+            ],
+            "ageout_cnt": [
+              {
+                "ageout_cnt": "0"
+              }
+            ],
+            "insert_cnt": [
+              {
+                "insert_cnt": "0"
+              }
+            ],
+            "delete_cnt": [
+              {
+                "delete_cnt": "0"
+              }
+            ]
+          },
+          {
+            "name": "lan3",
+            "tx": [
+              {
+                "tx": "0"
+              }
+            ],
+            "rx": [
+              {
+                "rx": "0"
+              }
+            ],
+            "rx_discarded_cnt": [
+              {
+                "rx_discarded_cnt": "0"
+              }
+            ],
+            "rx_unrecognized_cnt": [
+              {
+                "rx_unrecognized_cnt": "0"
+              }
+            ],
+            "ageout_cnt": [
+              {
+                "ageout_cnt": "0"
+              }
+            ],
+            "insert_cnt": [
+              {
+                "insert_cnt": "0"
+              }
+            ],
+            "delete_cnt": [
+              {
+                "delete_cnt": "0"
+              }
+            ]
+          },
+          {
+            "name": "lan4",
+            "tx": [
+              {
+                "tx": "0"
+              }
+            ],
+            "rx": [
+              {
+                "rx": "0"
+              }
+            ],
+            "rx_discarded_cnt": [
+              {
+                "rx_discarded_cnt": "0"
+              }
+            ],
+            "rx_unrecognized_cnt": [
+              {
+                "rx_unrecognized_cnt": "0"
+              }
+            ],
+            "ageout_cnt": [
+              {
+                "ageout_cnt": "0"
+              }
+            ],
+            "insert_cnt": [
+              {
+                "insert_cnt": "0"
+              }
+            ],
+            "delete_cnt": [
+              {
+                "delete_cnt": "0"
+              }
+            ]
+          },
+          {
+            "name": "lan5",
+            "tx": [
+              {
+                "tx": "0"
+              }
+            ],
+            "rx": [
+              {
+                "rx": "0"
+              }
+            ],
+            "rx_discarded_cnt": [
+              {
+                "rx_discarded_cnt": "0"
+              }
+            ],
+            "rx_unrecognized_cnt": [
+              {
+                "rx_unrecognized_cnt": "0"
+              }
+            ],
+            "ageout_cnt": [
+              {
+                "ageout_cnt": "0"
+              }
+            ],
+            "insert_cnt": [
+              {
+                "insert_cnt": "0"
+              }
+            ],
+            "delete_cnt": [
+              {
+                "delete_cnt": "0"
+              }
+            ]
+          },
+          {
+            "name": "lan6",
+            "tx": [
+              {
+                "tx": "0"
+              }
+            ],
+            "rx": [
+              {
+                "rx": "0"
+              }
+            ],
+            "rx_discarded_cnt": [
+              {
+                "rx_discarded_cnt": "0"
+              }
+            ],
+            "rx_unrecognized_cnt": [
+              {
+                "rx_unrecognized_cnt": "0"
+              }
+            ],
+            "ageout_cnt": [
+              {
+                "ageout_cnt": "0"
+              }
+            ],
+            "insert_cnt": [
+              {
+                "insert_cnt": "0"
+              }
+            ],
+            "delete_cnt": [
+              {
+                "delete_cnt": "0"
+              }
+            ]
+          },
+          {
+            "name": "lan7",
+            "tx": [
+              {
+                "tx": "72"
+              }
+            ],
+            "rx": [
+              {
+                "rx": "70"
+              }
+            ],
+            "rx_discarded_cnt": [
+              {
+                "rx_discarded_cnt": "0"
+              }
+            ],
+            "rx_unrecognized_cnt": [
+              {
+                "rx_unrecognized_cnt": "0"
+              }
+            ],
+            "ageout_cnt": [
+              {
+                "ageout_cnt": "0"
+              }
+            ],
+            "insert_cnt": [
+              {
+                "insert_cnt": "1"
+              }
+            ],
+            "delete_cnt": [
+              {
+                "delete_cnt": "0"
+              }
+            ]
+          },
+          {
+            "name": "lan8",
+            "tx": [
+              {
+                "tx": "72"
+              }
+            ],
+            "rx": [
+              {
+                "rx": "71"
+              }
+            ],
+            "rx_discarded_cnt": [
+              {
+                "rx_discarded_cnt": "0"
+              }
+            ],
+            "rx_unrecognized_cnt": [
+              {
+                "rx_unrecognized_cnt": "0"
+              }
+            ],
+            "ageout_cnt": [
+              {
+                "ageout_cnt": "0"
+              }
+            ],
+            "insert_cnt": [
+              {
+                "insert_cnt": "2"
+              }
+            ],
+            "delete_cnt": [
+              {
+                "delete_cnt": "1"
+              }
+            ]
+          },
+          {
+            "name": "lan9",
+            "tx": [
+              {
+                "tx": "72"
+              }
+            ],
+            "rx": [
+              {
+                "rx": "0"
+              }
+            ],
+            "rx_discarded_cnt": [
+              {
+                "rx_discarded_cnt": "0"
+              }
+            ],
+            "rx_unrecognized_cnt": [
+              {
+                "rx_unrecognized_cnt": "0"
+              }
+            ],
+            "ageout_cnt": [
+              {
+                "ageout_cnt": "0"
+              }
+            ],
+            "insert_cnt": [
+              {
+                "insert_cnt": "0"
+              }
+            ],
+            "delete_cnt": [
+              {
+                "delete_cnt": "0"
+              }
+            ]
+          },
+          {
+            "name": "lan10",
+            "tx": [
+              {
+                "tx": "72"
+              }
+            ],
+            "rx": [
+              {
+                "rx": "0"
+              }
+            ],
+            "rx_discarded_cnt": [
+              {
+                "rx_discarded_cnt": "0"
+              }
+            ],
+            "rx_unrecognized_cnt": [
+              {
+                "rx_unrecognized_cnt": "0"
+              }
+            ],
+            "ageout_cnt": [
+              {
+                "ageout_cnt": "0"
+              }
+            ],
+            "insert_cnt": [
+              {
+                "insert_cnt": "0"
+              }
+            ],
+            "delete_cnt": [
+              {
+                "delete_cnt": "0"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "neighbors": {
+    "lldp": [
+      {
+        "interface": [
+          {
+            "name": "eth0",
+            "via": "LLDP",
+            "rid": "1",
+            "age": "0 day, 00:34:57",
+            "chassis": [
+              {
+                "id": [
+                  {
+                    "type": "mac",
+                    "value": "ec:ad:e0:02:b3:37"
+                  }
+                ],
+                "name": [
+                  {
+                    "value": "DLink Test"
+                  }
+                ],
+                "descr": [
+                  {
+                    "value": "DGS-1210-28/ME/B1"
+                  }
+                ],
+                "mgmt-ip": [
+                  {
+                    "value": "192.168.0.84"
+                  }
+                ],
+                "mgmt-iface": [
+                  {
+                    "value": "37"
+                  }
+                ],
+                "capability": [
+                  {
+                    "type": "Bridge",
+                    "enabled": true
+                  }
+                ]
+              }
+            ],
+            "port": [
+              {
+                "id": [
+                  {
+                    "type": "local",
+                    "value": "23"
+                  }
+                ],
+                "descr": [
+                  {
+                    "value": "D-Link DGS-1210-28/ME Rev.B1/7.02.B010 Port 23"
+                  }
+                ],
+                "ttl": [
+                  {
+                    "value": "120"
+                  }
+                ],
+                "mfs": [
+                  {
+                    "value": "1522"
+                  }
+                ],
+                "aggregation": [
+                  {
+                    "value": "23"
+                  }
+                ],
+                "auto-negotiation": [
+                  {
+                    "supported": true,
+                    "enabled": true,
+                    "advertised": [
+                      {
+                        "type": "1000Base-X",
+                        "hd": false,
+                        "fd": true
+                      },
+                      {
+                        "type": "1000Base-T",
+                        "hd": true,
+                        "fd": false
+                      }
+                    ],
+                    "current": [
+                      {
+                        "value": "1000BaseTFD - Four-pair Category 5 UTP, full duplex mode"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "vlan": [
+              {
+                "vlan-id": "1",
+                "pvid": true
+              }
+            ],
+            "ppvid": [
+              {
+                "supported": true,
+                "enabled": false
+              }
+            ]
+          },
+          {
+            "name": "eth0",
+            "via": "LLDP",
+            "rid": "3",
+            "age": "0 day, 00:30:40",
+            "chassis": [
+              {
+                "id": [
+                  {
+                    "type": "mac",
+                    "value": "50:3e:aa:0d:0c:84"
+                  }
+                ],
+                "name": [
+                  {
+                    "value": "sheverdin"
+                  }
+                ],
+                "descr": [
+                  {
+                    "value": "Ubuntu 23.04 Linux 6.2.0-39-generic #40-Ubuntu SMP PREEMPT_DYNAMIC Tue Nov 14 14:18:00 UTC 2023 x86_64"
+                  }
+                ],
+                "mgmt-ip": [
+                  {
+                    "value": "192.168.1.8"
+                  },
+                  {
+                    "value": "fe80::ae8b:a273:3b76:2c78"
+                  }
+                ],
+                "mgmt-iface": [
+                  {
+                    "value": "2"
+                  },
+                  {
+                    "value": "2"
+                  }
+                ],
+                "capability": [
+                  {
+                    "type": "Bridge",
+                    "enabled": true
+                  },
+                  {
+                    "type": "Router",
+                    "enabled": true
+                  },
+                  {
+                    "type": "Wlan",
+                    "enabled": false
+                  },
+                  {
+                    "type": "Station",
+                    "enabled": false
+                  }
+                ]
+              }
+            ],
+            "port": [
+              {
+                "id": [
+                  {
+                    "type": "mac",
+                    "value": "50:3e:aa:0d:0c:84"
+                  }
+                ],
+                "descr": [
+                  {
+                    "value": "enp1s0"
+                  }
+                ],
+                "ttl": [
+                  {
+                    "value": "120"
+                  }
+                ],
+                "auto-negotiation": [
+                  {
+                    "supported": true,
+                    "enabled": true,
+                    "advertised": [
+                      {
+                        "type": "10Base-T",
+                        "hd": true,
+                        "fd": true
+                      },
+                      {
+                        "type": "100Base-TX",
+                        "hd": true,
+                        "fd": true
+                      },
+                      {
+                        "type": "1000Base-T",
+                        "hd": true,
+                        "fd": true
+                      }
+                    ],
+                    "current": [
+                      {
+                        "value": "100BaseTXFD - 2 pair category 5 UTP, full duplex mode"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "lan7",
+            "via": "LLDP",
+            "rid": "1",
+            "age": "0 day, 00:34:57",
+            "chassis": [
+              {
+                "id": [
+                  {
+                    "type": "mac",
+                    "value": "ec:ad:e0:02:b3:37"
+                  }
+                ],
+                "name": [
+                  {
+                    "value": "DLink Test"
+                  }
+                ],
+                "descr": [
+                  {
+                    "value": "DGS-1210-28/ME/B1"
+                  }
+                ],
+                "mgmt-ip": [
+                  {
+                    "value": "192.168.0.84"
+                  }
+                ],
+                "mgmt-iface": [
+                  {
+                    "value": "37"
+                  }
+                ],
+                "capability": [
+                  {
+                    "type": "Bridge",
+                    "enabled": true
+                  }
+                ]
+              }
+            ],
+            "port": [
+              {
+                "id": [
+                  {
+                    "type": "local",
+                    "value": "23"
+                  }
+                ],
+                "descr": [
+                  {
+                    "value": "D-Link DGS-1210-28/ME Rev.B1/7.02.B010 Port 23"
+                  }
+                ],
+                "ttl": [
+                  {
+                    "value": "120"
+                  }
+                ],
+                "mfs": [
+                  {
+                    "value": "1522"
+                  }
+                ],
+                "aggregation": [
+                  {
+                    "value": "23"
+                  }
+                ],
+                "auto-negotiation": [
+                  {
+                    "supported": true,
+                    "enabled": true,
+                    "advertised": [
+                      {
+                        "type": "1000Base-X",
+                        "hd": false,
+                        "fd": true
+                      },
+                      {
+                        "type": "1000Base-T",
+                        "hd": true,
+                        "fd": false
+                      }
+                    ],
+                    "current": [
+                      {
+                        "value": "1000BaseTFD - Four-pair Category 5 UTP, full duplex mode"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "vlan": [
+              {
+                "vlan-id": "1",
+                "pvid": true
+              }
+            ],
+            "ppvid": [
+              {
+                "supported": true,
+                "enabled": false
+              }
+            ]
+          },
+          {
+            "name": "lan8",
+            "via": "LLDP",
+            "rid": "3",
+            "age": "0 day, 00:30:40",
+            "chassis": [
+              {
+                "id": [
+                  {
+                    "type": "mac",
+                    "value": "50:3e:aa:0d:0c:84"
+                  }
+                ],
+                "name": [
+                  {
+                    "value": "sheverdin"
+                  }
+                ],
+                "descr": [
+                  {
+                    "value": "Ubuntu 23.04 Linux 6.2.0-39-generic #40-Ubuntu SMP PREEMPT_DYNAMIC Tue Nov 14 14:18:00 UTC 2023 x86_64"
+                  }
+                ],
+                "mgmt-ip": [
+                  {
+                    "value": "192.168.1.8"
+                  },
+                  {
+                    "value": "fe80::ae8b:a273:3b76:2c78"
+                  }
+                ],
+                "mgmt-iface": [
+                  {
+                    "value": "2"
+                  },
+                  {
+                    "value": "2"
+                  }
+                ],
+                "capability": [
+                  {
+                    "type": "Bridge",
+                    "enabled": true
+                  },
+                  {
+                    "type": "Router",
+                    "enabled": true
+                  },
+                  {
+                    "type": "Wlan",
+                    "enabled": false
+                  },
+                  {
+                    "type": "Station",
+                    "enabled": false
+                  }
+                ]
+              }
+            ],
+            "port": [
+              {
+                "id": [
+                  {
+                    "type": "mac",
+                    "value": "50:3e:aa:0d:0c:84"
+                  }
+                ],
+                "descr": [
+                  {
+                    "value": "enp1s0"
+                  }
+                ],
+                "ttl": [
+                  {
+                    "value": "120"
+                  }
+                ],
+                "auto-negotiation": [
+                  {
+                    "supported": true,
+                    "enabled": true,
+                    "advertised": [
+                      {
+                        "type": "10Base-T",
+                        "hd": true,
+                        "fd": true
+                      },
+                      {
+                        "type": "100Base-TX",
+                        "hd": true,
+                        "fd": true
+                      },
+                      {
+                        "type": "1000Base-T",
+                        "hd": true,
+                        "fd": true
+                      }
+                    ],
+                    "current": [
+                      {
+                        "value": "100BaseTXFD - 2 pair category 5 UTP, full duplex mode"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "interfaces": {
+    "lldp": [
+      {
+        "interface": [
+          {
+            "name": "eth0",
+            "status": [
+              {
+                "value": "RX and TX"
+              }
+            ],
+            "chassis": [
+              {
+                "id": [
+                  {
+                    "type": "mac",
+                    "value": "00:00:00:01:00:00"
+                  }
+                ],
+                "name": [
+                  {
+                    "value": "TFortis"
+                  }
+                ],
+                "descr": [
+                  {
+                    "value": "OpenWrt 11.22.33 @ TFortis"
+                  }
+                ],
+                "mgmt-ip": [
+                  {
+                    "value": "192.168.1.1"
+                  },
+                  {
+                    "value": "fe80::200:ff:fe01:0"
+                  }
+                ],
+                "mgmt-iface": [
+                  {
+                    "value": "16"
+                  },
+                  {
+                    "value": "2"
+                  }
+                ],
+                "capability": [
+                  {
+                    "type": "Bridge",
+                    "enabled": true
+                  },
+                  {
+                    "type": "Router",
+                    "enabled": true
+                  },
+                  {
+                    "type": "Wlan",
+                    "enabled": false
+                  },
+                  {
+                    "type": "Station",
+                    "enabled": false
+                  }
+                ]
+              }
+            ],
+            "port": [
+              {
+                "id": [
+                  {
+                    "type": "mac",
+                    "value": "00:00:00:01:00:00"
+                  }
+                ],
+                "descr": [
+                  {
+                    "value": "eth0"
+                  }
+                ]
+              }
+            ],
+            "ttl": [
+              {
+                "ttl": "120"
+              }
+            ]
+          },
+          {
+            "name": "lan1",
+            "status": [
+              {
+                "value": "RX and TX"
+              }
+            ],
+            "chassis": [
+              {
+                "id": [
+                  {
+                    "type": "mac",
+                    "value": "00:00:00:01:00:00"
+                  }
+                ],
+                "name": [
+                  {
+                    "value": "TFortis"
+                  }
+                ],
+                "descr": [
+                  {
+                    "value": "OpenWrt 11.22.33 @ TFortis"
+                  }
+                ],
+                "mgmt-ip": [
+                  {
+                    "value": "192.168.1.1"
+                  },
+                  {
+                    "value": "fe80::200:ff:fe01:0"
+                  }
+                ],
+                "mgmt-iface": [
+                  {
+                    "value": "16"
+                  },
+                  {
+                    "value": "2"
+                  }
+                ],
+                "capability": [
+                  {
+                    "type": "Bridge",
+                    "enabled": true
+                  },
+                  {
+                    "type": "Router",
+                    "enabled": true
+                  },
+                  {
+                    "type": "Wlan",
+                    "enabled": false
+                  },
+                  {
+                    "type": "Station",
+                    "enabled": false
+                  }
+                ]
+              }
+            ],
+            "port": [
+              {
+                "id": [
+                  {
+                    "type": "mac",
+                    "value": "00:00:00:01:00:00"
+                  }
+                ],
+                "descr": [
+                  {
+                    "value": "lan1"
+                  }
+                ]
+              }
+            ],
+            "ttl": [
+              {
+                "ttl": "120"
+              }
+            ]
+          },
+          {
+            "name": "lan2",
+            "status": [
+              {
+                "value": "RX and TX"
+              }
+            ],
+            "chassis": [
+              {
+                "id": [
+                  {
+                    "type": "mac",
+                    "value": "00:00:00:01:00:00"
+                  }
+                ],
+                "name": [
+                  {
+                    "value": "TFortis"
+                  }
+                ],
+                "descr": [
+                  {
+                    "value": "OpenWrt 11.22.33 @ TFortis"
+                  }
+                ],
+                "mgmt-ip": [
+                  {
+                    "value": "192.168.1.1"
+                  },
+                  {
+                    "value": "fe80::200:ff:fe01:0"
+                  }
+                ],
+                "mgmt-iface": [
+                  {
+                    "value": "16"
+                  },
+                  {
+                    "value": "2"
+                  }
+                ],
+                "capability": [
+                  {
+                    "type": "Bridge",
+                    "enabled": true
+                  },
+                  {
+                    "type": "Router",
+                    "enabled": true
+                  },
+                  {
+                    "type": "Wlan",
+                    "enabled": false
+                  },
+                  {
+                    "type": "Station",
+                    "enabled": false
+                  }
+                ]
+              }
+            ],
+            "port": [
+              {
+                "id": [
+                  {
+                    "type": "mac",
+                    "value": "00:00:00:01:00:00"
+                  }
+                ],
+                "descr": [
+                  {
+                    "value": "lan2"
+                  }
+                ]
+              }
+            ],
+            "ttl": [
+              {
+                "ttl": "120"
+              }
+            ]
+          },
+          {
+            "name": "lan3",
+            "status": [
+              {
+                "value": "RX and TX"
+              }
+            ],
+            "chassis": [
+              {
+                "id": [
+                  {
+                    "type": "mac",
+                    "value": "00:00:00:01:00:00"
+                  }
+                ],
+                "name": [
+                  {
+                    "value": "TFortis"
+                  }
+                ],
+                "descr": [
+                  {
+                    "value": "OpenWrt 11.22.33 @ TFortis"
+                  }
+                ],
+                "mgmt-ip": [
+                  {
+                    "value": "192.168.1.1"
+                  },
+                  {
+                    "value": "fe80::200:ff:fe01:0"
+                  }
+                ],
+                "mgmt-iface": [
+                  {
+                    "value": "16"
+                  },
+                  {
+                    "value": "2"
+                  }
+                ],
+                "capability": [
+                  {
+                    "type": "Bridge",
+                    "enabled": true
+                  },
+                  {
+                    "type": "Router",
+                    "enabled": true
+                  },
+                  {
+                    "type": "Wlan",
+                    "enabled": false
+                  },
+                  {
+                    "type": "Station",
+                    "enabled": false
+                  }
+                ]
+              }
+            ],
+            "port": [
+              {
+                "id": [
+                  {
+                    "type": "mac",
+                    "value": "00:00:00:01:00:00"
+                  }
+                ],
+                "descr": [
+                  {
+                    "value": "lan3"
+                  }
+                ]
+              }
+            ],
+            "ttl": [
+              {
+                "ttl": "120"
+              }
+            ]
+          },
+          {
+            "name": "lan4",
+            "status": [
+              {
+                "value": "RX and TX"
+              }
+            ],
+            "chassis": [
+              {
+                "id": [
+                  {
+                    "type": "mac",
+                    "value": "00:00:00:01:00:00"
+                  }
+                ],
+                "name": [
+                  {
+                    "value": "TFortis"
+                  }
+                ],
+                "descr": [
+                  {
+                    "value": "OpenWrt 11.22.33 @ TFortis"
+                  }
+                ],
+                "mgmt-ip": [
+                  {
+                    "value": "192.168.1.1"
+                  },
+                  {
+                    "value": "fe80::200:ff:fe01:0"
+                  }
+                ],
+                "mgmt-iface": [
+                  {
+                    "value": "16"
+                  },
+                  {
+                    "value": "2"
+                  }
+                ],
+                "capability": [
+                  {
+                    "type": "Bridge",
+                    "enabled": true
+                  },
+                  {
+                    "type": "Router",
+                    "enabled": true
+                  },
+                  {
+                    "type": "Wlan",
+                    "enabled": false
+                  },
+                  {
+                    "type": "Station",
+                    "enabled": false
+                  }
+                ]
+              }
+            ],
+            "port": [
+              {
+                "id": [
+                  {
+                    "type": "mac",
+                    "value": "00:00:00:01:00:00"
+                  }
+                ],
+                "descr": [
+                  {
+                    "value": "lan4"
+                  }
+                ]
+              }
+            ],
+            "ttl": [
+              {
+                "ttl": "120"
+              }
+            ]
+          },
+          {
+            "name": "lan5",
+            "status": [
+              {
+                "value": "RX and TX"
+              }
+            ],
+            "chassis": [
+              {
+                "id": [
+                  {
+                    "type": "mac",
+                    "value": "00:00:00:01:00:00"
+                  }
+                ],
+                "name": [
+                  {
+                    "value": "TFortis"
+                  }
+                ],
+                "descr": [
+                  {
+                    "value": "OpenWrt 11.22.33 @ TFortis"
+                  }
+                ],
+                "mgmt-ip": [
+                  {
+                    "value": "192.168.1.1"
+                  },
+                  {
+                    "value": "fe80::200:ff:fe01:0"
+                  }
+                ],
+                "mgmt-iface": [
+                  {
+                    "value": "16"
+                  },
+                  {
+                    "value": "2"
+                  }
+                ],
+                "capability": [
+                  {
+                    "type": "Bridge",
+                    "enabled": true
+                  },
+                  {
+                    "type": "Router",
+                    "enabled": true
+                  },
+                  {
+                    "type": "Wlan",
+                    "enabled": false
+                  },
+                  {
+                    "type": "Station",
+                    "enabled": false
+                  }
+                ]
+              }
+            ],
+            "port": [
+              {
+                "id": [
+                  {
+                    "type": "mac",
+                    "value": "00:00:00:01:00:00"
+                  }
+                ],
+                "descr": [
+                  {
+                    "value": "lan5"
+                  }
+                ]
+              }
+            ],
+            "ttl": [
+              {
+                "ttl": "120"
+              }
+            ]
+          },
+          {
+            "name": "lan6",
+            "status": [
+              {
+                "value": "RX and TX"
+              }
+            ],
+            "chassis": [
+              {
+                "id": [
+                  {
+                    "type": "mac",
+                    "value": "00:00:00:01:00:00"
+                  }
+                ],
+                "name": [
+                  {
+                    "value": "TFortis"
+                  }
+                ],
+                "descr": [
+                  {
+                    "value": "OpenWrt 11.22.33 @ TFortis"
+                  }
+                ],
+                "mgmt-ip": [
+                  {
+                    "value": "192.168.1.1"
+                  },
+                  {
+                    "value": "fe80::200:ff:fe01:0"
+                  }
+                ],
+                "mgmt-iface": [
+                  {
+                    "value": "16"
+                  },
+                  {
+                    "value": "2"
+                  }
+                ],
+                "capability": [
+                  {
+                    "type": "Bridge",
+                    "enabled": true
+                  },
+                  {
+                    "type": "Router",
+                    "enabled": true
+                  },
+                  {
+                    "type": "Wlan",
+                    "enabled": false
+                  },
+                  {
+                    "type": "Station",
+                    "enabled": false
+                  }
+                ]
+              }
+            ],
+            "port": [
+              {
+                "id": [
+                  {
+                    "type": "mac",
+                    "value": "00:00:00:01:00:00"
+                  }
+                ],
+                "descr": [
+                  {
+                    "value": "lan6"
+                  }
+                ]
+              }
+            ],
+            "ttl": [
+              {
+                "ttl": "120"
+              }
+            ]
+          },
+          {
+            "name": "lan7",
+            "status": [
+              {
+                "value": "RX and TX"
+              }
+            ],
+            "chassis": [
+              {
+                "id": [
+                  {
+                    "type": "mac",
+                    "value": "00:00:00:01:00:00"
+                  }
+                ],
+                "name": [
+                  {
+                    "value": "TFortis"
+                  }
+                ],
+                "descr": [
+                  {
+                    "value": "OpenWrt 11.22.33 @ TFortis"
+                  }
+                ],
+                "mgmt-ip": [
+                  {
+                    "value": "192.168.1.1"
+                  },
+                  {
+                    "value": "fe80::200:ff:fe01:0"
+                  }
+                ],
+                "mgmt-iface": [
+                  {
+                    "value": "16"
+                  },
+                  {
+                    "value": "2"
+                  }
+                ],
+                "capability": [
+                  {
+                    "type": "Bridge",
+                    "enabled": true
+                  },
+                  {
+                    "type": "Router",
+                    "enabled": true
+                  },
+                  {
+                    "type": "Wlan",
+                    "enabled": false
+                  },
+                  {
+                    "type": "Station",
+                    "enabled": false
+                  }
+                ]
+              }
+            ],
+            "port": [
+              {
+                "id": [
+                  {
+                    "type": "mac",
+                    "value": "00:00:00:01:00:00"
+                  }
+                ],
+                "descr": [
+                  {
+                    "value": "lan7"
+                  }
+                ]
+              }
+            ],
+            "ttl": [
+              {
+                "ttl": "120"
+              }
+            ]
+          },
+          {
+            "name": "lan8",
+            "status": [
+              {
+                "value": "RX and TX"
+              }
+            ],
+            "chassis": [
+              {
+                "id": [
+                  {
+                    "type": "mac",
+                    "value": "00:00:00:01:00:00"
+                  }
+                ],
+                "name": [
+                  {
+                    "value": "TFortis"
+                  }
+                ],
+                "descr": [
+                  {
+                    "value": "OpenWrt 11.22.33 @ TFortis"
+                  }
+                ],
+                "mgmt-ip": [
+                  {
+                    "value": "192.168.1.1"
+                  },
+                  {
+                    "value": "fe80::200:ff:fe01:0"
+                  }
+                ],
+                "mgmt-iface": [
+                  {
+                    "value": "16"
+                  },
+                  {
+                    "value": "2"
+                  }
+                ],
+                "capability": [
+                  {
+                    "type": "Bridge",
+                    "enabled": true
+                  },
+                  {
+                    "type": "Router",
+                    "enabled": true
+                  },
+                  {
+                    "type": "Wlan",
+                    "enabled": false
+                  },
+                  {
+                    "type": "Station",
+                    "enabled": false
+                  }
+                ]
+              }
+            ],
+            "port": [
+              {
+                "id": [
+                  {
+                    "type": "mac",
+                    "value": "00:00:00:01:00:00"
+                  }
+                ],
+                "descr": [
+                  {
+                    "value": "lan8"
+                  }
+                ]
+              }
+            ],
+            "ttl": [
+              {
+                "ttl": "120"
+              }
+            ]
+          },
+          {
+            "name": "lan9",
+            "status": [
+              {
+                "value": "RX and TX"
+              }
+            ],
+            "chassis": [
+              {
+                "id": [
+                  {
+                    "type": "mac",
+                    "value": "00:00:00:01:00:00"
+                  }
+                ],
+                "name": [
+                  {
+                    "value": "TFortis"
+                  }
+                ],
+                "descr": [
+                  {
+                    "value": "OpenWrt 11.22.33 @ TFortis"
+                  }
+                ],
+                "mgmt-ip": [
+                  {
+                    "value": "192.168.1.1"
+                  },
+                  {
+                    "value": "fe80::200:ff:fe01:0"
+                  }
+                ],
+                "mgmt-iface": [
+                  {
+                    "value": "16"
+                  },
+                  {
+                    "value": "2"
+                  }
+                ],
+                "capability": [
+                  {
+                    "type": "Bridge",
+                    "enabled": true
+                  },
+                  {
+                    "type": "Router",
+                    "enabled": true
+                  },
+                  {
+                    "type": "Wlan",
+                    "enabled": false
+                  },
+                  {
+                    "type": "Station",
+                    "enabled": false
+                  }
+                ]
+              }
+            ],
+            "port": [
+              {
+                "id": [
+                  {
+                    "type": "mac",
+                    "value": "00:00:00:01:00:00"
+                  }
+                ],
+                "descr": [
+                  {
+                    "value": "lan9"
+                  }
+                ]
+              }
+            ],
+            "ttl": [
+              {
+                "ttl": "120"
+              }
+            ]
+          },
+          {
+            "name": "lan10",
+            "status": [
+              {
+                "value": "RX and TX"
+              }
+            ],
+            "chassis": [
+              {
+                "id": [
+                  {
+                    "type": "mac",
+                    "value": "00:00:00:01:00:00"
+                  }
+                ],
+                "name": [
+                  {
+                    "value": "TFortis"
+                  }
+                ],
+                "descr": [
+                  {
+                    "value": "OpenWrt 11.22.33 @ TFortis"
+                  }
+                ],
+                "mgmt-ip": [
+                  {
+                    "value": "192.168.1.1"
+                  },
+                  {
+                    "value": "fe80::200:ff:fe01:0"
+                  }
+                ],
+                "mgmt-iface": [
+                  {
+                    "value": "16"
+                  },
+                  {
+                    "value": "2"
+                  }
+                ],
+                "capability": [
+                  {
+                    "type": "Bridge",
+                    "enabled": true
+                  },
+                  {
+                    "type": "Router",
+                    "enabled": true
+                  },
+                  {
+                    "type": "Wlan",
+                    "enabled": false
+                  },
+                  {
+                    "type": "Station",
+                    "enabled": false
+                  }
+                ]
+              }
+            ],
+            "port": [
+              {
+                "id": [
+                  {
+                    "type": "mac",
+                    "value": "00:00:00:01:00:00"
+                  }
+                ],
+                "descr": [
+                  {
+                    "value": "lan10"
+                  }
+                ]
+              }
+            ],
+            "ttl": [
+              {
+                "ttl": "120"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "chassis": {
+    "local-chassis": [
+      {
+        "chassis": [
+          {
+            "id": [
+              {
+                "type": "mac",
+                "value": "00:00:00:01:00:00"
+              }
+            ],
+            "name": [
+              {
+                "value": "TFortis"
+              }
+            ],
+            "descr": [
+              {
+                "value": "OpenWrt 11.22.33 @ TFortis"
+              }
+            ],
+            "mgmt-ip": [
+              {
+                "value": "192.168.1.1"
+              },
+              {
+                "value": "fe80::200:ff:fe01:0"
+              }
+            ],
+            "mgmt-iface": [
+              {
+                "value": "16"
+              },
+              {
+                "value": "2"
+              }
+            ],
+            "capability": [
+              {
+                "type": "Bridge",
+                "enabled": true
+              },
+              {
+                "type": "Router",
+                "enabled": true
+              },
+              {
+                "type": "Wlan",
+                "enabled": false
+              },
+              {
+                "type": "Station",
+                "enabled": false
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

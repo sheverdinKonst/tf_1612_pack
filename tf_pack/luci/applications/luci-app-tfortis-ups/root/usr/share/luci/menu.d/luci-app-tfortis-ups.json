@@ -1,0 +1,14 @@
+{
+  "admin/special/ups": {
+    "title": "UPS",
+    "order": 3,
+    "action": {
+      "type": "view",
+      "path": "special/ups"
+    },
+    "depends": {
+      "acl": [ "luci-app-tfortis-ups" ]
+    }
+
+  }  
+}

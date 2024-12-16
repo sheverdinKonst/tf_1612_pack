@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CLISH_MODULE xmlns="http://clish.sourceforge.net/XMLSchema"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://clish.sourceforge.net/XMLSchema
+http://clish.sourceforge.net/XMLSchema/clish.xsd">
+
+    <VIEW name="main">
+        <COMMAND name="system description"
+                 help="Configure name, Location and Contact">
+            <PARAM name="config"
+                   test='"${access_level}" = "admin"'
+                   help="config"
+                   optional="false"
+                   order="true"
+                   mode="subcommand"
+                   ptype="SUBCOMMAND">
+                <PARAM name="name"
+                       help="set host name  or IP address for sntp server"
+                       optional="true"
+                       oder = "true"
+                       mode="subcommand"
+                       ptype="SUBCOMMAND">
+                    <PARAM name="nameValue"
+                           help=""
+                           optional="false"
+                           ptype="STRING"/>
+                </PARAM>
+
+                <PARAM name="location"
+                       help="set host name  or IP address for sntp server"
+                       optional="true"
+                       oder = "true"
+                       mode="subcommand"
+                       ptype="SUBCOMMAND">
+                    <PARAM name="locationValue"
+                           help=""
+                           optional="false"
+                           ptype="STRING"/>
+                </PARAM>
+
+                <PARAM name="company"
+                       help="set host name  or IP address for sntp server"
+                       optional="true"
+                       oder = "true"
+                       mode="subcommand"
+                       ptype="SUBCOMMAND">
+                    <PARAM name="contactValue"
+                           help=""
+                           optional="false"
+                           ptype="STRING"/>
+                </PARAM>
+
+                <PARAM name="notes"
+                       help="set host name  or IP address for sntp server"
+                       optional="true"
+                       oder = "true"
+                       mode="subcommand"
+                       ptype="SUBCOMMAND">
+                    <PARAM name="notesValue"
+                           help=""
+                           optional="false"
+                           ptype="STRING"/>
+                </PARAM>
+            </PARAM>
+
+            <ACTION>
+                 if [[ -n "${config}" ]]; then
+                    if [[ -n "${name}" ]]; then
+                        /etc/tf_clish/scripts/description/set_description.lua "description" "${nameValue}"
+                    fi
+                    if [[ -n "${location}" ]]; then
+                        /etc/tf_clish/scripts/description/set_description.lua "location" "${locationValue}"
+                    fi
+                    if [[ -n "${company}" ]]; then
+                        /etc/tf_clish/scripts/description/set_description.lua "contacts" "${contactValue}"
+                    fi
+                    if [[ -n "${notes}" ]]; then
+                        /etc/tf_clish/scripts/description/set_description.lua "notes" "${notesValue}"
+                    fi
+                 fi
+            </ACTION>
+        </COMMAND>
+    </VIEW>
+</CLISH_MODULE>

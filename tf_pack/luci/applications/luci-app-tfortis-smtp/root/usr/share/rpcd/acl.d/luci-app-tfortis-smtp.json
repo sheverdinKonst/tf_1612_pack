@@ -1,0 +1,14 @@
+{
+  "luci-app-tfortis-smtp": {
+    "read": {
+      "uci": [ "smtp", "network" ],
+      "file": {
+        "/usr/bin/msmtp": ["exec"],
+        "/usr/libexec/network/sendSmtp.sh": ["exec"]
+      }
+    },
+    "write": {
+      "uci": [ "smtp" ]
+    }
+  }
+}

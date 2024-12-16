@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CLISH_MODULE xmlns="http://clish.sourceforge.net/XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://clish.sourceforge.net/XMLSchema
+                     http://clish.sourceforge.net/XMLSchema/clish.xsd">
+    <!--  =======================================================-->
+    <VIEW name="main">
+        <!--===================================================-->
+
+        <COMMAND name="network ipif"
+             help="network interfaces settings and status">
+            <PARAM name="config"
+                   test='"${access_level}" = "admin"'
+                   help="network interfaces settings "
+                   optional="true"
+                   order="true"
+                   mode="subcommand"
+                   ptype="SUBCOMMAND">
+                <PARAM name="ifname"
+                       help="type interfaces name"
+                       optional="false"
+                       order="true"
+                       mode="subcommand"
+                       ptype="SUBCOMMAND">
+                    <PARAM name="ifnameValue"
+                       help=" - interfaces name"
+                       optional="false"
+                       order="true"
+                       ptype="STRING"/>
+                </PARAM>
+                <PARAM name="proto"
+                       test='-n ifnameValue'
+                       help="choose protocol STATIC or DHCP for interface"
+                       optional="false"
+                       mode="switch"
+                       ptype="SUBCOMMAND">
+                    <PARAM name="static"
+                           help="set static protocol: IP, netmask, gateway, dns"
+                           mode="subcommand"
+                           ptype="SUBCOMMAND">
+                        <PARAM name="ipaddress"
+                               help="set ip address for interface"
+                               optional="true"
+                               order="true"
+                               mode="subcommand"
+                               ptype="SUBCOMMAND">
+                            <PARAM name="IP"
+                                   help=" - ip address "
+                                   ptype="IP_ADDR"/>
+                        </PARAM>
+
+                        <PARAM name="netmask"
+                               help="netmask for interface"
+                               optional="true"
+                               order="true"
+                               mode="subcommand"
+                               ptype="SUBCOMMAND">
+                            <PARAM name="netmaskIP"
+                                   help=" - netmask"
+                                   ptype="IP_ADDR_MASK"/>
+                        </PARAM>
+
+                        <PARAM name="gateway"
+                               help="gateway for interface"
+                               order="true"
+                               optional="true"
+                               mode="subcommand"
+                               ptype="SUBCOMMAND">
+                            <PARAM name="gatewayIP"
+                                   help=" - gateway address"
+                                   ptype="IP_ADDR"/>
+                        </PARAM>
+
+                        <PARAM name="dns"
+                               help="DNS for interface"
+                               optional="true"
+                               order="true"
+                               mode="subcommand"
+                               ptype="SUBCOMMAND">
+                            <PARAM name="DNSIP"
+                                   help=" - DNS address for interface"
+                                   ptype="IP_ADDR"/>
+                        </PARAM>
+                    </PARAM>
+
+                    <PARAM name="dhcp"
+                           test='-n ifnameValue'
+                           help="Set DHCP protocol for intrface"
+                           mode="subcommand"
+                           ptype="SUBCOMMAND"/>
+                </PARAM>
+            </PARAM>
+
+            <PARAM name="show"
+                   help="show arp, fdb, network and packet status"
+                   test='-z "${config}"'
+                   optional="true"
+                   order="true"
+                   mode="subcommand"
+                   ptype="SUBCOMMAND">
+                <PARAM name="status"
+                       help="show arp, fdb, network and packet status"
+                       test='-z "${config}"'
+                       optional="true"
+                       order="true"
+                       mode="subcommand"
+                       ptype="SUBCOMMAND">
+                    <PARAM name="arp"
+                           test='-z "${fdb}" -a -z "${network}" -a -z "${packet}"'
+                           help="show arp table"
+                           optional="true"
+                           order="true"
+                           mode="subcommand"
+                           ptype="SUBCOMMAND">
+                    </PARAM>
+                    <PARAM name="fdb"
+                           test='-z "${arp}" -a -z "${network}" -a -z "${packet}"'
+                           help="show fdb table"
+                           optional="true"
+                           order="true"
+                           mode="subcommand"
+                           ptype="SUBCOMMAND">
+                        <PARAM name="ports"
+                               help="choose port range for show fdb table"
+                               optional="true"
+                               order="true"
+                               mode="subcommand"
+                               ptype="SUBCOMMAND"/>
+                        <PARAM name="portValue"
+                               test = '-n "${ports}"'
+                               optional="false"
+                               order="true"
+                               help=" - for fdb table"
+                               ptype="PORT_NUM_LIST_1_10"/>
+                    </PARAM>
+                    <PARAM name="network"
+                           test='-z "${fdb}" -a -z "${arp}" -a -z "${packet}"'
+                           help="show network interfaces"
+                           optional="true"
+                           mode="subcommand"
+                           ptype="SUBCOMMAND">
+                    </PARAM>
+                    <PARAM name="packet"
+                           test='-z "${fdb}" -a -z "${network}" -a -z "${arp}"'
+                           help="show packet status"
+                           optional="true"
+                           order="true"
+                           mode="subcommand"
+                           ptype="SUBCOMMAND">
+                        <PARAM name="ports"
+                               help="choose port range for packet"
+                               optional="true"
+                               order="true"
+                               mode="subcommand"
+                               ptype="SUBCOMMAND"/>
+                        <PARAM name="portValue"
+                               test = '-n "${ports}"'
+                               optional="false"
+                               order="true"
+                               help=" - for packet status"
+                               ptype="PORT_NUM_LIST_1_10"/>
+                    </PARAM>
+                </PARAM>
+            </PARAM>
+
+            <ACTION>
+                if [[ -n "${config}" ]]; then
+                    /etc/tf_clish/scripts/ipif/set_ipif.lua "ifname" ${ifnameValue} "proto" "${proto}" "ip" "${IP}" "netmask" "${netmaskIP}" "gateway" "${gatewayIP}" "dns" ${DNSIP}
+                fi
+
+                if [[ -n "${show}" ]]; then
+                    if  [[ -n "${network}" ]]; then
+                        /etc/tf_clish/scripts/ipif/show_ipif.lua
+                    fi
+
+                    if  [[ -n "${arp}" ]]; then
+                        /etc/tf_clish/scripts/ipif/fdb.lua "arp" "1-10"
+                    fi
+
+                    if  [[ -n "${fdb}" ]]; then
+                        if [[ -n "${ports}" ]]; then
+                        /etc/tf_clish/scripts/ipif/fdb.lua "fdb"  ${portValue}
+                        else
+                        /etc/tf_clish/scripts/ipif/fdb.lua "fdb"  "1-10"
+                        fi
+                    fi
+
+                    if  [[ -n "${packet}" ]]; then
+                        if [[ -n  "${ports}" ]]; then
+                            /etc/tf_clish/scripts/ipif/show_packets.lua ${portValue}
+                        else
+                            /etc/tf_clish/scripts/ipif/show_packets.lua "1-10"
+                        fi
+                    fi
+                fi
+             
+            </ACTION>
+		</COMMAND>
+	</VIEW>
+    <!--=======================================================-->
+</CLISH_MODULE>

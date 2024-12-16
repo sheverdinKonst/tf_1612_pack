@@ -1,0 +1,8 @@
+#!/bin/sh
+
+touch /etc/config/tfortis-teleport
+uci set tfortis-teleport.@tfortis-teleport[0]=tfortis-teleport
+uci set tfortis-teleport.@tfortis-teleport[0].state='1'
+uci commit
+
+return 0

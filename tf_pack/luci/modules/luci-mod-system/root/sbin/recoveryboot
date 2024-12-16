@@ -1,0 +1,5 @@
+#!/bin/sh
+fw_setenv bootcount 11
+fw_setenv upgrade_available 1
+sleep 1
+reboot

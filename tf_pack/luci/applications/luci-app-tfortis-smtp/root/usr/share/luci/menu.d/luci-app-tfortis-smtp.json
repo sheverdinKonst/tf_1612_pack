@@ -1,0 +1,13 @@
+{
+  "admin/services/smtp": {
+    "title": "SMTP",
+    "order": 3,
+    "action": {
+      "type": "view",
+      "path": "smtp/settings"
+    },
+    "depends": {
+      "acl": [ "luci-app-tfortis-smtp" ]
+    }
+  } 
+}

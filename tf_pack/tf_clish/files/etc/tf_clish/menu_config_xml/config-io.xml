@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CLISH_MODULE xmlns="http://clish.sourceforge.net/XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://clish.sourceforge.net/XMLSchema
+                     http://clish.sourceforge.net/XMLSchema/clish.xsd">
+    <!--=======================================================-->
+    <VIEW name="main">
+        <!--===================================================-->
+        <COMMAND name="special io"
+                 help="Configure inputs and sensors">
+            <PARAM name="config"
+                   test='"${access_level}" = "admin"'
+                   help="input/output settings"
+                   optional="true"
+                   order="true"
+                   mode="subcommand"
+                   ptype="SUBCOMMAND">
+                <PARAM name="input"
+                       test='-z "${output}"'
+                       help="input settings"
+                       optional="true"
+                       order="true"
+                       mode="subcommand"
+                       ptype="SUBCOMMAND">
+                    <PARAM name="sensor"
+                           help=" - choose input sensor"
+                           ptype="INPUT_TYPE"/>
+                    <PARAM name="state"
+                           help="set state for input sensor for normal mode"
+                           optional="true"
+                           mode="subcommand"
+                           ptype="SUBCOMMAND">
+                        <PARAM name="state_value"
+                               help=" - input state"
+                               ptype="INPUT_STATE"/>
+                    </PARAM>
+                    <PARAM name="alarm_state"
+                           help="set alarm state for input sensor"
+                           optional="true"
+                           mode="subcommand"
+                           ptype="SUBCOMMAND">
+                        <PARAM name="alarm_state_value"
+                               help=" - input alarm state"
+                               ptype="INPUT_ALARM_STATE"/>
+                    </PARAM>
+                </PARAM>
+
+                <PARAM name="output"
+                       test='-z "${input}"'
+                       help="output settings"
+                       optional="true"
+                       mode="subcommand"
+                       ptype="SUBCOMMAND">
+                    <PARAM name="sensor"
+                           help=" - chose output sensor"
+                           ptype="OUTPUT_TYPE"/>
+                    <PARAM name="state"
+                           help="set state for output sensor for normal mode"
+                           optional="false"
+                           mode="subcommand"
+                           ptype="SUBCOMMAND">
+                        <PARAM name="state_value"
+                               help=" - output alarm state"
+                               ptype="INPUT_STATE"/>
+                    </PARAM>
+                </PARAM>
+            </PARAM>
+
+            <PARAM name="show"
+                   help="show peripheral status and settings"
+                   test='-z "${config}"'
+                   optional="true"
+                   order="true"
+                   mode="subcommand"
+                   ptype="SUBCOMMAND">
+                <PARAM name="status"
+                       help="show peripheral status"
+                       test='-z "${configuration}"'
+                       optional="true"
+                       order="true"
+                       mode="subcommand"
+                       ptype="SUBCOMMAND">
+
+                    <PARAM name="sfp"
+                           test='-z "${ups}" -a -z "${input}" -a -z "${output}"'
+                           help="show sfp status"
+                           optional="true"
+                           mode="subcommand"
+                           ptype="SUBCOMMAND">
+                        <PARAM name="sfpType"
+                               help=" - choose sfp channel"
+                               ptype="SFP_TYPE"/>
+                    </PARAM>
+                    <PARAM name="ups"
+                           test='-z "${sfp}" -a -z "${input}" -a -z "${output}"'
+                           help="show ups status"
+                           optional="true"
+                           order="true"
+                           mode="subcommand"
+                           ptype="SUBCOMMAND">
+                    </PARAM>
+                    <PARAM name="input"
+                           test='-z "${ups}" -a -z "${sfp}" -a -z "${output}"'
+                           help="show input sensors status"
+                           optional="true"
+                           mode="subcommand"
+                           ptype="SUBCOMMAND">
+                    </PARAM>
+                    <PARAM name="output"
+                           test='-z "${ups}" -a -z "${sfp}" -a -z "${input}"'
+                           help="show output sensors status"
+                           optional="true"
+                           mode="subcommand"
+                           ptype="SUBCOMMAND">
+                    </PARAM>
+                </PARAM>
+                <PARAM name="configuration"
+                       help="show input / output settings"
+                       test='-z "${status}" -a "${show_access_level}" = "admin"'
+                       optional="true"
+                       order="true"
+                       mode="subcommand"
+                       ptype="SUBCOMMAND">
+                    <PARAM name="input"
+                           test='-z "${ups}" -a -z "${sfp}" -a -z "${output}"'
+                           help="show input settings"
+                           optional="true"
+                           mode="subcommand"
+                           ptype="SUBCOMMAND">
+                    </PARAM>
+                    <PARAM name="output"
+                           test='-z "${ups}" -a -z "${sfp}" -a -z "${input}"'
+                           help="show output settings"
+                           optional="true"
+                           mode="subcommand"
+                           ptype="SUBCOMMAND">
+                    </PARAM>
+                </PARAM>
+            </PARAM>
+
+            <ACTION>
+                if [[ -n "${config}" ]]; then
+                     if [[ -n "${state_value}" ]]; then
+                        /etc/tf_clish/scripts/peripheral/io.lua "config" ${sensor} ${state} ${state_value}
+                    fi
+
+                    if [[ -n "${alarm_state_value}" ]]; then
+                        /etc/tf_clish/scripts/peripheral/io.lua "config" ${sensor} ${alarm_state} ${alarm_state_value}
+                    fi
+                fi
+
+                if [[ -n "${show}" ]]; then
+                    if [[ -n "${configuration}" ]]; then
+                        if [[ -n "${input}" ]]; then
+                            /etc/tf_clish/scripts/peripheral/io.lua "show" "config" "input"
+                        fi
+                        if [[ -n "${output}" ]]; then
+                            /etc/tf_clish/scripts/peripheral/io.lua "show" "config" "output"
+                        fi
+                    fi
+
+                    if [[ -n "${status}" ]]; then
+                        if [[ -n "${sfp}" ]]; then
+                           /etc/tf_clish/scripts/peripheral/sfp.lua "${sfpType}"
+                        fi
+                        if [[ -n "${ups}" ]]; then
+                            /etc/tf_clish/scripts/peripheral/ups.lua
+                        fi
+                        if [[ -n "${input}" ]]; then
+                            /etc/tf_clish/scripts/peripheral/io.lua "show" "status" "input"
+                        fi
+                        if [[ -n "${output}" ]]; then
+                            /etc/tf_clish/scripts/peripheral/io.lua "show" "status" "output"
+                        fi
+                    fi
+                fi
+            </ACTION>
+        </COMMAND>
+	</VIEW>
+    <!--=======================================================-->
+</CLISH_MODULE>

@@ -1,0 +1,180 @@
+#!/bin/bash /etc/rc.common
+START=95
+
+USE_PROCD=1
+
+UCI_CONF="log"
+CONFIG_FILE="/var/etc/rsyslog.conf"
+
+modules=""
+rules=""
+forwarders=""
+
+
+
+handle_filter(){
+	local name
+	local facility
+	local severity
+	local progname
+	local content
+	local config="$1"
+	local add="$2"
+	config_get name "${config}" name
+
+
+	if [[ $name == $add ]]
+	then
+		config_get name "${config}" name
+		config_get facility "${config}" facility
+		config_get severity "${config}" severity
+		config_get progname "${config}" progname
+		config_get content "${config}"  content
+		filterstr=""
+
+		if [[ "$facility" != "*" ]]
+		then
+			filterstr+="\$syslogfacility-text >= \"$facility\""
+		fi
+
+		if [[ "$severity" != "*" ]]
+		then
+			if [[ -n $filterstr ]]
+			then
+				filterstr+=" and "
+			fi
+			filterstr+="\$syslogseverity-text >= \"$severity\""
+		fi
+
+		if [[ -n "$progname" ]]
+		then
+			if [[ -n $filterstr ]]
+			then
+				filterstr+=" and "
+			fi
+			filterstr+="\$programname contains \"$progname\""
+		fi
+
+		if [[ -n "$content" ]]
+		then
+			if [[ -n $filterstr ]]
+			then
+				filterstr+=" and "
+			fi
+			filterstr+="\$msg contains \"$content\""
+		fi
+
+		if [[ -z $filterstr ]]
+			then
+				#filterstr="prifilt(*.*)"
+				filterstr="1"
+			fi
+		echo "if ($filterstr) then {" >> ${CONFIG_FILE}
+	fi
+}
+
+handle_action(){
+	local name
+	local action
+	local log_email
+	local log_syslogs
+	local config="$1"
+	local add="$2"
+
+	config_get name "${config}" name
+	if [[ $name == $add ]]
+	then
+		config_get name "${config}" name
+		config_get action "${config}" action
+
+		config_get log_email "${config}" log_email
+		config_get log_syslogs "${config}" log_syslog
+
+		if [[ $action == "memory" ]]
+		then
+			echo "action(type=\"omfile\" file=\"/var/log/syslog\")" >> ${CONFIG_FILE}
+		fi
+		if [[ $action == "flash" ]]
+		then
+			echo "action(type=\"omfile\" file=\"/log/switch\")" >> ${CONFIG_FILE}
+		fi
+		if [[ $action == "email" ]]
+		then
+			local subject
+			config_load smtp
+			config_get subject "client" subject
+			echo "action(type=\"omprog\" template=\"tfTemplate\" binary=\"/usr/libexec/network/logSmtp.sh $subject $log_email)" >> ${CONFIG_FILE}
+			config_load "${UCI_CONF}"
+		fi
+		if [[ $action == "syslog" ]]
+		then
+			if [ -n "$log_syslogs" ]; then
+			local log_syslog
+			local log_proto
+			local log_port
+			config_load syslog
+			config_get log_proto "syslog" log_proto
+			config_get log_port "syslog" log_port
+			config_load "${UCI_CONF}"
+			for log_syslog in $log_syslogs; do
+				echo "action(type=\"omfwd\" Target=\"$log_syslog\" Port=\"$log_port\" Protocol=\"$log_proto\")" >> ${CONFIG_FILE}
+			done
+		fi
+
+		fi
+		echo -e "}">> ${CONFIG_FILE}
+	fi
+}
+
+handle_rule() {
+	local config="$1"
+	local config_rule="rule"
+	local config_filter="filter"
+	local filter_name
+	local filter
+	local action_name
+
+	config_get filter_name "${config}" filter
+	config_get action_name "${config}" action
+
+	config_foreach handle_filter filter  "${filter_name}"
+	config_foreach handle_action action "${action_name}"
+}
+
+
+expand_config() {
+	local input_t=""
+	local input_u=""
+	mkdir -p "$(dirname ${CONFIG_FILE})"
+	> ${CONFIG_FILE}
+	echo -e "module(load=\"imuxsock\")" >> ${CONFIG_FILE}
+	echo -e "module(load=\"imklog\")" >> ${CONFIG_FILE}
+	echo -e "module(load=\"imudp\")">> ${CONFIG_FILE}
+	echo -e "module(load=\"omprog\")" >> ${CONFIG_FILE}
+	echo -e "\$template tfTemplate,\"%\$day% %timegenerated:1:3:date-rfc3164% %\$year% %timegenerated:12:19:date-rfc3339% %syslogfacility-text%.%syslogseverity-text% %syslogtag%%msg%\\\n\"" >> ${CONFIG_FILE}
+	echo -e "input(type=\"imudp\" port=\"514\")" >> ${CONFIG_FILE}
+	echo -e "\$ActionFileDefaultTemplate tfTemplate">> ${CONFIG_FILE}
+
+	config_load "${UCI_CONF}"
+	config_foreach handle_rule rule
+}
+
+
+start_service() {
+	expand_config
+	procd_open_instance
+	procd_set_param command /usr/sbin/rsyslogd -f ${CONFIG_FILE} -n
+	procd_close_instance
+}
+
+reload_service()
+{
+     stop
+     start
+}
+
+service_triggers()
+{
+	procd_add_reload_trigger ${UCI_CONF}
+}
+

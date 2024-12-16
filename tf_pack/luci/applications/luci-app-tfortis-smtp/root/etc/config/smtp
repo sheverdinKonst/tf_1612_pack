@@ -1,0 +1,7 @@
+config smtp 'client'
+	option enabled '0'
+	option port '25'
+	option host ''
+	option from ''
+	option to ''
+	option user ''

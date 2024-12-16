@@ -1,0 +1,38 @@
+{
+	"admin/mstpd": {
+		"title": "STP/RSTP",
+		"order": 5,
+		"action": {
+			"type": "firstchild"
+		},
+		"depends": {
+			"uci": {
+				"mstpd": true
+			}
+		}
+	},
+
+	"admin/mstpd/status": {
+		"title": "Status",
+		"order": 10,
+		"action": {
+			"type": "view",
+			"path": "mstpd/status"
+		},
+		"depends": {
+			"acl": [ "luci-app-tn-mstpd-status" ]
+		}
+	},
+
+	"admin/mstpd/config": {
+		"title": "Settings",
+		"order": 20,
+		"action": {
+			"type": "view",
+			"path": "mstpd/config"
+		},
+		"depends": {
+			"acl": [ "luci-app-tn-mstpd-config" ]
+		}
+	}
+}

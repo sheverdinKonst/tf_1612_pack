@@ -1,0 +1,304 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: luci-app-tn-snmpd\n"
+"PO-Revision-Date: 2020-04-24 12:59+0300\n"
+"Last-Translator: Anton Kikin <a.kikin@tano-systems.com>\n"
+"Language-Team: none\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n"
+"%100<10 || n%100>=20) ? 1 : 2);\n"
+"POT-Creation-Date: 2019-01-14 01:23+0300\n"
+"X-Generator: Poedit 2.2\n"
+
+#: htdocs/luci-static/resources/view/snmpd/snmpd.js:577
+msgid "AES"
+msgstr "AES"
+
+#: htdocs/luci-static/resources/view/snmpd/snmpd.js:451
+msgid "AgentX socket path"
+msgstr "Путь к сокету AgentX"
+
+#: htdocs/luci-static/resources/view/snmpd/snmpd.js:553
+msgid "Allow write"
+msgstr "Разрешить запись"
+
+#: htdocs/luci-static/resources/view/snmpd/snmpd.js:646
+msgid "Community"
+msgstr "SNMP сообщество"
+
+#: htdocs/luci-static/resources/view/snmpd/snmpd.js:687
+msgid "Contact"
+msgstr "Контакт"
+
+#: htdocs/luci-static/resources/view/snmpd/snmpd.js:578
+msgid "DES"
+msgstr "DES"
+
+#: htdocs/luci-static/resources/view/snmpd/snmpd.js:313
+msgctxt "Download data (action)"
+msgid "Download (%1024.2mB)"
+msgstr "Скачать (%1024.2mБ)"
+
+#: htdocs/luci-static/resources/view/snmpd/snmpd.js:452
+msgid "Empty for disable AgentX"
+msgstr "Если не задано, AgentX будет отключен"
+
+#: htdocs/luci-static/resources/view/snmpd/snmpd.js:332
+msgid "Enable SNMP service"
+msgstr "Включить службу SNMP"
+
+#: htdocs/luci-static/resources/view/snmpd/snmpd.js:605
+msgid "Enable SNMP trap functionality"
+msgstr "Включить функционал SNMP трапов"
+
+#: htdocs/luci-static/resources/view/snmpd/snmpd.js:604
+msgid "Enable SNMP traps"
+msgstr "Включить SNMP трапы"
+
+#: htdocs/luci-static/resources/view/snmpd/snmpd.js:710
+msgid "Enable logging to file"
+msgstr "Включить журналирование в файл"
+
+#: htdocs/luci-static/resources/view/snmpd/snmpd.js:738
+msgid "Enable logging to syslog"
+msgstr "Включить журналирование в syslog"
+
+#: htdocs/luci-static/resources/view/snmpd/snmpd.js:784
+msgid "Global"
+msgstr "Глобальные"
+
+#: root/usr/share/rpcd/acl.d/luci-app-tn-snmpd.json:3
+msgid "Grant access to SNMP configuration"
+msgstr "Предоставить доступ к конфигурации SNMP"
+
+#: htdocs/luci-static/resources/view/snmpd/snmpd.js:631
+msgid "Host to transfer SNMP trap traffic to (hostname or IP address)"
+msgstr "Адрес хоста назначения для отправки трапов (имя хоста или IP-адрес)"
+
+#: htdocs/luci-static/resources/view/snmpd/snmpd.js:630
+msgid "Host/IP"
+msgstr "Хост/IP-адрес"
+
+#: htdocs/luci-static/resources/view/snmpd/snmpd.js:356
+msgid "IP version"
+msgstr "Версия IP-протокола"
+
+#: htdocs/luci-static/resources/view/snmpd/snmpd.js:359
+msgid "IPv4 and IPv6"
+msgstr "IPv4 и IPv6"
+
+#: htdocs/luci-static/resources/view/snmpd/snmpd.js:693
+msgid "Location"
+msgstr "Расположение"
+
+#: htdocs/luci-static/resources/view/snmpd/snmpd.js:789
+msgid "Logging"
+msgstr "Журналирование"
+
+#: htdocs/luci-static/resources/view/snmpd/snmpd.js:562
+msgid "MD5"
+msgstr "MD5"
+
+#: htdocs/luci-static/resources/view/snmpd/snmpd.js:312
+msgid "MIB download"
+msgstr "Скачать MIB файл"
+
+#: htdocs/luci-static/resources/view/snmpd/snmpd.js:681
+msgid "Name"
+msgstr "Имя"
+
+#: htdocs/luci-static/resources/view/snmpd/snmpd.js:778
+msgid "On this page you may configure SNMP agent settings."
+msgstr "На данной странице можно выполнить конфигурацию SNMP агента."
+
+#: htdocs/luci-static/resources/view/snmpd/snmpd.js:357
+msgid "Only IPv4"
+msgstr "Только IPv4"
+
+#: htdocs/luci-static/resources/view/snmpd/snmpd.js:358
+msgid "Only IPv6"
+msgstr "Только IPv6"
+
+#: htdocs/luci-static/resources/view/snmpd/snmpd.js:447
+msgid "Only SNMPv3"
+msgstr "Только SNMPv3"
+
+#: htdocs/luci-static/resources/view/snmpd/snmpd.js:716
+msgid "Path to log file"
+msgstr "Путь к файлу журнала"
+
+#: htdocs/luci-static/resources/view/snmpd/snmpd.js:394
+#: htdocs/luci-static/resources/view/snmpd/snmpd.js:638
+msgid "Port"
+msgstr "Порт"
+
+#: htdocs/luci-static/resources/view/snmpd/snmpd.js:639
+msgid "Port for trap's host"
+msgstr "Порт для отправки трапов"
+
+#: htdocs/luci-static/resources/view/snmpd/snmpd.js:723
+msgid "Priority for file logging"
+msgstr "Приоритет сообщений журналирования в файл"
+
+#: htdocs/luci-static/resources/view/snmpd/snmpd.js:759
+msgid "Priority for syslog logging"
+msgstr "Приоритет сообщений журналирования в syslog"
+
+#: htdocs/luci-static/resources/view/snmpd/snmpd.js:487
+msgid "Read community"
+msgstr "SNMP сообщество для чтения"
+
+#: htdocs/luci-static/resources/view/snmpd/snmpd.js:492
+msgid "Read community source"
+msgstr "Источник SNMP сообщества для чтения"
+
+#: htdocs/luci-static/resources/view/snmpd/snmpd.js:333
+msgid "Run SNMP service on system's startup"
+msgstr "Запускать службу SNMP при запуске системы"
+
+#: htdocs/luci-static/resources/view/snmpd/snmpd.js:561
+msgid "SHA"
+msgstr "SHA"
+
+#: root/usr/share/luci/menu.d/luci-app-tn-snmpd.json:3
+msgid "SNMP"
+msgstr "SNMP"
+
+#: htdocs/luci-static/resources/snmpd.js:14
+msgid "SNMP LuCI application (version %s)"
+msgstr "LuCI приложение настройки SNMP (версия %s)"
+
+#: htdocs/luci-static/resources/view/snmpd/snmpd.js:777
+msgid "SNMP Settings"
+msgstr "Настройки SNMP"
+
+#: htdocs/luci-static/resources/view/snmpd/snmpd.js:622
+msgid "SNMP traps version"
+msgstr "Версия SNMP трапов"
+
+#: htdocs/luci-static/resources/view/snmpd/snmpd.js:440
+msgid "SNMP version"
+msgstr "Версия SNMP"
+
+#: htdocs/luci-static/resources/view/snmpd/snmpd.js:623
+msgid "SNMP version used for sending traps"
+msgstr "Используемая версия SNMP для отправки трапов"
+
+#: htdocs/luci-static/resources/view/snmpd/snmpd.js:441
+msgid "SNMP version used to monitor and control the device"
+msgstr "Используемая версия SNMP для мониторинга и управления устройством"
+
+#: htdocs/luci-static/resources/view/snmpd/snmpd.js:445
+msgid "SNMPv1 and SNMPv2c"
+msgstr "SNMPv1 и SNMPv2c"
+
+#: htdocs/luci-static/resources/view/snmpd/snmpd.js:446
+msgid "SNMPv1, SNMPv2c and SNMPv3"
+msgstr "SNMPv1, SNMPv2c и SNMPv3"
+
+#: htdocs/luci-static/resources/view/snmpd/snmpd.js:785
+msgid "SNMPv1/SNMPv2c"
+msgstr "SNMPv1/SNMPv2c"
+
+#: htdocs/luci-static/resources/view/snmpd/snmpd.js:786
+msgid "SNMPv3"
+msgstr "SNMPv3"
+
+#: htdocs/luci-static/resources/view/snmpd/snmpd.js:568
+msgid "SNMPv3 authentication passphrase"
+msgstr "Пароль аутентификации SNMPv3"
+
+#: htdocs/luci-static/resources/view/snmpd/snmpd.js:559
+msgid "SNMPv3 authentication type"
+msgstr "Тип аутентификации SNMPv3"
+
+#: htdocs/luci-static/resources/view/snmpd/snmpd.js:584
+msgid "SNMPv3 encryption passphrase"
+msgstr "Пароль шифрования SNMPv3"
+
+#: htdocs/luci-static/resources/view/snmpd/snmpd.js:575
+msgid "SNMPv3 encryption type"
+msgstr "Тип шифрования SNMPv3"
+
+#: htdocs/luci-static/resources/view/snmpd/snmpd.js:546
+msgid "SNMPv3 username"
+msgstr "Имя пользователя SNMPv3"
+
+#: htdocs/luci-static/resources/view/snmpd/snmpd.js:547
+msgid "Set username to access SNMP"
+msgstr "Имя пользователя SNMPv3"
+
+#: htdocs/luci-static/resources/view/snmpd/snmpd.js:744
+msgid "Syslog facility"
+msgstr "Категория syslog сообщений"
+
+#: htdocs/luci-static/resources/view/snmpd/snmpd.js:788
+msgid "System"
+msgstr "Система"
+
+#: htdocs/luci-static/resources/view/snmpd/snmpd.js:687
+msgid "System contact"
+msgstr "Контакт системы"
+
+#: htdocs/luci-static/resources/view/snmpd/snmpd.js:693
+msgid "System location"
+msgstr "Расположение системы"
+
+#: htdocs/luci-static/resources/view/snmpd/snmpd.js:681
+msgid "System name"
+msgstr "Имя системы"
+
+#: htdocs/luci-static/resources/view/snmpd/snmpd.js:647
+msgid "The SNMP community for traps"
+msgstr "SNMP сообщество для трапов"
+
+#: htdocs/luci-static/resources/view/snmpd/snmpd.js:787
+msgctxt "SNMP"
+msgid "Traps"
+msgstr "Трапы"
+
+#: htdocs/luci-static/resources/view/snmpd/snmpd.js:493
+msgid ""
+"Trusted source for SNMP read community access (hostname, IP/MASK, IP/BITS or "
+"IPv6 equivalents)"
+msgstr ""
+"Доверенный источник SNMP сообщества для чтения (имя хоста, IP-адрес/маска, "
+"IP-адрес/биты или эквиваленты для IPv6)"
+
+#: htdocs/luci-static/resources/view/snmpd/snmpd.js:517
+msgid ""
+"Trusted source for SNMP write community access (hostname, IP/MASK, IP/BITS "
+"or IPv6 equivalents)"
+msgstr ""
+"Доверенный источник SNMP сообщества для записи (имя хоста, IP-адрес/маска, "
+"IP-адрес/биты или эквиваленты для IPv6)"
+
+#: htdocs/luci-static/resources/view/snmpd/snmpd.js:724
+#: htdocs/luci-static/resources/view/snmpd/snmpd.js:760
+msgid "Will log messages of selected priority and above."
+msgstr "Будут регистрироваться сообщения выбранного приоритета и выше."
+
+#: htdocs/luci-static/resources/view/snmpd/snmpd.js:511
+msgid "Write community"
+msgstr "SNMP сообщество для записи"
+
+#: htdocs/luci-static/resources/view/snmpd/snmpd.js:516
+msgid "Write community source"
+msgstr "Источник SNMP сообщества для записи"
+
+#: htdocs/luci-static/resources/view/snmpd/snmpd.js:494
+#: htdocs/luci-static/resources/view/snmpd/snmpd.js:518
+msgid "any (default)"
+msgstr "любой (default)"
+
+#: htdocs/luci-static/resources/view/snmpd/snmpd.js:560
+#: htdocs/luci-static/resources/view/snmpd/snmpd.js:576
+msgid "none"
+msgstr "нет"
+
+#: htdocs/luci-static/resources/snmpd.js:16
+msgid "© 2019–2020, Tano Systems LLC, Anton Kikin"
+msgstr "© 2019–2020, ООО «Тано Системс», Антон Кикин"

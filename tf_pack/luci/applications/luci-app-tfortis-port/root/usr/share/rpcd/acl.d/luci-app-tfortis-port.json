@@ -1,0 +1,46 @@
+{
+  "luci-app-tfortis-port": {
+    "description": "Grant UCI access to LuCI app tfortis-port",
+    "read": {
+      "uci": [
+        "port",
+        "luci",
+				"network"
+      ],
+      "ubus": {
+        "uci": [
+          "get"
+        ],
+		"poe":[
+			"info"
+		],
+        "luci": [
+					"getBuiltinEthernetPorts"
+				],
+				"luci-rpc": [
+					"getBoardJSON",
+					"getNetworkDevices"	
+				],
+				"network": [
+					"get_proto_handlers"
+				],
+				"network.interface": [
+					"dump"
+				]
+      },
+      "file": {
+				"/usr/sbin/ethtool": [ "list", "exec"]
+			} 
+    },
+    "write": {
+      "ubus": {
+        "uci": [
+          "set", "commit"
+        ]
+      },
+      "uci": [
+        "port"
+      ]
+    }
+  }
+}

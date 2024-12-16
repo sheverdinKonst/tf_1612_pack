@@ -1,0 +1,25 @@
+#!/bin/sh
+
+FORMAT=${1:-plain}
+
+if [ ! -x /sbin/logread ]; then
+	echo "/sbin/logread not exists"
+	exit 1
+fi
+
+if [ ! -x /usr/bin/syslog_fc ]; then
+	echo "/usr/bin/syslog_fc not exists"
+	exit 1
+fi
+
+case "$FORMAT" in
+	json|csv)
+		cat /var/log/syslog | /usr/bin/syslog_fc --ts-parse-spec="%d %b %Y %H:%M:%S" -e "%T %F.%P %G: %_M" -f ${FORMAT} -s
+		;;
+	clearlog)
+		> /var/log/syslog
+		;;
+	*)
+		cat /var/log/syslog
+		;;
+esac

@@ -1,0 +1,25 @@
+{
+  "luci-app-tfortis-teleport": {
+    "description": "Grant UCI access to LuCI app tfortis-teleport",
+    "read": {
+      "ubus": {
+        "uci": [
+          "get"
+        ]
+      },
+      "uci": [
+        "tfortis-teleport"
+      ]
+    },
+    "write": {
+      "ubus": {
+        "uci": [
+          "set", "commit"
+        ]
+      },
+      "uci": [
+        "tfortis-teleport"
+      ]
+    }
+  }
+}

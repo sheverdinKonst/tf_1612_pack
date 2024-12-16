@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CLISH_MODULE xmlns="http://clish.sourceforge.net/XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://clish.sourceforge.net/XMLSchema
+                     http://clish.sourceforge.net/XMLSchema/clish.xsd">
+    <VIEW name="main">
+        <COMMAND name="system user"
+                 help="Add/delete user, set password and access level"
+                 lock="false"
+                 interrupt="true">
+            <PARAM name="config"
+                   test='"${access_level}" = "admin"'
+                   help="configure user accounts"
+                   optional="true"
+                   order="true"
+                   mode="subcommand"
+                   ptype="SUBCOMMAND">
+                <PARAM name="add"
+                       test='-z "${delete}"'
+                       help="add new user"
+                       optional="true"
+                       oder = "true"
+                       mode="subcommand"
+                       ptype="SUBCOMMAND">
+                    <PARAM name="user_name"
+                           help="set user name"
+                           optional="false"
+                           mode="subcommand"
+                           ptype="SUBCOMMAND">
+                        <PARAM name="username"
+                               help=" - user name value"
+                               ptype="STRING"/>
+                    </PARAM>
+
+                    <PARAM name="password"
+                           test='-n "${user_name}"'
+                           help="set user password"
+                           optional="true"
+                           order="true"
+                           mode="subcommand"
+                           ptype="SUBCOMMAND">
+                        <PARAM name="passValue"
+                               help=" user password"
+                               ptype="STRING"/>
+                    </PARAM>
+
+                    <PARAM name="admin_rule"
+                           test='-n "${user_name}"'
+                           help="set access level"
+                           optional="false"
+                           order="true"
+                           mode="subcommand"
+                           ptype="SUBCOMMAND">
+                        <PARAM name="adminruleValue"
+                               help=" access level value"
+                               ptype="ADMIN_RULE"/>
+                    </PARAM>
+                </PARAM>
+                <PARAM name="delete"
+                       test='-z "${add}"'
+                       help="delete user"
+                       optional="true"
+                       oder = "true"
+                       mode="subcommand"
+                       ptype="SUBCOMMAND">
+                    <PARAM name="user_name"
+                           help=" user name"
+                           optional="false"
+                           mode="subcommand"
+                           ptype="SUBCOMMAND">
+                        <PARAM name="username"
+                               help=" user name value"
+                               ptype="STRING"/>
+                    </PARAM>
+                </PARAM>
+            </PARAM>
+            <PARAM name="show"
+                   help="show user configuration"
+                   test='-z "${config}"'
+                   optional="true"
+                   order="true"
+                   mode="subcommand"
+                   ptype="SUBCOMMAND">
+                <PARAM name="configuration"
+                       help="show user configuration"
+                       optional="false"
+                       order="true"
+                       mode="subcommand"
+                       ptype="SUBCOMMAND">
+                </PARAM>
+            </PARAM>
+
+            <ACTION>
+                if [[ -n "${config}" ]]; then
+                    if [[ -n "${add}" ]]; then
+                        if [[ -n "${passValue}" ]]; then
+                            /etc/tf_clish/scripts/user/config_user.lua "-a" "${username}" "${passValue}" ${adminruleValue}
+                        else
+                            /etc/tf_clish/scripts/user/getPass.sh "-a" "${username}" ${adminruleValue}
+                        fi
+                    fi
+                    if [[ -n "${delete}" ]]; then
+                        /etc/tf_clish/scripts/user/config_user.lua "-d" "${username}"
+                    fi
+                fi
+                if [[ -n "${show}" ]]; then
+                    if [[ -n "${configuration}" ]]; then
+                        /etc/tf_clish/scripts/user/show_user.lua
+                    fi
+                fi
+            </ACTION>
+        </COMMAND>
+    </VIEW>
+</CLISH_MODULE>

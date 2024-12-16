@@ -1,0 +1,54 @@
+
+config filter
+	option name 'kernel_filter'
+	option facility 'kern'
+	option severity 'alert'
+
+config filter
+	option name 'user_filter'
+	option facility 'user'
+	option severity 'notice'
+
+config filter
+	option name 'all_filter'
+	option facility '*'
+	option severity '*'
+
+config filter
+	option name 'tfortis_filter'
+	option facility '*'
+	option severity '*'
+	option progname 'tfortis'
+
+config filter
+	option name 'port_filter'
+	option facility '*'
+	option severity '*'
+	option content 'port'
+
+config action
+	option name 'write_memory'
+	option action 'memory'
+
+config action
+	option name 'write_flash'
+	option action 'flash'
+
+config action
+	option name 'send_syslog'
+	option action 'syslog'
+	list log_syslog '192.168.1.2'
+
+config action
+	option name 'send_mail'
+	option action 'email'
+	list log_email 'abelyaev@fort-telecom.ru'
+
+config rule
+	option filter 'port_filter'
+	option action 'write_flash'
+
+config rule
+	option filter 'all_filter'
+	option action 'write_memory'
+

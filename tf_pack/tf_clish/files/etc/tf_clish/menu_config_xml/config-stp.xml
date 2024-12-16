@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CLISH_MODULE xmlns="http://clish.sourceforge.net/XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://clish.sourceforge.net/XMLSchema
+                     http://clish.sourceforge.net/XMLSchema/clish.xsd">
+    <!--=======================================================-->
+    <VIEW name="main">
+        <COMMAND name="services stp"
+                 help="configure Spanning Tree">
+            <PARAM name="config"
+                   test='"${access_level}" = "admin"'
+                   help="config"
+                   optional="true"
+                   order="true"
+                   mode="subcommand"
+                   ptype="SUBCOMMAND">
+                <PARAM name="system"
+                       test='-z "${ports}" -a -z "${bridge}"'
+                       help="STP/RSTP system configuration"
+                       optional="true"
+                       mode="subcommand"
+                       ptype="SUBCOMMAND">
+                <PARAM name="state"
+                       test='-z "${ports}" -a -z "${bridge}"'
+                       help="enable/disable STP/RSTP"
+                       optional="true"
+                       mode="subcommand"
+                       ptype="SUBCOMMAND">
+                    <PARAM name="stateValue"
+                           help="set enable or disable state"
+                           ptype="STATE"/>
+                </PARAM>
+                <PARAM name="protocol"
+                       test='-z "${ports}" -a -z "${bridge}"'
+                       help="choose stp version: STP, RSTP, MSTP"
+                       optional="true"
+                       mode="subcommand"
+                       ptype="SUBCOMMAND">
+                    <PARAM name="protocolValue"
+                           help="STP, RSTP "
+                           ptype="STP_PROTOCOL"/>
+                </PARAM>
+
+                <PARAM name="log_level"
+                           test='-z "${ports}" -a -z "${bridge}"'
+                           help="log level"
+                           optional="true"
+                           mode="subcommand"
+                           ptype="SUBCOMMAND">
+                        <PARAM name="logValue"
+                               help="log level: "
+                               ptype="STP_LOG_LEVEL"/>
+                </PARAM>
+                </PARAM>
+                <PARAM name="bridge"
+                       test='-z "${ports}" -a -z "${system}"'
+                       help="STP/RSTP bridge configuration"
+                       optional="true"
+                       order="false"
+                       mode="subcommand"
+                       ptype="SUBCOMMAND">>
+
+                    <PARAM name="priority"
+                           help="configure Spanning Tree"
+                           optional="true"
+                           mode="subcommand"
+                           ptype="SUBCOMMAND">
+                        <PARAM name="priorityValue"
+                               help="bridge priority. Default bridge priority is 32768"
+                               ptype="STP_PRIORITY"/>
+                    </PARAM>
+
+                    <PARAM name="ageing"
+                           help="bridge ethernet (MAC) address ageing time."
+                           optional="true"
+                           mode="subcommand"
+                           ptype="SUBCOMMAND">
+                        <PARAM name="ageingValue"
+                               help="ageing  in seconds"
+                               ptype="NUM_10_1M"/>
+                    </PARAM>
+                    <PARAM name="hello_time"
+                           help="interval at which the bridge sends hello packets to the surrounding bridges to make sure the paths are fault-free (1–10 seconds)"
+                           optional="true"
+                           mode="subcommand"
+                           ptype="SUBCOMMAND">
+                        <PARAM name="hello_time_value"
+                               help="hello_time in seconds"
+                               ptype="NUM_1_10"/>
+                    </PARAM>
+                    <PARAM name="forward_delay"
+                           help="delay for the root and designated ports to transit to the forwarding state"
+                           optional="true"
+                           mode="subcommand"
+                           ptype="SUBCOMMAND">
+                        <PARAM name="forwarddelayValue"
+                               help="forward delay in seconds"
+                               ptype="NUM_4_30"/>
+                    </PARAM>
+                    <PARAM name="tx_hold_count"
+                           help="tx hold count"
+                           optional="true"
+                           mode="subcommand"
+                           ptype="SUBCOMMAND">
+                        <PARAM name="txholdcountValue"
+                               help="tx hold count value"
+                               ptype="NUM_1_10"/>
+                    </PARAM>
+                </PARAM>
+
+                <PARAM name="ports"
+                       test='-z "${bridge}" -a -z "${system}"'
+                       help="choose port range"
+                       optional="true"
+                       order="false"
+                       mode="subcommand"
+                       ptype="SUBCOMMAND">
+                    <PARAM name="port_range"
+                           help="port range"
+                           optional="false"
+                           order="true"
+                           mode="subcommand"
+                           ptype="SUBCOMMAND">
+                        <PARAM name="portValue"
+                               test = '-n "${ports}"'
+                               optional="false"
+                               order="true"
+                               help="port range: "
+                               ptype="PORT_NUM_LIST_1_10"/>
+                    </PARAM>
+                    <PARAM name="treeprio"
+                           test=' -n "${portValue}"'
+                           help="port priority "
+                           optional="true"
+                           mode="subcommand"
+                           ptype="SUBCOMMAND">
+                        <PARAM name="p_treeprioValue"
+                               help="port priority. Default port priority is 32768."
+                               ptype="STP_PRIORITY"/>
+                    </PARAM>
+                    <PARAM name="path_cost"
+                          test=' -n "${portValue}"'
+                           help="path cost"
+                           optional="true"
+                           mode="subcommand"
+                           ptype="SUBCOMMAND">
+                        <PARAM name="p_pathcostValue"
+                               help="path_cost value in range 1 - 200.000.000"
+                               ptype="UINT"/>
+                    </PARAM>
+
+                    <PARAM name="admin_edge"
+                           test=' -n "${portValue}"'
+                           help="initial edge state"
+                           optional="true"
+                           mode="subcommand"
+                           ptype="SUBCOMMAND">
+                        <PARAM name="p_adminageValue"
+                               help="admin edge value"
+                               ptype="STP_BOOL"/>
+                    </PARAM>
+
+                    <PARAM name="auto_edge"
+                           test=' -n "${portValue}"'
+                           help="auto transition to/from edge state"
+                           optional="true"
+                           mode="subcommand"
+                           ptype="SUBCOMMAND">
+                        <PARAM name="p_autoedgeValue"
+                               help="auto edge value"
+                               ptype="STP_BOOL"/>
+                    </PARAM>
+
+                    <PARAM name="bpdu_filter"
+                           test=' -n "${portValue}"'
+                           help="Disable STP/RSTP processing on this port"
+                           optional="true"
+                           mode="subcommand"
+                           ptype="SUBCOMMAND">
+                        <PARAM name="p_bpdufilterValue"
+                               help="bpdu filter"
+                               ptype="STP_BOOL"/>
+                    </PARAM>
+
+                    <PARAM name="bpdu_guard"
+                           test=' -n "${portValue}"'
+                           help="disable port if BPDU is detected (received) on it"
+                           optional="true"
+                           mode="subcommand"
+                           ptype="SUBCOMMAND">
+                        <PARAM name="p_bpduguardValue"
+                               help="bpdu guard value"
+                               ptype="STP_BOOL"/>
+                    </PARAM>
+                    <PARAM name="forward_bpdu"
+                           test=' -n "${portValue}"'
+                           help="Configure Spanning Tree"
+                           optional="true"
+                           mode="subcommand"
+                           ptype="SUBCOMMAND">
+                        <PARAM name="forward_bpduValue"
+                               help="forward BPDU Value"
+                               ptype="UINT"/>
+                    </PARAM>
+                </PARAM>
+            </PARAM>
+
+            <PARAM name="show"
+                   help="show config or status STP/RSTP"
+                   test='-z "${config}"'
+                   optional="true"
+                   order="true"
+                   mode="subcommand"
+                   ptype="SUBCOMMAND">
+                <PARAM name="status"
+                       test='-z "${configuration}"'
+                       help="show status STP/RSTP"
+                       optional="true"
+                       order="true"
+                       mode="subcommand"
+                       ptype="SUBCOMMAND">
+                    <PARAM name="ports"
+                           test='-z "${bridge}"'
+                           help="show the status of ports"
+                           optional="true"
+                           mode="subcommand"
+                           ptype="SUBCOMMAND">
+                        <PARAM name="portValue"
+                               optional="true"
+                               help="port range: "
+                               ptype="PORT_NUM_LIST_1_10"/>
+                    </PARAM>
+                    <PARAM name="bridge"
+                           test='-z "${ports}"'
+                           help="show the status of bridge"
+                           optional="true"
+                           mode="subcommand"
+                           ptype="SUBCOMMAND"/>
+                </PARAM>
+                <PARAM name="configuration"
+                       test='-z "${status}" -a "${show_access_level}" = "admin"'
+                       help="show config STP/RSTP"
+                       optional="true"
+                       order="true"
+                       mode="subcommand"
+                       ptype="SUBCOMMAND">
+                    <PARAM name="bridge"
+                           test='-z "${ports}"'
+                           help="show bridge configuration"
+                           optional="true"
+                           order="false"
+                           mode="subcommand"
+                           ptype="SUBCOMMAND"/>
+                    <PARAM name="ports"
+                           test='-z "${bridge}"'
+                           help="show ports configuration"
+                           optional="false"
+                           order="false"
+                           mode="subcommand"
+                           ptype="SUBCOMMAND">
+                        <PARAM name="portValue"
+                               optional="true"
+                               help="port range: "
+                               ptype="PORT_NUM_LIST_1_10"/>
+                    </PARAM>
+                </PARAM>
+            </PARAM>
+
+            <ACTION>
+                if [[ -n "${config}" ]]; then
+
+                    if [[ -n "${state}" ]]; then
+                        /etc/tf_clish/scripts/stp/config_stp_global.lua "state" "${stateValue}"
+                    fi
+                    if [[ -n "${protocol}" ]]; then
+                        /etc/tf_clish/scripts/stp/config_stp_global.lua "protocol" "${protocolValue}"
+                    fi
+                    if [[ -n "${loglevel}" ]]; then
+                        /etc/tf_clish/scripts/stp/config_stp_global.lua "loglevel" "${logValue}"
+                    fi
+
+                    if [[ -n "${bridge}" ]]; then
+                        if [[ -n "${priority}" ]]; then
+                            /etc/tf_clish/scripts/stp/config_stp_global.lua "priority" "${priorityValue}"
+                        fi
+
+                        if [[ -n "${ageing}" ]]; then
+                             /etc/tf_clish/scripts/stp/config_stp_global.lua "ageing" "${ageingValue}"
+                        fi
+
+                        if [[ -n "${hello_time}" ]]; then
+                              /etc/tf_clish/scripts/stp/config_stp_global.lua "hellotime" "${hello_time_value}"
+                        fi
+                        if [[ -n "${forward_delay}" ]]; then
+                            /etc/tf_clish/scripts/stp/config_stp_global.lua "forwarddelay" "${forwarddelayValue}"
+                        fi
+                        if [[ -n "${tx_hold_count}" ]]; then
+                            /etc/tf_clish/scripts/stp/config_stp_global.lua "txholdcount" "${txholdcountValue}"
+                        fi
+                        if [[ -n "${forward_bpdu}" ]]; then
+                            /etc/tf_clish/scripts/lua/stp/config_stp_global.lua "forward_bpdu" "${forward_bpduValue}"
+                        fi
+                    fi
+
+                    if [[ -n "${ports}" ]]; then
+
+                        if [[ -n "${treeprio}" ]]; then
+                            /etc/tf_clish/scripts/stp/config_stp_port.lua "${portValue}" "treeprio" "${p_treeprioValue}"
+                        fi
+
+                        if [[ -n "${path_cost}" ]]; then
+                            /etc/tf_clish/scripts/stp/config_stp_port.lua "${portValue}" "pathcost" "${p_pathcostValue}"
+                        fi
+
+                        if [[ -n "${admin_edge}" ]]; then
+                            /etc/tf_clish/scripts/stp/config_stp_port.lua "${portValue}" "adminedge" "${p_adminageValue}"
+                        fi
+
+                        if [[ -n "${auto_edge}" ]]; then
+                            /etc/tf_clish/scripts/stp/config_stp_port.lua "${portValue}" "autoedge" "${p_autoedgeValue}"
+                        fi
+
+                        if [[ -n "${bpdu_filter}" ]]; then
+                            echo ">>>> bpdu_filter"
+                            /etc/tf_clish/scripts/stp/config_stp_port.lua "${portValue}" "bpdufilter" "${p_bpdufilterValue}"
+                        fi
+
+                        if [[ -n "${bpdu_guard}" ]]; then
+                            echo ">>>> bpdu_guard"
+                            /etc/tf_clish/scripts/stp/config_stp_port.lua "${portValue}" "bpduguard" "${p_bpduguardValue}"
+                        fi
+                    fi
+                fi
+
+                if [[ -n "${show}" ]]; then
+                    if [[ -n "${configuration}" ]]; then
+                        if [[ -n "${bridge}" ]]; then
+                            echo "bridge"
+                            /etc/tf_clish/scripts/stp/show_stp_config.lua "bridge" "switch"
+                        fi
+
+                        if [[ -n "${ports}" ]]; then
+                            if [[ -z "${portValue}" ]]; then
+                                /etc/tf_clish/scripts/stp/show_stp_config.lua "ports" "all"
+                            fi
+
+                            if [[ -n "${portValue}" ]]; then
+                                /etc/tf_clish/scripts/stp/show_stp_config.lua "ports" "${portValue}"
+                            fi
+                        fi
+                    fi
+
+                    if [[ -n "${status}" ]]; then
+                        if [[ -n "${bridge}" ]]; then
+                            /etc/tf_clish/scripts/stp/show_stp_status.lua "bridge" "switch"
+                        fi
+
+                        if [[ -n "${ports}" ]]; then
+                            if [[ -z "${portValue}" ]]; then
+                                /etc/tf_clish/scripts/stp/show_stp_status.lua "ports" "all"
+                            fi
+
+                            if [[ -n "${portValue}" ]]; then
+                                /etc/tf_clish/scripts/stp/show_stp_status.lua "ports" "${portValue}"
+                            fi
+                        fi
+                    fi
+                fi
+            </ACTION>
+        </COMMAND>
+    </VIEW>
+</CLISH_MODULE>

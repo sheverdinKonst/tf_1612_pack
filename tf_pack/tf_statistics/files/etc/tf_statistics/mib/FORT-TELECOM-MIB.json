@@ -1,0 +1,1904 @@
+{
+  "imports": {
+    "class": "imports",
+    "SNMPv2-CONF": [
+      "NOTIFICATION-GROUP",
+      "MODULE-COMPLIANCE"
+    ],
+    "SNMPv2-SMI": [
+      "MODULE-IDENTITY",
+      "NOTIFICATION-TYPE",
+      "OBJECT-IDENTITY",
+      "Counter32",
+      "Gauge32",
+      "Counter64",
+      "Unsigned32",
+      "Bits",
+      "iso",
+      "TimeTicks",
+      "OBJECT-TYPE",
+      "enterprises",
+      "MibIdentifier",
+      "IpAddress",
+      "Integer32"
+    ],
+    "SNMPv2-TC": [
+      "DisplayString",
+      "TEXTUAL-CONVENTION"
+    ]
+  },
+  "forttelecomMIB": {
+    "name": "forttelecomMIB",
+    "oid": "1.3.6.1.4.1.42019",
+    "class": "moduleidentity",
+    "revisions": [
+      {
+        "revision": "2020-08-26 00:00",
+        "description": "Fort-Telecom MIB"
+      }
+    ],
+    "lastupdated": "202008260000Z",
+    "organization": "Fort-Telecom Ltd.",
+    "contactinfo": " Editor: Belyaev Alexandr Fort-Telecom Ltd. Tel: 8-800-100-112-8 E-mail: abelyaev@fort-telecom.ru ",
+    "description": "The MIB module for managing TFortis switch. Copyright (c) Fort-Telecom (2020)."
+  },
+  "switch": {
+    "name": "switch",
+    "oid": "1.3.6.1.4.1.42019.3",
+    "class": "objectidentity"
+  },
+  "integrations": {
+    "name": "integrations",
+    "oid": "1.3.6.1.4.1.42019.4",
+    "class": "objectidentity"
+  },
+  "psw": {
+    "name": "psw",
+    "oid": "1.3.6.1.4.1.42019.3.2",
+    "class": "objectidentity"
+  },
+  "teleport": {
+    "name": "teleport",
+    "oid": "1.3.6.1.4.1.42019.4.2",
+    "class": "objectidentity"
+  },
+  "trapsPSW": {
+    "name": "trapsPSW",
+    "oid": "1.3.6.1.4.1.42019.3.2.0",
+    "class": "objectidentity"
+  },
+  "trapsTLP": {
+    "name": "trapsTLP",
+    "oid": "1.3.6.1.4.1.42019.4.2.0",
+    "class": "objectidentity"
+  },
+  "configPSW": {
+    "name": "configPSW",
+    "oid": "1.3.6.1.4.1.42019.3.2.1",
+    "class": "objectidentity"
+  },
+  "statusPSW": {
+    "name": "statusPSW",
+    "oid": "1.3.6.1.4.1.42019.3.2.2",
+    "class": "objectidentity"
+  },
+  "comfortStart": {
+    "name": "comfortStart",
+    "oid": "1.3.6.1.4.1.42019.3.2.1.1",
+    "class": "objectidentity"
+  },
+  "comfortStartTime": {
+    "name": "comfortStartTime",
+    "oid": "1.3.6.1.4.1.42019.3.2.1.1.1",
+    "nodetype": "scalar",
+    "class": "objecttype",
+    "syntax": {
+      "type": "INTEGER",
+      "class": "type",
+      "constraints": {
+        "range": [
+          {
+            "min": 1,
+            "max": 2
+          }
+        ]
+      }
+    },
+    "maxaccess": "read-write",
+    "status": "current",
+    "description": "Comfort Start Time (in Hours)"
+  },
+  "comfStartTable": {
+    "name": "comfStartTable",
+    "oid": "1.3.6.1.4.1.42019.3.2.1.1.2",
+    "nodetype": "table",
+    "class": "objecttype",
+    "maxaccess": "not-accessible",
+    "status": "current"
+  },
+  "comfStartEntry": {
+    "name": "comfStartEntry",
+    "oid": "1.3.6.1.4.1.42019.3.2.1.1.2.1",
+    "nodetype": "row",
+    "class": "objecttype",
+    "maxaccess": "not-accessible",
+    "indices": [
+      {
+        "module": "FORT-TELECOM-MIB",
+        "object": "comfStIndex",
+        "implied": 0
+      }
+    ],
+    "status": "current",
+    "description": "An entry (conceptual row) in the comfStartTable."
+  },
+  "comfStIndex": {
+    "name": "comfStIndex",
+    "oid": "1.3.6.1.4.1.42019.3.2.1.1.2.1.1",
+    "nodetype": "column",
+    "class": "objecttype",
+    "syntax": {
+      "type": "INTEGER",
+      "class": "type"
+    },
+    "maxaccess": "read-write",
+    "status": "current"
+  },
+  "comfStState": {
+    "name": "comfStState",
+    "oid": "1.3.6.1.4.1.42019.3.2.1.1.2.1.2",
+    "nodetype": "column",
+    "class": "objecttype",
+    "syntax": {
+      "type": "INTEGER",
+      "class": "type",
+      "constraints": {
+        "enumeration": {
+          "enabled": 1,
+          "disabled": 2
+        }
+      }
+    },
+    "maxaccess": "read-write",
+    "status": "current"
+  },
+  "autoRestart": {
+    "name": "autoRestart",
+    "oid": "1.3.6.1.4.1.42019.3.2.1.2",
+    "class": "objectidentity"
+  },
+  "autoRestartTable": {
+    "name": "autoRestartTable",
+    "oid": "1.3.6.1.4.1.42019.3.2.1.2.1",
+    "nodetype": "table",
+    "class": "objecttype",
+    "maxaccess": "not-accessible",
+    "status": "current"
+  },
+  "autoRestartEntry": {
+    "name": "autoRestartEntry",
+    "oid": "1.3.6.1.4.1.42019.3.2.1.2.1.1",
+    "nodetype": "row",
+    "class": "objecttype",
+    "maxaccess": "not-accessible",
+    "indices": [
+      {
+        "module": "FORT-TELECOM-MIB",
+        "object": "autoRstIndex",
+        "implied": 0
+      }
+    ],
+    "status": "current",
+    "description": "An entry (conceptual row) in the autoRestartTable."
+  },
+  "autoRstIndex": {
+    "name": "autoRstIndex",
+    "oid": "1.3.6.1.4.1.42019.3.2.1.2.1.1.1",
+    "nodetype": "column",
+    "class": "objecttype",
+    "syntax": {
+      "type": "INTEGER",
+      "class": "type"
+    },
+    "maxaccess": "read-write",
+    "status": "current"
+  },
+  "autoRstMode": {
+    "name": "autoRstMode",
+    "oid": "1.3.6.1.4.1.42019.3.2.1.2.1.1.2",
+    "nodetype": "column",
+    "class": "objecttype",
+    "syntax": {
+      "type": "INTEGER",
+      "class": "type",
+      "constraints": {
+        "enumeration": {
+          "link": 1,
+          "ping": 2,
+          "speed": 3,
+          "time": 4,
+          "disabled": 0
+        }
+      }
+    },
+    "maxaccess": "read-write",
+    "status": "current",
+    "description": "Mode of Auto Restart controller"
+  },
+  "autoRstDstIP": {
+    "name": "autoRstDstIP",
+    "oid": "1.3.6.1.4.1.42019.3.2.1.2.1.1.3",
+    "nodetype": "column",
+    "class": "objecttype",
+    "syntax": {
+      "type": "IpAddress",
+      "class": "type"
+    },
+    "maxaccess": "read-write",
+    "status": "current",
+    "description": "IP address of device"
+  },
+  "autoRstSpeedDown": {
+    "name": "autoRstSpeedDown",
+    "oid": "1.3.6.1.4.1.42019.3.2.1.2.1.1.4",
+    "nodetype": "column",
+    "class": "objecttype",
+    "syntax": {
+      "type": "INTEGER",
+      "class": "type"
+    },
+    "maxaccess": "read-write",
+    "status": "current",
+    "description": "Lower level of speed"
+  },
+  "autoRstSpeedUp": {
+    "name": "autoRstSpeedUp",
+    "oid": "1.3.6.1.4.1.42019.3.2.1.2.1.1.5",
+    "nodetype": "column",
+    "class": "objecttype",
+    "syntax": {
+      "type": "INTEGER",
+      "class": "type"
+    },
+    "maxaccess": "read-write",
+    "status": "current",
+    "description": "Upper level of speed"
+  },
+  "autoReStartTimeOnHour": {
+    "name": "autoReStartTimeOnHour",
+    "oid": "1.3.6.1.4.1.42019.3.2.1.2.1.1.6",
+    "nodetype": "scalar",
+    "class": "objecttype",
+    "syntax": {
+      "type": "INTEGER",
+      "class": "type"
+    },
+    "maxaccess": "read-write",
+    "status": "current",
+    "description": "Hour of PoE Enable"
+  },
+  "autoReStartTimeOnMin": {
+    "name": "autoReStartTimeOnMin",
+    "oid": "1.3.6.1.4.1.42019.3.2.1.2.1.1.7",
+    "nodetype": "scalar",
+    "class": "objecttype",
+    "syntax": {
+      "type": "INTEGER",
+      "class": "type"
+    },
+    "maxaccess": "read-write",
+    "status": "current",
+    "description": "Minute of PoE Enable"
+  },
+  "autoReStartTimeOffHour": {
+    "name": "autoReStartTimeOffHour",
+    "oid": "1.3.6.1.4.1.42019.3.2.1.2.1.1.8",
+    "nodetype": "scalar",
+    "class": "objecttype",
+    "syntax": {
+      "type": "INTEGER",
+      "class": "type"
+    },
+    "maxaccess": "read-write",
+    "status": "current",
+    "description": "Hour of PoE Disable"
+  },
+  "autoReStartTimeOffMin": {
+    "name": "autoReStartTimeOffMin",
+    "oid": "1.3.6.1.4.1.42019.3.2.1.2.1.1.9",
+    "nodetype": "scalar",
+    "class": "objecttype",
+    "syntax": {
+      "type": "INTEGER",
+      "class": "type"
+    },
+    "maxaccess": "read-write",
+    "status": "current",
+    "description": "Minute of PoE Disable"
+  },
+  "portPoe": {
+    "name": "portPoe",
+    "oid": "1.3.6.1.4.1.42019.3.2.1.3",
+    "class": "objectidentity"
+  },
+  "portPoeTable": {
+    "name": "portPoeTable",
+    "oid": "1.3.6.1.4.1.42019.3.2.1.3.1",
+    "nodetype": "table",
+    "class": "objecttype",
+    "maxaccess": "not-accessible",
+    "status": "current"
+  },
+  "portPoeEntry": {
+    "name": "portPoeEntry",
+    "oid": "1.3.6.1.4.1.42019.3.2.1.3.1.1",
+    "nodetype": "row",
+    "class": "objecttype",
+    "maxaccess": "not-accessible",
+    "indices": [
+      {
+        "module": "FORT-TELECOM-MIB",
+        "object": "portPoeIndex",
+        "implied": 0
+      }
+    ],
+    "status": "current",
+    "description": "An entry (conceptual row) in the portPoeTable."
+  },
+  "portPoeIndex": {
+    "name": "portPoeIndex",
+    "oid": "1.3.6.1.4.1.42019.3.2.1.3.1.1.1",
+    "nodetype": "column",
+    "class": "objecttype",
+    "syntax": {
+      "type": "INTEGER",
+      "class": "type"
+    },
+    "maxaccess": "read-write",
+    "status": "current",
+    "description": "Port Number"
+  },
+  "portPoeState": {
+    "name": "portPoeState",
+    "oid": "1.3.6.1.4.1.42019.3.2.1.3.1.1.2",
+    "nodetype": "column",
+    "class": "objecttype",
+    "syntax": {
+      "type": "INTEGER",
+      "class": "type",
+      "constraints": {
+        "enumeration": {
+          "enabled": 1,
+          "disabled": 2
+        }
+      }
+    },
+    "maxaccess": "read-write",
+    "status": "current",
+    "description": "PoE State"
+  },
+  "outStatePSW": {
+    "name": "outStatePSW",
+    "oid": "1.3.6.1.4.1.42019.3.2.1.4",
+    "class": "objectidentity"
+  },
+  "state": {
+    "name": "state",
+    "oid": "1.3.6.1.4.1.42019.3.2.1.4.1",
+    "nodetype": "scalar",
+    "class": "objecttype",
+    "syntax": {
+      "type": "INTEGER",
+      "class": "type",
+      "constraints": {
+        "enumeration": {
+          "open": 1,
+          "short": 2
+        }
+      }
+    },
+    "maxaccess": "read-write",
+    "status": "current",
+    "description": "Output Relay State"
+  },
+  "stpTopologyChanged": {
+    "name": "stpTopologyChanged",
+    "oid": "1.3.6.1.4.1.42019.3.2.0.1",
+    "class": "notificationtype",
+    "status": "current",
+    "description": "STP Topology changed events occur"
+  },
+  "specialFunctionNoLink": {
+    "name": "specialFunctionNoLink",
+    "oid": "1.3.6.1.4.1.42019.3.2.0.2",
+    "class": "notificationtype",
+    "status": "current",
+    "description": " This Notification indicates no link activity at activated SpecialFunctions by criterion a link"
+  },
+  "specialFunctionNoPingResponse": {
+    "name": "specialFunctionNoPingResponse",
+    "oid": "1.3.6.1.4.1.42019.3.2.0.3",
+    "class": "notificationtype",
+    "status": "current",
+    "description": " This Notification indicates no ping response at activated SpecialFunctions by criterion a ping"
+  },
+  "specialFunctionLowSpeed": {
+    "name": "specialFunctionLowSpeed",
+    "oid": "1.3.6.1.4.1.42019.3.2.0.4",
+    "class": "notificationtype",
+    "status": "current",
+    "description": "This Notification indicates low speed on port at activated SpecialFunctions by criterion a speed"
+  },
+  "updateFirmware": {
+    "name": "updateFirmware",
+    "oid": "1.3.6.1.4.1.42019.3.2.0.5",
+    "class": "notificationtype",
+    "status": "current",
+    "description": " This Notification indicates a firmwre updating"
+  },
+  "setToDefault": {
+    "name": "setToDefault",
+    "oid": "1.3.6.1.4.1.42019.3.2.0.6",
+    "class": "notificationtype",
+    "status": "current",
+    "description": "Settings to default"
+  },
+  "backupSettings": {
+    "name": "backupSettings",
+    "oid": "1.3.6.1.4.1.42019.3.2.0.7",
+    "class": "notificationtype",
+    "status": "current",
+    "description": "Make backup copy of settings in file"
+  },
+  "systemWarmStart": {
+    "name": "systemWarmStart",
+    "oid": "1.3.6.1.4.1.42019.3.2.0.8",
+    "class": "notificationtype",
+    "status": "current",
+    "description": "Start system after reboot"
+  },
+  "systemColdStart": {
+    "name": "systemColdStart",
+    "oid": "1.3.6.1.4.1.42019.3.2.0.9",
+    "class": "notificationtype",
+    "status": "current",
+    "description": "Start system after power down (Cold start)"
+  },
+  "webInterfaceLoginOk": {
+    "name": "webInterfaceLoginOk",
+    "oid": "1.3.6.1.4.1.42019.3.2.0.10",
+    "class": "notificationtype",
+    "status": "current",
+    "description": "Successfully authentification on web-interface"
+  },
+  "webInterfaceLoginFail": {
+    "name": "webInterfaceLoginFail",
+    "oid": "1.3.6.1.4.1.42019.3.2.0.11",
+    "class": "notificationtype",
+    "status": "current",
+    "description": "Fail authentification on web-interface"
+  },
+  "emptyArpTable": {
+    "name": "emptyArpTable",
+    "oid": "1.3.6.1.4.1.42019.3.2.0.12",
+    "class": "notificationtype",
+    "status": "current",
+    "description": "Arp table is empty"
+  },
+  "upsLowVoltage": {
+    "name": "upsLowVoltage",
+    "oid": "1.3.6.1.4.1.42019.3.2.0.13",
+    "class": "notificationtype",
+    "status": "current",
+    "description": "UPS: Voltage on battery is low (below than 44V)"
+  },
+  "upsBattrtyPower": {
+    "name": "upsBattrtyPower",
+    "oid": "1.3.6.1.4.1.42019.3.2.0.14",
+    "class": "notificationtype",
+    "status": "current",
+    "description": "UPS: Power souce is battery"
+  },
+  "upsVacPower": {
+    "name": "upsVacPower",
+    "oid": "1.3.6.1.4.1.42019.3.2.0.15",
+    "class": "notificationtype",
+    "status": "current",
+    "description": "UPS: Power souce is external VAC"
+  },
+  "tamperIsActive": {
+    "name": "tamperIsActive",
+    "oid": "1.3.6.1.4.1.42019.3.2.0.16",
+    "class": "notificationtype",
+    "status": "current",
+    "description": "Sensor 0 (Tamper) is active."
+  },
+  "sensor1isActive": {
+    "name": "sensor1isActive",
+    "oid": "1.3.6.1.4.1.42019.3.2.0.17",
+    "class": "notificationtype",
+    "status": "current",
+    "description": "Sensor 1 (dry contact) is active"
+  },
+  "sensor2isActive": {
+    "name": "sensor2isActive",
+    "oid": "1.3.6.1.4.1.42019.3.2.0.18",
+    "class": "notificationtype",
+    "status": "current",
+    "description": "Sensor 2 (dry contact) is active"
+  },
+  "input1isActive": {
+    "name": "input1isActive",
+    "oid": "1.3.6.1.4.1.42019.3.2.0.19",
+    "class": "notificationtype",
+    "status": "current",
+    "description": "Input 1 is active"
+  },
+  "input2isActive": {
+    "name": "input2isActive",
+    "oid": "1.3.6.1.4.1.42019.3.2.0.20",
+    "class": "notificationtype",
+    "status": "current",
+    "description": "Input 2 is active"
+  },
+  "input3isActive": {
+    "name": "input3isActive",
+    "oid": "1.3.6.1.4.1.42019.3.2.0.21",
+    "class": "notificationtype",
+    "status": "current",
+    "description": "Input 3 is active"
+  },
+  "input4isActive": {
+    "name": "input4isActive",
+    "oid": "1.3.6.1.4.1.42019.3.2.0.22",
+    "class": "notificationtype",
+    "status": "current",
+    "description": "Input 4 is active"
+  },
+  "macFilteringAlarm": {
+    "name": "macFilteringAlarm",
+    "oid": "1.3.6.1.4.1.42019.3.2.0.23",
+    "class": "notificationtype",
+    "status": "current",
+    "description": "Unallowed MAC address: "
+  },
+  "portErrorDisabled": {
+    "name": "portErrorDisabled",
+    "oid": "1.3.6.1.4.1.42019.3.2.0.24",
+    "class": "notificationtype",
+    "status": "current",
+    "description": "Port Error-Disabled"
+  },
+  "pwr180DiagnosticError": {
+    "name": "pwr180DiagnosticError",
+    "oid": "1.3.6.1.4.1.42019.3.2.0.25",
+    "class": "notificationtype",
+    "status": "current",
+    "description": "The error of the PWR-180 power supply was diagnosed, check the power supply"
+  },
+  "temperatureSensorLow": {
+    "name": "temperatureSensorLow",
+    "oid": "1.3.6.1.4.1.42019.3.2.0.26",
+    "class": "notificationtype",
+    "status": "current",
+    "description": "Temperature: low level"
+  },
+  "temperatureSensorHigh": {
+    "name": "temperatureSensorHigh",
+    "oid": "1.3.6.1.4.1.42019.3.2.0.27",
+    "class": "notificationtype",
+    "status": "current",
+    "description": "Temperature: high level"
+  },
+  "humiditySensorLow": {
+    "name": "humiditySensorLow",
+    "oid": "1.3.6.1.4.1.42019.3.2.0.28",
+    "class": "notificationtype",
+    "status": "current",
+    "description": "Humidity: low level"
+  },
+  "humiditySensorHigh": {
+    "name": "humiditySensorHigh",
+    "oid": "1.3.6.1.4.1.42019.3.2.0.29",
+    "class": "notificationtype",
+    "status": "current",
+    "description": "Humidity: high level"
+  },
+  "leakageSensorAlarm": {
+    "name": "leakageSensorAlarm",
+    "oid": "1.3.6.1.4.1.42019.3.2.0.30",
+    "class": "notificationtype",
+    "status": "current",
+    "description": "Leakage sensor is active: 1 - Normal, 2 - Alarm"
+  },
+  "upsStatus": {
+    "name": "upsStatus",
+    "oid": "1.3.6.1.4.1.42019.3.2.2.1",
+    "class": "objectidentity"
+  },
+  "upsModeAvalible": {
+    "name": "upsModeAvalible",
+    "oid": "1.3.6.1.4.1.42019.3.2.2.1.1",
+    "nodetype": "scalar",
+    "class": "objecttype",
+    "syntax": {
+      "type": "INTEGER",
+      "class": "type",
+      "constraints": {
+        "enumeration": {
+          "true": 1,
+          "false": 2
+        }
+      }
+    },
+    "maxaccess": "read-only",
+    "status": "current",
+    "description": "UPS option is avalible. 'true' for switches with UPS module."
+  },
+  "upsPwrSource": {
+    "name": "upsPwrSource",
+    "oid": "1.3.6.1.4.1.42019.3.2.2.1.2",
+    "nodetype": "scalar",
+    "class": "objecttype",
+    "syntax": {
+      "type": "INTEGER",
+      "class": "type",
+      "constraints": {
+        "enumeration": {
+          "battery": 1,
+          "ac": 2
+        }
+      }
+    },
+    "maxaccess": "read-only",
+    "status": "current",
+    "description": "This variable shows the power source for switch. 'Battery' - power source is battery, no external AC voltage. 'AC' - power source is external AC voltage,normal operation. This option only for switches with UPS module."
+  },
+  "upsBatteryVoltage": {
+    "name": "upsBatteryVoltage",
+    "oid": "1.3.6.1.4.1.42019.3.2.2.1.3",
+    "nodetype": "scalar",
+    "class": "objecttype",
+    "syntax": {
+      "type": "INTEGER",
+      "class": "type"
+    },
+    "maxaccess": "read-only",
+    "status": "current",
+    "description": "This variable shows battery voltage. This option only for switches with UPS module."
+  },
+  "upsBatteryTime": {
+    "name": "upsBatteryTime",
+    "oid": "1.3.6.1.4.1.42019.3.2.2.1.4",
+    "nodetype": "scalar",
+    "class": "objecttype",
+    "syntax": {
+      "type": "INTEGER",
+      "class": "type"
+    },
+    "maxaccess": "read-only",
+    "status": "current",
+    "description": "This variable shows estimated operating time (in sec.) of the device after switching to battery power (only for devices with UPS module)."
+  },
+  "inputStatus": {
+    "name": "inputStatus",
+    "oid": "1.3.6.1.4.1.42019.3.2.2.2",
+    "class": "objectidentity"
+  },
+  "inputStatusTable": {
+    "name": "inputStatusTable",
+    "oid": "1.3.6.1.4.1.42019.3.2.2.2.1",
+    "nodetype": "table",
+    "class": "objecttype",
+    "maxaccess": "not-accessible",
+    "status": "current"
+  },
+  "inputStatusEntry": {
+    "name": "inputStatusEntry",
+    "oid": "1.3.6.1.4.1.42019.3.2.2.2.1.1",
+    "nodetype": "row",
+    "class": "objecttype",
+    "maxaccess": "not-accessible",
+    "indices": [
+      {
+        "module": "FORT-TELECOM-MIB",
+        "object": "inputIndex",
+        "implied": 0
+      }
+    ],
+    "status": "current",
+    "description": "An entry (conceptual row) in the portPoeTable."
+  },
+  "inputIndex": {
+    "name": "inputIndex",
+    "oid": "1.3.6.1.4.1.42019.3.2.2.2.1.1.1",
+    "nodetype": "column",
+    "class": "objecttype",
+    "syntax": {
+      "type": "INTEGER",
+      "class": "type"
+    },
+    "maxaccess": "read-write",
+    "status": "current",
+    "description": "Input Number"
+  },
+  "inputType": {
+    "name": "inputType",
+    "oid": "1.3.6.1.4.1.42019.3.2.2.2.1.1.2",
+    "nodetype": "column",
+    "class": "objecttype",
+    "syntax": {
+      "type": "INTEGER",
+      "class": "type",
+      "constraints": {
+        "enumeration": {
+          "build-in": 1,
+          "plc": 2
+        }
+      }
+    },
+    "maxaccess": "read-only",
+    "status": "current",
+    "description": "Input Type: 'buil-in' - inputs on main board, 'plc' - inputs on optional board"
+  },
+  "inputState": {
+    "name": "inputState",
+    "oid": "1.3.6.1.4.1.42019.3.2.2.2.1.1.3",
+    "nodetype": "column",
+    "class": "objecttype",
+    "syntax": {
+      "type": "INTEGER",
+      "class": "type",
+      "constraints": {
+        "enumeration": {
+          "short": 1,
+          "open": 2
+        }
+      }
+    },
+    "maxaccess": "read-only",
+    "status": "current",
+    "description": "Input State"
+  },
+  "inputAlarm": {
+    "name": "inputAlarm",
+    "oid": "1.3.6.1.4.1.42019.3.2.2.2.1.1.4",
+    "nodetype": "column",
+    "class": "objecttype",
+    "syntax": {
+      "type": "INTEGER",
+      "class": "type",
+      "constraints": {
+        "enumeration": {
+          "short": 1,
+          "open": 2,
+          "any": 3
+        }
+      }
+    },
+    "maxaccess": "read-only",
+    "status": "current",
+    "description": "Alarm state condition"
+  },
+  "fwStatus": {
+    "name": "fwStatus",
+    "oid": "1.3.6.1.4.1.42019.3.2.2.3",
+    "class": "objectidentity"
+  },
+  "fwVersion": {
+    "name": "fwVersion",
+    "oid": "1.3.6.1.4.1.42019.3.2.2.3.1",
+    "nodetype": "scalar",
+    "class": "objecttype",
+    "syntax": {
+      "type": "OCTET STRING",
+      "class": "type"
+    },
+    "maxaccess": "read-only",
+    "status": "current",
+    "description": "Firmware version"
+  },
+  "poeStatus": {
+    "name": "poeStatus",
+    "oid": "1.3.6.1.4.1.42019.3.2.2.5",
+    "class": "objectidentity"
+  },
+  "poeStatusTable": {
+    "name": "poeStatusTable",
+    "oid": "1.3.6.1.4.1.42019.3.2.2.5.1",
+    "nodetype": "table",
+    "class": "objecttype",
+    "maxaccess": "not-accessible",
+    "status": "current"
+  },
+  "poeStatusEntry": {
+    "name": "poeStatusEntry",
+    "oid": "1.3.6.1.4.1.42019.3.2.2.5.1.1",
+    "nodetype": "row",
+    "class": "objecttype",
+    "maxaccess": "not-accessible",
+    "indices": [
+      {
+        "module": "FORT-TELECOM-MIB",
+        "object": "portPoeStatusIndex",
+        "implied": 0
+      }
+    ],
+    "status": "current",
+    "description": "An entry (conceptual row) in the portPoeTable."
+  },
+  "portPoeStatusIndex": {
+    "name": "portPoeStatusIndex",
+    "oid": "1.3.6.1.4.1.42019.3.2.2.5.1.1.1",
+    "nodetype": "column",
+    "class": "objecttype",
+    "syntax": {
+      "type": "INTEGER",
+      "class": "type"
+    },
+    "maxaccess": "read-write",
+    "status": "current",
+    "description": "Port Number"
+  },
+  "portPoeStatusState": {
+    "name": "portPoeStatusState",
+    "oid": "1.3.6.1.4.1.42019.3.2.2.5.1.1.2",
+    "nodetype": "column",
+    "class": "objecttype",
+    "syntax": {
+      "type": "INTEGER",
+      "class": "type",
+      "constraints": {
+        "enumeration": {
+          "up": 1,
+          "down": 2
+        }
+      }
+    },
+    "maxaccess": "read-only",
+    "status": "current",
+    "description": "PoE State"
+  },
+  "portPoeStatusPower": {
+    "name": "portPoeStatusPower",
+    "oid": "1.3.6.1.4.1.42019.3.2.2.5.1.1.3",
+    "nodetype": "column",
+    "class": "objecttype",
+    "syntax": {
+      "type": "INTEGER",
+      "class": "type"
+    },
+    "maxaccess": "read-only",
+    "status": "current",
+    "description": "PoE load power (in mW) "
+  },
+  "specialStatus": {
+    "name": "specialStatus",
+    "oid": "1.3.6.1.4.1.42019.3.2.2.6",
+    "class": "objectidentity"
+  },
+  "autoRestartErrors": {
+    "name": "autoRestartErrors",
+    "oid": "1.3.6.1.4.1.42019.3.2.2.6.1",
+    "class": "objectidentity"
+  },
+  "autoRestartErrorsTable": {
+    "name": "autoRestartErrorsTable",
+    "oid": "1.3.6.1.4.1.42019.3.2.2.6.1.1",
+    "nodetype": "table",
+    "class": "objecttype",
+    "maxaccess": "not-accessible",
+    "status": "current"
+  },
+  "autoRestartErrorsEntry": {
+    "name": "autoRestartErrorsEntry",
+    "oid": "1.3.6.1.4.1.42019.3.2.2.6.1.1.1",
+    "nodetype": "row",
+    "class": "objecttype",
+    "maxaccess": "not-accessible",
+    "indices": [
+      {
+        "module": "FORT-TELECOM-MIB",
+        "object": "arPortIndex",
+        "implied": 0
+      }
+    ],
+    "status": "current",
+    "description": "An entry (conceptual row) in the autoRestartErrorsTable."
+  },
+  "arPortIndex": {
+    "name": "arPortIndex",
+    "oid": "1.3.6.1.4.1.42019.3.2.2.6.1.1.1.1",
+    "nodetype": "column",
+    "class": "objecttype",
+    "syntax": {
+      "type": "INTEGER",
+      "class": "type"
+    },
+    "maxaccess": "read-write",
+    "status": "current",
+    "description": "Port Number"
+  },
+  "arPortStatus": {
+    "name": "arPortStatus",
+    "oid": "1.3.6.1.4.1.42019.3.2.2.6.1.1.1.2",
+    "nodetype": "column",
+    "class": "objecttype",
+    "syntax": {
+      "type": "INTEGER",
+      "class": "type",
+      "constraints": {
+        "enumeration": {
+          "normal": 1,
+          "noLink": 2,
+          "noPing": 3,
+          "lowSpeed": 4
+        }
+      }
+    },
+    "maxaccess": "read-only",
+    "status": "current",
+    "description": "State of special function 'AutoRestart'. 'normal' - no error, 'noLink' - no link activity on port, 'noPing' - no answer to ping, 'lowSpeed' - low speed on port"
+  },
+  "comfortStartStatus": {
+    "name": "comfortStartStatus",
+    "oid": "1.3.6.1.4.1.42019.3.2.2.6.2",
+    "class": "objectidentity"
+  },
+  "comfortStartStatusTable": {
+    "name": "comfortStartStatusTable",
+    "oid": "1.3.6.1.4.1.42019.3.2.2.6.2.1",
+    "nodetype": "table",
+    "class": "objecttype",
+    "maxaccess": "not-accessible",
+    "status": "current"
+  },
+  "comfortStartStatusEntry": {
+    "name": "comfortStartStatusEntry",
+    "oid": "1.3.6.1.4.1.42019.3.2.2.6.2.1.1",
+    "nodetype": "row",
+    "class": "objecttype",
+    "maxaccess": "not-accessible",
+    "indices": [
+      {
+        "module": "FORT-TELECOM-MIB",
+        "object": "csPortIndex",
+        "implied": 0
+      }
+    ],
+    "status": "current",
+    "description": "An entry (conceptual row) in the comfortStartStatusTable."
+  },
+  "csPortIndex": {
+    "name": "csPortIndex",
+    "oid": "1.3.6.1.4.1.42019.3.2.2.6.2.1.1.1",
+    "nodetype": "column",
+    "class": "objecttype",
+    "syntax": {
+      "type": "INTEGER",
+      "class": "type"
+    },
+    "maxaccess": "read-write",
+    "status": "current",
+    "description": "Port Number"
+  },
+  "csPortStatus": {
+    "name": "csPortStatus",
+    "oid": "1.3.6.1.4.1.42019.3.2.2.6.2.1.1.2",
+    "nodetype": "column",
+    "class": "objecttype",
+    "syntax": {
+      "type": "INTEGER",
+      "class": "type",
+      "constraints": {
+        "enumeration": {
+          "normal": 1,
+          "processing": 2
+        }
+      }
+    },
+    "maxaccess": "read-only",
+    "status": "current",
+    "description": "State of special function 'ComfortStart' on port. 'normal' - ComfortStart is ready, 'processing' - ComfortStart in processing"
+  },
+  "sfpStatus": {
+    "name": "sfpStatus",
+    "oid": "1.3.6.1.4.1.42019.3.2.2.7",
+    "class": "objectidentity"
+  },
+  "sfpStatusTable": {
+    "name": "sfpStatusTable",
+    "oid": "1.3.6.1.4.1.42019.3.2.2.7.1",
+    "nodetype": "table",
+    "class": "objecttype",
+    "maxaccess": "not-accessible",
+    "status": "current"
+  },
+  "sfpStatusEntry": {
+    "name": "sfpStatusEntry",
+    "oid": "1.3.6.1.4.1.42019.3.2.2.7.1.1",
+    "nodetype": "row",
+    "class": "objecttype",
+    "maxaccess": "not-accessible",
+    "indices": [
+      {
+        "module": "FORT-TELECOM-MIB",
+        "object": "portSfpIndex",
+        "implied": 0
+      }
+    ],
+    "status": "current",
+    "description": "An entry (conceptual row) in the sfpStatusTable."
+  },
+  "portSfpIndex": {
+    "name": "portSfpIndex",
+    "oid": "1.3.6.1.4.1.42019.3.2.2.7.1.1.1",
+    "nodetype": "column",
+    "class": "objecttype",
+    "syntax": {
+      "type": "INTEGER",
+      "class": "type"
+    },
+    "maxaccess": "read-write",
+    "status": "current",
+    "description": "SFP port number"
+  },
+  "portSfpPresent": {
+    "name": "portSfpPresent",
+    "oid": "1.3.6.1.4.1.42019.3.2.2.7.1.1.2",
+    "nodetype": "column",
+    "class": "objecttype",
+    "syntax": {
+      "type": "INTEGER",
+      "class": "type"
+    },
+    "maxaccess": "read-only",
+    "status": "current",
+    "description": "Present of SFP module in the case"
+  },
+  "portSfpSignalDetect": {
+    "name": "portSfpSignalDetect",
+    "oid": "1.3.6.1.4.1.42019.3.2.2.7.1.1.3",
+    "nodetype": "column",
+    "class": "objecttype",
+    "syntax": {
+      "type": "INTEGER",
+      "class": "type"
+    },
+    "maxaccess": "read-only",
+    "status": "current",
+    "description": "Optical Signal Detect of SFP module"
+  },
+  "portSfpVendor": {
+    "name": "portSfpVendor",
+    "oid": "1.3.6.1.4.1.42019.3.2.2.7.1.1.4",
+    "nodetype": "column",
+    "class": "objecttype",
+    "syntax": {
+      "type": "DisplayString",
+      "class": "type",
+      "constraints": {
+        "size": [
+          {
+            "min": 0,
+            "max": 255
+          }
+        ]
+      }
+    },
+    "maxaccess": "read-only",
+    "status": "current",
+    "description": "SFP module Vendor"
+  },
+  "portSfpOui": {
+    "name": "portSfpOui",
+    "oid": "1.3.6.1.4.1.42019.3.2.2.7.1.1.5",
+    "nodetype": "column",
+    "class": "objecttype",
+    "syntax": {
+      "type": "DisplayString",
+      "class": "type",
+      "constraints": {
+        "size": [
+          {
+            "min": 0,
+            "max": 255
+          }
+        ]
+      }
+    },
+    "maxaccess": "read-only",
+    "status": "current",
+    "description": "SFP module Vendor OUI"
+  },
+  "portSfpPartNumber": {
+    "name": "portSfpPartNumber",
+    "oid": "1.3.6.1.4.1.42019.3.2.2.7.1.1.6",
+    "nodetype": "column",
+    "class": "objecttype",
+    "syntax": {
+      "type": "DisplayString",
+      "class": "type",
+      "constraints": {
+        "size": [
+          {
+            "min": 0,
+            "max": 255
+          }
+        ]
+      }
+    },
+    "maxaccess": "read-only",
+    "status": "current",
+    "description": "SFP module Part Number"
+  },
+  "portSfpRevision": {
+    "name": "portSfpRevision",
+    "oid": "1.3.6.1.4.1.42019.3.2.2.7.1.1.7",
+    "nodetype": "column",
+    "class": "objecttype",
+    "syntax": {
+      "type": "DisplayString",
+      "class": "type",
+      "constraints": {
+        "size": [
+          {
+            "min": 0,
+            "max": 255
+          }
+        ]
+      }
+    },
+    "maxaccess": "read-only",
+    "status": "current",
+    "description": "SFP module Revision"
+  },
+  "portSfpTemperature": {
+    "name": "portSfpTemperature",
+    "oid": "1.3.6.1.4.1.42019.3.2.2.7.1.1.8",
+    "nodetype": "column",
+    "class": "objecttype",
+    "syntax": {
+      "type": "INTEGER",
+      "class": "type"
+    },
+    "maxaccess": "read-only",
+    "status": "current",
+    "description": "Temperature of SFP module. In degrees Celsius"
+  },
+  "portSfpVoltage": {
+    "name": "portSfpVoltage",
+    "oid": "1.3.6.1.4.1.42019.3.2.2.7.1.1.9",
+    "nodetype": "column",
+    "class": "objecttype",
+    "syntax": {
+      "type": "INTEGER",
+      "class": "type"
+    },
+    "maxaccess": "read-only",
+    "status": "current",
+    "description": "Voltage in SFP module (mV)"
+  },
+  "portSfpBiasCurrent": {
+    "name": "portSfpBiasCurrent",
+    "oid": "1.3.6.1.4.1.42019.3.2.2.7.1.1.10",
+    "nodetype": "column",
+    "class": "objecttype",
+    "syntax": {
+      "type": "INTEGER",
+      "class": "type"
+    },
+    "maxaccess": "read-only",
+    "status": "current",
+    "description": "TX bias current (uA)"
+  },
+  "portSfpTxOutPower": {
+    "name": "portSfpTxOutPower",
+    "oid": "1.3.6.1.4.1.42019.3.2.2.7.1.1.11",
+    "nodetype": "column",
+    "class": "objecttype",
+    "syntax": {
+      "type": "INTEGER",
+      "class": "type"
+    },
+    "maxaccess": "read-only",
+    "status": "current",
+    "description": "TX output optical power (uW)"
+  },
+  "portSfpTxOutPowerDb": {
+    "name": "portSfpTxOutPowerDb",
+    "oid": "1.3.6.1.4.1.42019.3.2.2.7.1.1.12",
+    "nodetype": "column",
+    "class": "objecttype",
+    "syntax": {
+      "type": "INTEGER",
+      "class": "type"
+    },
+    "maxaccess": "read-only",
+    "status": "current",
+    "description": "TX output optical power (dB)"
+  },
+  "portSfpRxOutPower": {
+    "name": "portSfpRxOutPower",
+    "oid": "1.3.6.1.4.1.42019.3.2.2.7.1.1.13",
+    "nodetype": "column",
+    "class": "objecttype",
+    "syntax": {
+      "type": "INTEGER",
+      "class": "type"
+    },
+    "maxaccess": "read-only",
+    "status": "current",
+    "description": "RX output optical power (uW)"
+  },
+  "portSfpRxOutPowerDb": {
+    "name": "portSfpRxOutPowerDb",
+    "oid": "1.3.6.1.4.1.42019.3.2.2.7.1.1.14",
+    "nodetype": "column",
+    "class": "objecttype",
+    "syntax": {
+      "type": "INTEGER",
+      "class": "type"
+    },
+    "maxaccess": "read-only",
+    "status": "current",
+    "description": "RX output optical power (dB)"
+  },
+  "sensorEntry": {
+    "name": "sensorEntry",
+    "oid": "1.3.6.1.4.1.42019.3.2.2.8",
+    "class": "objectidentity"
+  },
+  "sensorConnected": {
+    "name": "sensorConnected",
+    "oid": "1.3.6.1.4.1.42019.3.2.2.8.1",
+    "nodetype": "scalar",
+    "class": "objecttype",
+    "syntax": {
+      "type": "INTEGER",
+      "class": "type",
+      "constraints": {
+        "enumeration": {
+          "connected": 1,
+          "disconnected": 2
+        }
+      }
+    },
+    "maxaccess": "read-only",
+    "status": "current",
+    "description": "Connection status of temperature/humidity sensor"
+  },
+  "sensorTemperature": {
+    "name": "sensorTemperature",
+    "oid": "1.3.6.1.4.1.42019.3.2.2.8.2",
+    "nodetype": "scalar",
+    "class": "objecttype",
+    "syntax": {
+      "type": "INTEGER",
+      "class": "type"
+    },
+    "maxaccess": "read-only",
+    "status": "current",
+    "description": "Temperature value"
+  },
+  "sensorHumidity": {
+    "name": "sensorHumidity",
+    "oid": "1.3.6.1.4.1.42019.3.2.2.8.3",
+    "nodetype": "scalar",
+    "class": "objecttype",
+    "syntax": {
+      "type": "INTEGER",
+      "class": "type"
+    },
+    "maxaccess": "read-only",
+    "status": "current",
+    "description": "Humidity value"
+  },
+  "sensorTemperatureMin": {
+    "name": "sensorTemperatureMin",
+    "oid": "1.3.6.1.4.1.42019.3.2.2.8.4",
+    "nodetype": "scalar",
+    "class": "objecttype",
+    "syntax": {
+      "type": "INTEGER",
+      "class": "type"
+    },
+    "maxaccess": "read-write",
+    "status": "current",
+    "description": "Minimal value of temperature"
+  },
+  "sensorTemperatureMax": {
+    "name": "sensorTemperatureMax",
+    "oid": "1.3.6.1.4.1.42019.3.2.2.8.5",
+    "nodetype": "scalar",
+    "class": "objecttype",
+    "syntax": {
+      "type": "INTEGER",
+      "class": "type"
+    },
+    "maxaccess": "read-write",
+    "status": "current",
+    "description": "Maximal value of temperature"
+  },
+  "sensorHumidityMin": {
+    "name": "sensorHumidityMin",
+    "oid": "1.3.6.1.4.1.42019.3.2.2.8.6",
+    "nodetype": "scalar",
+    "class": "objecttype",
+    "syntax": {
+      "type": "INTEGER",
+      "class": "type"
+    },
+    "maxaccess": "read-write",
+    "status": "current",
+    "description": "Minimal value of Humidity"
+  },
+  "sensorHumidityMax": {
+    "name": "sensorHumidityMax",
+    "oid": "1.3.6.1.4.1.42019.3.2.2.8.7",
+    "nodetype": "scalar",
+    "class": "objecttype",
+    "syntax": {
+      "type": "INTEGER",
+      "class": "type"
+    },
+    "maxaccess": "read-write",
+    "status": "current",
+    "description": "Maximal value of Humidity"
+  },
+  "updateFirmwareTLP": {
+    "name": "updateFirmwareTLP",
+    "oid": "1.3.6.1.4.1.42019.4.2.0.1",
+    "class": "notificationtype",
+    "status": "current",
+    "description": " This Notification indicates a firmwre updating"
+  },
+  "setToDefaultTLP": {
+    "name": "setToDefaultTLP",
+    "oid": "1.3.6.1.4.1.42019.4.2.0.2",
+    "class": "notificationtype",
+    "status": "current",
+    "description": "Settings to default"
+  },
+  "backupSettingsTLP": {
+    "name": "backupSettingsTLP",
+    "oid": "1.3.6.1.4.1.42019.4.2.0.3",
+    "class": "notificationtype",
+    "status": "current",
+    "description": "Make backup copy of settings in file"
+  },
+  "systemWarmStartTLP": {
+    "name": "systemWarmStartTLP",
+    "oid": "1.3.6.1.4.1.42019.4.2.0.4",
+    "class": "notificationtype",
+    "status": "current",
+    "description": "Start system after reboot"
+  },
+  "systemColdStartTLP": {
+    "name": "systemColdStartTLP",
+    "oid": "1.3.6.1.4.1.42019.4.2.0.5",
+    "class": "notificationtype",
+    "status": "current",
+    "description": "Start system after power down (Cold start)"
+  },
+  "webInterfaceLoginOkTLP": {
+    "name": "webInterfaceLoginOkTLP",
+    "oid": "1.3.6.1.4.1.42019.4.2.0.6",
+    "class": "notificationtype",
+    "status": "current",
+    "description": "Successfully authentification on web-interface"
+  },
+  "webInterfaceLoginFailTLP": {
+    "name": "webInterfaceLoginFailTLP",
+    "oid": "1.3.6.1.4.1.42019.4.2.0.7",
+    "class": "notificationtype",
+    "status": "current",
+    "description": "Fail authentification on web-interface"
+  },
+  "emptyArpTableTLP": {
+    "name": "emptyArpTableTLP",
+    "oid": "1.3.6.1.4.1.42019.4.2.0.8",
+    "class": "notificationtype",
+    "status": "current",
+    "description": "Arp table is empty"
+  },
+  "input1isChanged": {
+    "name": "input1isChanged",
+    "oid": "1.3.6.1.4.1.42019.4.2.0.9",
+    "class": "notificationtype",
+    "status": "current",
+    "description": "Input 1 is changed"
+  },
+  "input2isChanged": {
+    "name": "input2isChanged",
+    "oid": "1.3.6.1.4.1.42019.4.2.0.10",
+    "class": "notificationtype",
+    "status": "current",
+    "description": "Input 2 is changed"
+  },
+  "input3isChanged": {
+    "name": "input3isChanged",
+    "oid": "1.3.6.1.4.1.42019.4.2.0.11",
+    "class": "notificationtype",
+    "status": "current",
+    "description": "Input 3 is changed"
+  },
+  "input4isChanged": {
+    "name": "input4isChanged",
+    "oid": "1.3.6.1.4.1.42019.4.2.0.12",
+    "class": "notificationtype",
+    "status": "current",
+    "description": "Input 4 is changed"
+  },
+  "input5isChanged": {
+    "name": "input5isChanged",
+    "oid": "1.3.6.1.4.1.42019.4.2.0.13",
+    "class": "notificationtype",
+    "status": "current",
+    "description": "Input 5 is changed"
+  },
+  "input6isChanged": {
+    "name": "input6isChanged",
+    "oid": "1.3.6.1.4.1.42019.4.2.0.14",
+    "class": "notificationtype",
+    "status": "current",
+    "description": "Input 6 is changed"
+  },
+  "input7isChanged": {
+    "name": "input7isChanged",
+    "oid": "1.3.6.1.4.1.42019.4.2.0.15",
+    "class": "notificationtype",
+    "status": "current",
+    "description": "Input 7 is changed"
+  },
+  "input8isChanged": {
+    "name": "input8isChanged",
+    "oid": "1.3.6.1.4.1.42019.4.2.0.16",
+    "class": "notificationtype",
+    "status": "current",
+    "description": "Input 8 is changed"
+  },
+  "input9isChanged": {
+    "name": "input9isChanged",
+    "oid": "1.3.6.1.4.1.42019.4.2.0.17",
+    "class": "notificationtype",
+    "status": "current",
+    "description": "Input 9 is changed"
+  },
+  "output1isChanged": {
+    "name": "output1isChanged",
+    "oid": "1.3.6.1.4.1.42019.4.2.0.18",
+    "class": "notificationtype",
+    "status": "current",
+    "description": "Output 1 is changed"
+  },
+  "output2isChanged": {
+    "name": "output2isChanged",
+    "oid": "1.3.6.1.4.1.42019.4.2.0.19",
+    "class": "notificationtype",
+    "status": "current",
+    "description": "Output 2 is changed"
+  },
+  "output3isChanged": {
+    "name": "output3isChanged",
+    "oid": "1.3.6.1.4.1.42019.4.2.0.20",
+    "class": "notificationtype",
+    "status": "current",
+    "description": "Output 3 is changed"
+  },
+  "output4isChanged": {
+    "name": "output4isChanged",
+    "oid": "1.3.6.1.4.1.42019.4.2.0.21",
+    "class": "notificationtype",
+    "status": "current",
+    "description": "Output 4 is changed"
+  },
+  "output5isChanged": {
+    "name": "output5isChanged",
+    "oid": "1.3.6.1.4.1.42019.4.2.0.22",
+    "class": "notificationtype",
+    "status": "current",
+    "description": "Output 5 is changed"
+  },
+  "output6isChanged": {
+    "name": "output6isChanged",
+    "oid": "1.3.6.1.4.1.42019.4.2.0.23",
+    "class": "notificationtype",
+    "status": "current",
+    "description": "Output 6 is changed"
+  },
+  "output7isChanged": {
+    "name": "output7isChanged",
+    "oid": "1.3.6.1.4.1.42019.4.2.0.24",
+    "class": "notificationtype",
+    "status": "current",
+    "description": "Output 7 is changed"
+  },
+  "output8isChanged": {
+    "name": "output8isChanged",
+    "oid": "1.3.6.1.4.1.42019.4.2.0.25",
+    "class": "notificationtype",
+    "status": "current",
+    "description": "Output 8 is changed"
+  },
+  "output9isChanged": {
+    "name": "output9isChanged",
+    "oid": "1.3.6.1.4.1.42019.4.2.0.26",
+    "class": "notificationtype",
+    "status": "current",
+    "description": "Output 9 is changed"
+  },
+  "device1connFail": {
+    "name": "device1connFail",
+    "oid": "1.3.6.1.4.1.42019.4.2.0.27",
+    "class": "notificationtype",
+    "status": "current",
+    "description": "Device 1 connection fail"
+  },
+  "device2connFail": {
+    "name": "device2connFail",
+    "oid": "1.3.6.1.4.1.42019.4.2.0.28",
+    "class": "notificationtype",
+    "status": "current",
+    "description": "Device 2 connection fail"
+  },
+  "device3connFail": {
+    "name": "device3connFail",
+    "oid": "1.3.6.1.4.1.42019.4.2.0.29",
+    "class": "notificationtype",
+    "status": "current",
+    "description": "Device 3 connection fail"
+  },
+  "device4connFail": {
+    "name": "device4connFail",
+    "oid": "1.3.6.1.4.1.42019.4.2.0.30",
+    "class": "notificationtype",
+    "status": "current",
+    "description": "Device 4 connection fail"
+  },
+  "device5connFail": {
+    "name": "device5connFail",
+    "oid": "1.3.6.1.4.1.42019.4.2.0.31",
+    "class": "notificationtype",
+    "status": "current",
+    "description": "Device 5 connection fail"
+  },
+  "device6connFail": {
+    "name": "device6connFail",
+    "oid": "1.3.6.1.4.1.42019.4.2.0.32",
+    "class": "notificationtype",
+    "status": "current",
+    "description": "Device 6 connection fail"
+  },
+  "device7connFail": {
+    "name": "device7connFail",
+    "oid": "1.3.6.1.4.1.42019.4.2.0.33",
+    "class": "notificationtype",
+    "status": "current",
+    "description": "Device 7 connection fail"
+  },
+  "device8connFail": {
+    "name": "device8connFail",
+    "oid": "1.3.6.1.4.1.42019.4.2.0.34",
+    "class": "notificationtype",
+    "status": "current",
+    "description": "Device 8 connection fail"
+  },
+  "device9connFail": {
+    "name": "device9connFail",
+    "oid": "1.3.6.1.4.1.42019.4.2.0.35",
+    "class": "notificationtype",
+    "status": "current",
+    "description": "Device 9 connection fail"
+  },
+  "device10connFail": {
+    "name": "device10connFail",
+    "oid": "1.3.6.1.4.1.42019.4.2.0.36",
+    "class": "notificationtype",
+    "status": "current",
+    "description": "Device 10 connection fail"
+  },
+  "device11connFail": {
+    "name": "device11connFail",
+    "oid": "1.3.6.1.4.1.42019.4.2.0.37",
+    "class": "notificationtype",
+    "status": "current",
+    "description": "Device 11 connection fail"
+  },
+  "device12connFail": {
+    "name": "device12connFail",
+    "oid": "1.3.6.1.4.1.42019.4.2.0.38",
+    "class": "notificationtype",
+    "status": "current",
+    "description": "Device 12 connection fail"
+  },
+  "device13connFail": {
+    "name": "device13connFail",
+    "oid": "1.3.6.1.4.1.42019.4.2.0.39",
+    "class": "notificationtype",
+    "status": "current",
+    "description": "Device 13 connection fail"
+  },
+  "device14connFail": {
+    "name": "device14connFail",
+    "oid": "1.3.6.1.4.1.42019.4.2.0.40",
+    "class": "notificationtype",
+    "status": "current",
+    "description": "Device 14 connection fail"
+  },
+  "device15connFail": {
+    "name": "device15connFail",
+    "oid": "1.3.6.1.4.1.42019.4.2.0.41",
+    "class": "notificationtype",
+    "status": "current",
+    "description": "Device 15 connection fail"
+  },
+  "device16connFail": {
+    "name": "device16connFail",
+    "oid": "1.3.6.1.4.1.42019.4.2.0.42",
+    "class": "notificationtype",
+    "status": "current",
+    "description": "Device 16 connection fail"
+  },
+  "device17connFail": {
+    "name": "device17connFail",
+    "oid": "1.3.6.1.4.1.42019.4.2.0.43",
+    "class": "notificationtype",
+    "status": "current",
+    "description": "Device 17 connection fail"
+  },
+  "device18connFail": {
+    "name": "device18connFail",
+    "oid": "1.3.6.1.4.1.42019.4.2.0.44",
+    "class": "notificationtype",
+    "status": "current",
+    "description": "Device 18 connection fail"
+  },
+  "device19connFail": {
+    "name": "device19connFail",
+    "oid": "1.3.6.1.4.1.42019.4.2.0.45",
+    "class": "notificationtype",
+    "status": "current",
+    "description": "Device 19 connection fail"
+  },
+  "device20connFail": {
+    "name": "device20connFail",
+    "oid": "1.3.6.1.4.1.42019.4.2.0.46",
+    "class": "notificationtype",
+    "status": "current",
+    "description": "Device 20 connection fail"
+  },
+  "device21connFail": {
+    "name": "device21connFail",
+    "oid": "1.3.6.1.4.1.42019.4.2.0.47",
+    "class": "notificationtype",
+    "status": "current",
+    "description": "Device 21 connection fail"
+  },
+  "device22connFail": {
+    "name": "device22connFail",
+    "oid": "1.3.6.1.4.1.42019.4.2.0.48",
+    "class": "notificationtype",
+    "status": "current",
+    "description": "Device 22 connection fail"
+  },
+  "device23connFail": {
+    "name": "device23connFail",
+    "oid": "1.3.6.1.4.1.42019.4.2.0.49",
+    "class": "notificationtype",
+    "status": "current",
+    "description": "Device 23 connection fail"
+  },
+  "device24connFail": {
+    "name": "device24connFail",
+    "oid": "1.3.6.1.4.1.42019.4.2.0.50",
+    "class": "notificationtype",
+    "status": "current",
+    "description": "Device 24 connection fail"
+  },
+  "device25connFail": {
+    "name": "device25connFail",
+    "oid": "1.3.6.1.4.1.42019.4.2.0.51",
+    "class": "notificationtype",
+    "status": "current",
+    "description": "Device 25 connection fail"
+  },
+  "device26connFail": {
+    "name": "device26connFail",
+    "oid": "1.3.6.1.4.1.42019.4.2.0.52",
+    "class": "notificationtype",
+    "status": "current",
+    "description": "Device 26 connection fail"
+  },
+  "device27connFail": {
+    "name": "device27connFail",
+    "oid": "1.3.6.1.4.1.42019.4.2.0.53",
+    "class": "notificationtype",
+    "status": "current",
+    "description": "Device 27 connection fail"
+  },
+  "device28connFail": {
+    "name": "device28connFail",
+    "oid": "1.3.6.1.4.1.42019.4.2.0.54",
+    "class": "notificationtype",
+    "status": "current",
+    "description": "Device 28 connection fail"
+  },
+  "device29connFail": {
+    "name": "device29connFail",
+    "oid": "1.3.6.1.4.1.42019.4.2.0.55",
+    "class": "notificationtype",
+    "status": "current",
+    "description": "Device 29 connection fail"
+  },
+  "device30connFail": {
+    "name": "device30connFail",
+    "oid": "1.3.6.1.4.1.42019.4.2.0.56",
+    "class": "notificationtype",
+    "status": "current",
+    "description": "Device 30 connection fail"
+  },
+  "device31connFail": {
+    "name": "device31connFail",
+    "oid": "1.3.6.1.4.1.42019.4.2.0.57",
+    "class": "notificationtype",
+    "status": "current",
+    "description": "Device 31 connection fail"
+  },
+  "device32connFail": {
+    "name": "device32connFail",
+    "oid": "1.3.6.1.4.1.42019.4.2.0.58",
+    "class": "notificationtype",
+    "status": "current",
+    "description": "Device 32 connection fail"
+  },
+  "inputTeleport": {
+    "name": "inputTeleport",
+    "oid": "1.3.6.1.4.1.42019.4.2.2",
+    "class": "objectidentity"
+  },
+  "inputStatusTableTLP": {
+    "name": "inputStatusTableTLP",
+    "oid": "1.3.6.1.4.1.42019.4.2.2.1",
+    "nodetype": "table",
+    "class": "objecttype",
+    "maxaccess": "not-accessible",
+    "status": "current"
+  },
+  "inputStatusEntryTLP": {
+    "name": "inputStatusEntryTLP",
+    "oid": "1.3.6.1.4.1.42019.4.2.2.1.1",
+    "nodetype": "row",
+    "class": "objecttype",
+    "maxaccess": "not-accessible",
+    "indices": [
+      {
+        "module": "FORT-TELECOM-MIB",
+        "object": "inputIndexTLP",
+        "implied": 0
+      }
+    ],
+    "status": "current",
+    "description": "An entry (conceptual row) ."
+  },
+  "inputIndexTLP": {
+    "name": "inputIndexTLP",
+    "oid": "1.3.6.1.4.1.42019.4.2.2.1.1.1",
+    "nodetype": "column",
+    "class": "objecttype",
+    "syntax": {
+      "type": "INTEGER",
+      "class": "type"
+    },
+    "maxaccess": "read-write",
+    "status": "current",
+    "description": "Input Number"
+  },
+  "inputStateTLP": {
+    "name": "inputStateTLP",
+    "oid": "1.3.6.1.4.1.42019.4.2.2.1.1.2",
+    "nodetype": "column",
+    "class": "objecttype",
+    "syntax": {
+      "type": "INTEGER",
+      "class": "type",
+      "constraints": {
+        "enumeration": {
+          "open": 1,
+          "short": 2
+        }
+      }
+    },
+    "maxaccess": "read-only",
+    "status": "current",
+    "description": "Input State"
+  },
+  "outputTeleport": {
+    "name": "outputTeleport",
+    "oid": "1.3.6.1.4.1.42019.4.2.3",
+    "class": "objectidentity"
+  },
+  "outputTeleportTable": {
+    "name": "outputTeleportTable",
+    "oid": "1.3.6.1.4.1.42019.4.2.3.1",
+    "nodetype": "table",
+    "class": "objecttype",
+    "maxaccess": "not-accessible",
+    "status": "current"
+  },
+  "outputTeleportEntry": {
+    "name": "outputTeleportEntry",
+    "oid": "1.3.6.1.4.1.42019.4.2.3.1.1",
+    "nodetype": "row",
+    "class": "objecttype",
+    "maxaccess": "not-accessible",
+    "indices": [
+      {
+        "module": "FORT-TELECOM-MIB",
+        "object": "outIndex",
+        "implied": 0
+      }
+    ],
+    "status": "current",
+    "description": "An entry (conceptual row) in the outputTeleportTable."
+  },
+  "outIndex": {
+    "name": "outIndex",
+    "oid": "1.3.6.1.4.1.42019.4.2.3.1.1.1",
+    "nodetype": "column",
+    "class": "objecttype",
+    "syntax": {
+      "type": "INTEGER",
+      "class": "type"
+    },
+    "maxaccess": "read-write",
+    "status": "current",
+    "description": "Index of Output"
+  },
+  "outState": {
+    "name": "outState",
+    "oid": "1.3.6.1.4.1.42019.4.2.3.1.1.2",
+    "nodetype": "column",
+    "class": "objecttype",
+    "syntax": {
+      "type": "INTEGER",
+      "class": "type",
+      "constraints": {
+        "enumeration": {
+          "open": 1,
+          "short": 2
+        }
+      }
+    },
+    "maxaccess": "read-write",
+    "status": "current",
+    "description": "State of Output"
+  },
+  "fwStatusTLP": {
+    "name": "fwStatusTLP",
+    "oid": "1.3.6.1.4.1.42019.4.2.4",
+    "class": "objectidentity"
+  },
+  "fwVersionTLP": {
+    "name": "fwVersionTLP",
+    "oid": "1.3.6.1.4.1.42019.4.2.4.1",
+    "nodetype": "scalar",
+    "class": "objecttype",
+    "syntax": {
+      "type": "OCTET STRING",
+      "class": "type"
+    },
+    "maxaccess": "read-only",
+    "status": "current",
+    "description": "Firmware version"
+  },
+  "meta": {
+    "comments": [
+      "ASN.1 source file:///usr/share/snmp/mibs/FORT-TELECOM-MIB.txt",
+      "Produced by pysmi-0.3.4 at Wed Mar  6 13:57:24 2024",
+      "On host sheverdin platform Linux version 6.2.0-39-generic by user sheverdin",
+      "Using Python version 3.11.4 (main, Dec  7 2023, 15:43:41) [GCC 12.3.0]"
+    ],
+    "module": "FORT-TELECOM-MIB"
+  }
+}

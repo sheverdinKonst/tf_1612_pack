@@ -1,0 +1,209 @@
+#!/bin/sh /etc/rc.common
+START=99
+
+USE_PROCD=1
+PROG="/usr/sbin/snmpd"
+
+CONFIGFILE="/etc/snmp/snmpd.conf"
+TEMP_CONFIG="/etc/snmp_config"
+
+
+snmp_general_add() {
+  local cfg="$1"
+  config_get agentaddress "$cfg" agentaddress
+	[ -n "$agentaddress" ] || return 0
+	config_get agentxsocket "$cfg" agentxsocket
+	[ -n "$agentxsocket" ] && echo "agentXSocket $agentxsocket" >> $CONFIGFILE
+	echo "agentaddress $agentaddress" >> $CONFIGFILE
+	echo "master agentx" >> $CONFIGFILE
+	echo "view all included .1" >> $CONFIGFILE
+  echo "engineIDType 3" >> $CONFIGFILE
+  echo "engineIDNic eth0" >> $CONFIGFILE
+}
+
+snmpd_v1_v2c_add() {
+	local cfg="$1"
+	config_get version_state "$cfg" version_state
+	[ -n "$version_state" ] || return 0
+	[ "$version_state" = 1 ] || return 0
+	config_get read_community "$cfg" read_community
+	[ -n "$read_community" ] || return 0
+	config_get write_community "$cfg" write_community
+	[ -n "$write_community" ] || return 0
+	config_get read_access "$cfg" read_access
+	[ -n "$read_access" ] || return 0
+	config_get write_access "$cfg" write_access
+	[ -n "$write_access" ] || return 0
+	config_get version "$cfg" version
+	[ -n "$version" ] || return 0
+
+	echo "com2sec ro_$version $read_access $read_community" >> $CONFIGFILE
+	echo "com2sec rw_$version $write_access $write_community" >> $CONFIGFILE
+	echo "group  $read_community $version ro_$version" >> $CONFIGFILE
+	echo "group $write_community $version rw_$version" >> $CONFIGFILE
+	echo "access $read_community \"\" any noauth exact all none none" >> $CONFIGFILE
+	echo "access $write_community \"\" any noauth exact all all all" >> $CONFIGFILE
+}
+
+snmpd_snmpv3_add() {
+	local cfg="$1"
+	local version
+	local username
+	local auth_type
+	local auth_pass
+	local privacy_type
+	local privacy_pass
+	local allow_write
+
+	config_get version_state "$cfg" version_state
+	[ -n "$version_state" ] || return 0
+	[ "$version_state" = 1 ] || return 0
+
+	config_get version "$cfg" version
+	[ -n "$version" -a "$version" != "v1/v2c" ] || return 0
+	if [ "$version" != "v1/v2c/v3" -a "$version" != "v3" ]; then
+		return 0
+	fi
+	config_get username "$cfg" snmp_v3_username
+	[ -n "$username" ] || return 0
+
+	config_get auth_type "$cfg" username
+	[ -n "$auth_type" ] || return 0
+
+	config_get auth_pass "$cfg" auth_pass
+	config_get privacy_type "$cfg" privacy_type
+	config_get privacy_pass "$cfg" privacy_pass
+
+	config_get_bool allow_write "$cfg" allow_write
+	local useraccess="rouser"
+	[ $allow_write -ne 0 ] && useraccess="rwuser"
+
+	if [ -n "$privacy_type" -a "$privacy_type" != "none" ]; then
+		echo "createUser $username $auth_type \"$auth_pass\" $privacy_type \"$privacy_pass\"" >> $CONFIGFILE
+		echo "$useraccess $username" >> $CONFIGFILE
+	else
+		if [ -n "$auth_type" -a "$auth_type" != "none" ]; then
+			echo "createUser $username $auth_type \"$auth_pass\"" >> $CONFIGFILE
+			echo "$useraccess $username authNoPriv" >> $CONFIGFILE
+		else
+			echo "createUser $username" >> $CONFIGFILE
+			echo "$useraccess $username noAuthNoPriv" >> $CONFIGFILE
+		fi
+	fi
+}
+
+snmpd_pass_add() {
+	local cfg="$1"
+	local pass='pass'
+	config_get miboid "$cfg" miboid
+	[ -n "$miboid" ] || return 0
+	config_get prog "$cfg" prog
+	[ -n "$prog" ] || return 0
+	config_get_bool persist "$cfg" persist 0
+	[ $persist -ne 0 ] && pass='pass_persist'
+	config_get priority "$cfg" priority
+	priority=${priority:+-p $priority}
+	echo "$pass $priority $miboid $prog" >> $CONFIGFILE
+}
+
+snmpd_exec_add() {
+	local cfg="$1"
+
+	config_get name "$cfg" name
+	[ -n "$name" ] || return 0
+	config_get prog "$cfg" prog
+	[ -n "$prog" ] || return 0
+	config_get args "$cfg" args
+	config_get miboid "$cfg" miboid
+	echo "exec $miboid $name $prog $args" >> $CONFIGFILE
+}
+
+snmpd_extend_add() {
+	local cfg="$1"
+
+	config_get name "$cfg" name
+	[ -n "$name" ] || return 0
+	config_get prog "$cfg" prog
+	[ -n "$prog" ] || return 0
+	config_get args "$cfg" args
+	config_get miboid "$cfg" miboid
+	echo "extend $miboid $name $prog $args" >> $CONFIGFILE
+}
+
+snmpd_setup_fw_rules() {
+	local net="$1"
+	local zone
+
+	zone=$(fw3 -q network "$net" 2>/dev/null)
+
+	local handled_zone
+	for handled_zone in $HANDLED_SNMP_ZONES; do
+		[ "$handled_zone" = "$zone" ] && return
+	done
+
+	json_add_object ""
+	json_add_string type rule
+	json_add_string src "$zone"
+	json_add_string proto udp
+	json_add_string dest_port 161
+	json_add_string target ACCEPT
+	json_close_object
+
+	HANDLED_SNMP_ZONES="$HANDLED_SNMP_ZONES $zone"
+}
+
+start_service() {
+	[ -f "$CONFIGFILE" ] && rm -f "$CONFIGFILE"
+
+	config_load snmpd
+	config_get_bool snmp_enabled general enabled 1
+	[ "$snmp_enabled" -eq 0 ] && return
+
+	procd_open_instance
+
+	config_foreach snmp_general_add general
+  config_foreach snmpd_v1_v2c_add snmp_v1
+  config_foreach snmpd_v1_v2c_add snmp_v2c
+  config_foreach snmpd_snmpv3_add snmp_v3
+	config_foreach snmpd_pass_add pass
+
+	#append_parm trapcommunity community trapcommunity
+
+	procd_set_param command $PROG -V -q -Lf /tmp/snmpLog -f -r
+	procd_set_param file $CONFIGFILE
+	procd_set_param respawn
+
+	for iface in $(ls /sys/class/net 2>/dev/null); do
+		procd_append_param netdev "$iface"
+	done
+
+	procd_open_data
+
+	json_add_array firewall
+	config_list_foreach general network snmpd_setup_fw_rules
+	json_close_array
+
+	procd_close_data
+	procd_close_instance
+}
+
+service_stopped() {
+	[ -f "$CONFIGFILE" ] || return
+	rm -f "$CONFIGFILE"
+	procd_set_config_changed firewall
+}
+
+service_triggers(){
+	local script=$(readlink "$initscript")
+	local name=$(basename ${script:-$initscript})
+
+	procd_open_trigger
+	procd_add_raw_trigger "interface.*" 2000 /etc/init.d/$name reload
+	procd_close_trigger
+	procd_add_reload_trigger 'snmpd'
+}
+
+service_started() {
+	[ "$snmp_enabled" -eq 0 ] && return
+	procd_set_config_changed firewall
+}

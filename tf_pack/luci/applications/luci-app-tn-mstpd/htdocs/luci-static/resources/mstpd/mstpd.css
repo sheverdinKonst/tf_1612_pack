@@ -1,0 +1,112 @@
+/*
+ * Copyright (c) 2020, Tano Systems LLC. All Rights Reserved.
+ * Author: Anton Kikin <a.kikin@tano-systems.com>
+ */
+
+.mstpd-yes { color: #2abd69; }
+.mstpd-no  { }
+
+.mstpd-params {
+	column-count: 2;
+	-moz-column-count: 2;
+	-webkit-column-count: 2;
+	column-gap: 24px;
+	-moz-column-gap: 24px;
+	-webkit-column-gap: 24px;
+}
+
+@media only screen and (max-width: 850px) {
+	.mstpd-br-params {
+		column-count: 1;
+		-moz-column-count: 1;
+		-webkit-column-count: 1;
+	}
+}
+
+.mstpd-collapsed.tr {
+	cursor: -webkit-zoom-in;
+	cursor: zoom-in;
+}
+
+.mstpd-expanded.tr {
+	cursor: -webkit-zoom-out;
+	cursor: zoom-out;
+}
+
+.mstpd-extrow .td {
+	border-top: none !important;
+	padding-top: 0;
+}
+
+.mstpd-params > div {
+	display: grid;
+	padding: 0 8px;
+	grid-template-columns: 1fr auto;
+	border-bottom: 1px solid #e6e6e6;
+	border-bottom-width: 1px;
+	        column-break-inside: avoid;
+	-webkit-column-break-inside: avoid;
+}
+
+.mstpd-params .mstpd-param {
+	margin-right: 6px;
+/*	white-space: nowrap;*/
+	font-weight: bold;
+}
+
+.mstpd-params .mstpd-param::after {
+	content: ':';
+}
+
+.mstpd-params .mstpd-param-value {
+	white-space: nowrap;
+	font-weight: normal;
+}
+
+.mstpd-port-params {
+/*	border: 1px solid #cccccc;*/
+	border-radius: 5px;
+	padding: 8px 8px;
+	box-shadow: 0 1px 3px 0 grey;
+/*	background-color: rgba(240,240,240,0.5);*/
+}
+
+.mstpd-port-params .mstpd-param {
+	margin-right: 12px;
+	font-weight: normal;
+/*	font-style: italic;*/
+}
+
+.mstpd-port-params > div {
+	border-bottom: none;
+	padding: 0;
+}
+
+
+.mstpd-badge {
+	display: inline-block;
+	width: auto !important;
+	width: fit-content !important;
+	width: -moz-fit-content !important;
+	width: -webkit-fit-content !important;
+	box-shadow: 0 1px 3px 0 grey;
+	padding: 0px 8px;
+	border-radius: 5px;
+	width: 100%;
+	background-color: #e6e6e6;
+	border: 0;
+	color: #595959;
+}
+
+.mstpd-badge.mstpd-state-forwarding { background-color: #b7efcf; border-color: #2abd69; color: #165e34; }
+.mstpd-badge.mstpd-state-learning   { background-color: #b2daf3; border-color: #46a6e2; color: #1a74ac; }
+.mstpd-badge.mstpd-state-discarding { background-color: #e6e6e6; border-color: #b9b9b9; color: #a0a0a0; }
+
+.mstpd-badge.mstpd-role-designated  { background-color: #b7efcf; border-color: #2abd69; color: #165e34; }
+.mstpd-badge.mstpd-role-root        { background-color: #b2daf3; border-color: #46a6e2; color: #1a74ac; }
+.mstpd-badge.mstpd-role-alternate   { background-color: #f9e3b3; border-color: #b7820f; color: #b7820f; }
+.mstpd-badge.mstpd-role-backup      { background-color: #f9e3f9; border-color: #e380e3; color: #b70f82; }
+.mstpd-badge.mstpd-role-disabled    { background-color: #e6e6e6; border-color: #b9b9b9; color: #a0a0a0; }
+
+.mstpd-badge.mstpd-proto-ok         { background-color: #b7efcf; border-color: #2abd69; color: #165e34; }
+.mstpd-badge.mstpd-proto-changed    { background-color: #ee5f5b; border-color: #dd1c16; color: #ffffff; }

@@ -1,0 +1,13 @@
+#!/bin/bash
+
+export access_level="user"
+export show_access_level="user"
+export CLISH_PATH=/etc/tf_clish/menu_config_xml
+if [[ "${CLISH_PATH}" != "/etc/tf_clish/menu_config_xml" ]]; then
+        echo "CLISH_PATH not set"
+else
+        clish
+fi
+
+
+

@@ -1,0 +1,58 @@
+#!/bin/sh /etc/rc.common
+
+START=95
+STOP=95
+USE_PROCD=1
+
+UCI_CONF="smtp"
+CONFIGFILE="/var/etc/msmtprc"
+
+
+make_config() {
+	local smtpEnabled
+	local smtpHost
+	local smtpPort
+	local smtpTls
+	local smtpUser
+	local smtpPass
+
+
+	config_load "${UCI_CONF}"
+	config_get smtpEnabled "client" enabled
+	config_get smtpHost "client" host
+	config_get smtpPort "client" port
+	config_get smtpUser "client" user
+	config_get smtpPass "client" password
+	config_get smtpTls "client" tls
+	> ${CONFIGFILE}
+	echo "account default" >> $CONFIGFILE
+	echo "host $smtpHost"  >> $CONFIGFILE
+	echo "port $smtpPort"  >> $CONFIGFILE
+	if [ $smtpTls == '1' ]
+	then
+		echo "tls on"  			 >> $CONFIGFILE
+		echo "tls_starttls off"  >> $CONFIGFILE
+	fi
+
+	if [ -n "$smtpUser" ]
+	then
+		echo "from $smtpUser"  >> $CONFIGFILE
+		echo "keepbcc on"	   >> $CONFIGFILE
+		echo "auth on"	   	   >> $CONFIGFILE
+		echo "user $smtpUser"  >> $CONFIGFILE
+		echo "password $smtpPass"  >> $CONFIGFILE
+	fi
+	echo "allow_from_override off" >> $CONFIGFILE
+	echo "set_from_header on" >> $CONFIGFILE
+	echo "syslog LOG_MAIL" >> $CONFIGFILE
+}
+
+start_service(){
+	make_config
+}
+
+service_triggers()
+{
+	procd_add_reload_trigger ${UCI_CONF}
+	make_config
+}

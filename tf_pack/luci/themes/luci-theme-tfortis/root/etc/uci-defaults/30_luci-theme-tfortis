@@ -1,0 +1,12 @@
+#!/bin/sh
+
+if [ "$PKG_UPGRADE" != 1 ]; then
+	uci get luci.themes.TFortis >/dev/null 2>&1 || \
+	uci batch <<-EOF
+		set luci.themes.TFortis=/luci-static/tfortis
+		set luci.main.mediaurlbase '/luci-static/tfortis'
+		commit luci
+	EOF
+fi
+
+exit 0

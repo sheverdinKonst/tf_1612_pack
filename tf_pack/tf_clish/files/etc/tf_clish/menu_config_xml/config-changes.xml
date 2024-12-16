@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CLISH_MODULE xmlns="http://clish.sourceforge.net/XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://clish.sourceforge.net/XMLSchema
+                     http://clish.sourceforge.net/XMLSchema/clish.xsd">
+    <VIEW name="main">
+        <COMMAND name="changes"
+                 help="changes - save, revert, show">
+            <PARAM name="save"
+                   test='-z "${show}" -a -z "${revert}" -a "${access_level}" = "admin"'
+                   help="aplay and restart app"
+                   optional="true"
+                   order="true"
+                   mode="subcommand"
+                   ptype="SUBCOMMAND"/>
+            <PARAM name="show"
+                   test='-z "${revert}" -a -z "${save}" -a "${access_level}" = "admin"'
+                   help="show changes"
+                   optional="true"
+                   order="true"
+                   mode="subcommand"
+                   ptype="SUBCOMMAND"/>
+            <PARAM name="revert"
+                   test='-z "${show}" -a -z "${save}" -a "${access_level}" = "admin"'
+                   help="revert changes by config_type or *all* changes if *config_type* not presented"
+                   optional="true"
+                   order="true"
+                   mode="subcommand"
+                   ptype="SUBCOMMAND">
+                <PARAM name="config_type"
+                   test='-n "${revert}"'
+                   help="type config type for revert changes"
+                   optional="true"
+                   order="true"
+                   mode="subcommand"
+                   ptype="SUBCOMMAND"/>
+                <PARAM name="revertSection"
+                       test='-n "${config_type}"'
+                       help="the configuration in which to undo the changes. For example: network, mstp, lldp and etc."
+                       optional="false"
+                       ptype="STRING"/>
+            </PARAM>
+
+            <ACTION>
+                if [[ -n "${save}" ]]; then
+                       /etc/tf_clish/scripts/changes/config_changes.lua "save"
+                fi
+                if [[ -n "${show}" ]]; then
+                       /etc/tf_clish/scripts/changes/config_changes.lua "show"
+                fi
+                if [[ -n "${revert}" ]]; then
+                    if [[ -n "${revertSection}" ]]; then
+                        /etc/tf_clish/scripts/changes/config_changes.lua "revert" "${revertSection}"
+                    fi
+
+                    if [[ -z "${revertSection}" ]]; then
+                        /etc/tf_clish/scripts/changes/config_changes.lua "revert" "all"
+                    fi
+                fi
+            </ACTION>
+        </COMMAND>
+    </VIEW>
+</CLISH_MODULE>

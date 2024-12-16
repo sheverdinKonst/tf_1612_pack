@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CLISH_MODULE xmlns="http://clish.sourceforge.net/XMLSchema"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://clish.sourceforge.net/XMLSchema
+                     http://clish.sourceforge.net/XMLSchema/clish.xsd">
+    <!--=======================================================-->
+    <VIEW name="main">
+        <COMMAND name="special autorestart"
+                 help="PoE autorestart">
+            <PARAM name="config"
+                   test='"${access_level}" = "admin"'
+                   help="configure PoE autorestart"
+                   optional="true"
+                   order="true"
+                   mode="subcommand"
+                   ptype="SUBCOMMAND">
+                <PARAM name="port"
+                       help="set port for configure"
+                       optional="false"
+                       order="true"
+                       mode="subcommand"
+                       ptype="SUBCOMMAND">
+                    <PARAM name="portValue"
+                           help="set port for configure"
+                           ptype="PORT_NUM_LIST_1_8"/>
+                </PARAM>
+                <PARAM name="mode"
+                       test='-n "${port}"'
+                       help="mode for autorestart PoE"
+                       optional="true"
+                       order="true"
+                       mode="subcommand"
+                       ptype="SUBCOMMAND">
+                    <PARAM name="stateValue"
+                           help=" - autorestart mode"
+                           ptype="AUTORESTART_MODE"/>
+                </PARAM>
+                <PARAM name="alarm"
+                       test='-n "${port}"'
+                       help="alarm for autorestart PoE"
+                       optional="true"
+                       order="true"
+                       mode="subcommand"
+                       ptype="SUBCOMMAND">
+                    <PARAM name="alarmValue"
+                           help=" - alarm for autorestart PoE"
+                           ptype="STATE_DE"/>
+                </PARAM>
+                <PARAM name="host"
+                       test='-n "${port}"'
+                       help="ip addresss for PING mode"
+                       optional="true"
+                       order="true"
+                       mode="subcommand"
+                       ptype="SUBCOMMAND">
+                    <PARAM name="ipaddress"
+                           help=" for for PING mode autorestart PoE"
+                           ptype="IP_ADDR"/>
+                </PARAM>
+                <PARAM name="min_speed"
+                       test='-n "${port}"'
+                       help="set min. speed for SPEED mode"
+                       optional="true"
+                       order="true"
+                       mode="subcommand"
+                       ptype="SUBCOMMAND">
+                    <PARAM name="min_speedValue"
+                           help=" - min. speed for SPEED mode autorestart PoE"
+                           ptype="UINT"/>
+                </PARAM>
+                <PARAM name="max_speed"
+                       test='-n "${port}"'
+                       help="set max. speed for SPEED mode"
+                       optional="true"
+                       order="true"
+                       mode="subcommand"
+                       ptype="SUBCOMMAND">
+                    <PARAM name="max_speedValue"
+                           help="- max. speed for SPEED mode autorestart PoE"
+                           ptype="UINT"/>
+                </PARAM>
+                <PARAM name="timeUp"
+                       test='-n "${port}"'
+                       help="time for ON PoE by alarm"
+                       optional="true"
+                       order="true"
+                       mode="subcommand"
+                       ptype="SUBCOMMAND">
+                    <PARAM name="timeUpValue"
+                           help=" - time Up for ON PoE by alarm"
+                           ptype="TIME24H"/>
+                </PARAM>
+                <PARAM name="timeDown"
+                       test='-n "${port}"'
+                       help="time for OFF PoE by alarm"
+                       optional="true"
+                       order="true"
+                       mode="subcommand"
+                       ptype="SUBCOMMAND">
+                    <PARAM name="timeDownValue"
+                           help=" - time Down for OFF PoE by alarm"
+                           ptype="TIME24H"/>
+                </PARAM>
+            </PARAM>
+            <PARAM name="show"
+                   help="show autorestart PoE status and settings"
+                   test='-z "${config}"'
+                   optional="true"
+                   order="true"
+                   mode="subcommand"
+                   ptype="SUBCOMMAND">
+                   <PARAM name="status"
+                       help="show autorestart PoE status"
+                       optional="true"
+                       order="true"
+                       mode="subcommand"
+                       ptype="SUBCOMMAND">
+                   </PARAM>
+                   <PARAM name="configuration"
+                       test='-z "${status}" -a "${show_access_level}" = "admin"'
+                       help="show autorestart PoE settings"
+                       optional="true"
+                       order="true"
+                       mode="subcommand"
+                       ptype="SUBCOMMAND">
+                   </PARAM>
+            </PARAM>
+
+            <ACTION>
+                if [[ -n "${config}" ]]; then
+                    if [[ -n "${state}" ]]; then
+                        /etc/tf_clish/scripts/autorestart/config_autorestart.lua ${state} ${portValue}  ${stateValue}
+                    fi
+
+                    if [[ -n "${alarm}" ]]; then
+                        /etc/tf_clish/scripts/autorestart/config_autorestart.lua ${alarm} ${portValue}  ${alarmValue}
+                    fi
+
+                    if [[ -n "${host}" ]]; then
+                        /etc/tf_clish/scripts/autorestart/config_autorestart.lua ${host} ${portValue}  ${ipaddress}
+                    fi
+
+                    if [[ -n "${min_speed}" ]]; then
+                        /etc/tf_clish/scripts/autorestart/config_autorestart.lua ${min_speed} ${portValue}  ${min_speedValue}
+                    fi
+
+                    if [[ -n "${max_speed}" ]]; then
+                        /etc/tf_clish/scripts/autorestart/config_autorestart.lua ${max_speed} ${portValue}  ${max_speedValue}
+                    fi
+
+                    if [[ -n "${timeUp}" ]]; then
+                        /etc/tf_clish/scripts/autorestart/config_autorestart.lua ${timeUp} ${portValue}  ${timeUpValue}
+                    fi
+
+                    if [[ -n "${timeDown}" ]]; then
+                        /etc/tf_clish/scripts/autorestart/config_autorestart.lua ${timeDown} ${portValue}  ${timeDownValue}
+                    fi
+                fi
+                if [[ -n "${show}" ]]; then
+                    if [[ -n "${status}" ]]; then
+                    /etc/tf_clish/scripts/autorestart/show_autorestart.lua "status"
+                    fi
+                    if [[ -n "${configuration}" ]]; then
+                    /etc/tf_clish/scripts/autorestart/show_autorestart.lua "config"
+                    fi
+                fi
+            </ACTION>
+        </COMMAND>
+    </VIEW>
+    <!--=======================================================-->
+</CLISH_MODULE>

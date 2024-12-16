@@ -1,0 +1,15 @@
+#rc.local for tfortis PSW ver 1.1
+
+#set device model
+fw_printenv -n boardversion > /tmp/sysinfo/model
+
+#disable jtag on gpio lines
+devmem 0x1b001000 32 0x18
+
+#reset bootcount
+if [[ $(fw_printenv upgrade_available) = "upgrade_available=1" ]]
+then
+    fw_setenv bootcount 0
+    fw_setenv upgrade_available 0
+    logger "clear upgrade_available flag"
+fi

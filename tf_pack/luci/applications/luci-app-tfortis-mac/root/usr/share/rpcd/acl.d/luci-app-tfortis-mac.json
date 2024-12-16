@@ -1,0 +1,11 @@
+{
+  "luci-app-tfortis-mac": {
+    "description": "Grant UCI access to LuCI app tfortis-mac",
+    "read": {     
+        "file": { 
+          "/usr/share/lua/arp_module.lua": [ "exec" ],
+          "/usr/share/lua/fdb_module.lua": [ "exec" ]
+         }   
+    }
+  }
+}

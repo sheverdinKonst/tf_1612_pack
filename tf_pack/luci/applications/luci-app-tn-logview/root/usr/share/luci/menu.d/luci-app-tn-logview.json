@@ -1,0 +1,35 @@
+{
+	"admin/log/logview": {
+		"title": "Logs",
+		"order": 10,
+		"action": {
+			"type": "view",
+			"path": "status/logview"
+		},
+		"depends": {
+			"acl": [ "luci-app-tn-logview" ]
+		}
+	},
+	"admin/log/syslog": {
+		"title": "Syslog",
+		"order": 20,
+		"action": {
+			"type": "view",
+			"path": "status/logsyslog"
+		},
+		"depends": {
+			"acl": [ "luci-app-tn-logview" ]
+		}
+	},
+	"admin/log/settings": {
+		"title": "Settings",
+		"order": 30,
+		"action": {
+			"type": "view",
+			"path": "status/logsettings"
+		},
+		"depends": {
+			"acl": [ "luci-app-tn-logview" ]
+		}
+	}
+}
