@@ -1,0 +1,7 @@
+src-link tfortis_packages /home/sheverdin/Fort_Telecom/t_fortis/pack/openwrt_tfortis_packages
+
+#src-git tfortis_packages  http://sheverdin:7319837kon@gitlab.forttel.ru/TFortis/FirmWare/tfortis-realtek/openwrt_tfortis_packages.git
+#src-git packages https://git.openwrt.org/feed/packages.git
+#src-git luci https://git.openwrt.org/project/luci.git
+#src-git routing https://git.openwrt.org/feed/routing.git
+#src-git telephony https://git.openwrt.org/feed/telephony.git
